@@ -1,13 +1,12 @@
 = BootstrapUiModule
 Arne Vandamme
-2.0.1.RELEASE
 :toc: left
 :sectanchors:
 :module-version: 2.0.1.RELEASE
 :module-name: BootstrapUiModule
 :module-artifact: bootstrap-ui-module
-:module-url: https://foreach.atlassian.net/wiki/display/AX/BootstrapUiModule
-:javadoc-url: https://across.foreach.be/docs/across-standard-modules/BootstrapUiModule/{module-version}/javadoc
+:module-url: https://across.foreach.be/modules/bootstrap-ui
+:javadoc-url: https://across-docs.foreach.be/across-standard-modules/BootstrapUiModule/{module-version}/javadoc
 :autoNumeric-url: https://github.com/BobKnothe/autoNumeric
 :datetime-url: https://github.com/Eonasdan/bootstrap-datetimepicker
 :bootstrap-select-url: https://silviomoreto.github.io/bootstrap-select/
@@ -195,6 +194,7 @@ If there is a global `ViewElementBuilderContext` available, you can also `ViewEl
 The `ViewElementBuilderContext` provides a `buildLink(String)` method that will resolve a link using the `WebAppLinkBuilder` attribute that is available on the builder context.
 By default the request-bound `WebAppLinkBuilder` is already set.
 
+[#development-mode]
 === Development mode rendering
 
 If development mode is active, all `ViewElement` names will be rendered in the markup.
