@@ -1,3 +1,5 @@
+:page-partial:
+
 ## Customizing a datetime picker
 
 Every `DateTimeFormElement` will be turned into a datetime picker as seen in the section <<DateTimeFormElementBuilder>>
