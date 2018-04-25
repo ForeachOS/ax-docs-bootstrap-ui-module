@@ -3,8 +3,9 @@
 [#2-1-0]
 == 2.1.0-SNAPSHOT
 
-* fix issues with control name prefixing, add `ControlNamePrefixAdjuster` implementation
+* fixed issues with control name prefixing and added the `ControlNamePrefixAdjuster` implementation
 ** some utility method `BootstrapElementUtils.prefixControlNames(String)` have been added to cover simple (common) cases
+** a xref:guides:prefixing-control-names.adoc[guide on control name prefixing] has been added to show the right way to change control names
 
 [#2-0-1]
 == 2.0.1.RELEASE
