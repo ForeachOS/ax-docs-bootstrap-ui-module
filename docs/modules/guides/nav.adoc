@@ -1,0 +1,3 @@
+* xref:index.adoc[Guides & How-tos]
+** xref:customizing-a-datetimepicker.adoc[Customizing a Date picker]
+** xref:prefixing-control-names.adoc[Prefixing control names]

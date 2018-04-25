@@ -1,0 +1,3 @@
+=== TableViewElementBuilder
+Generate Bootstrap markup table structures.
+Holds nested builders for head, foot and body sections.

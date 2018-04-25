@@ -1,0 +1,122 @@
+
+== Default elements
+Most default elements can be created through the `BootstrapUiFactory` (instance) of `BootstrapUiBuilders` (static facade to the factories).
+
+=== Overview
+Although elements can be created directly, most have an equivalent `ViewElementBuilder`.
+The builder implementation is rarely created directly but through the `BootstrapUiFactory`.
+
+`BootstrapUiElements` contains the list of constants that define the specific element types.
+
+[cols="1,2,4",options=header]
+|===
+
+|Element
+|Builder
+|Description
+
+|`AlertViewElement`
+|`AlertViewElementBuilder`
+|Create a Bootstrap alert component.
+
+|`AutoSuggestFormElement`
+|`AutoSuggestFormElementBuilder`
+|Configure and create a Typeahead based auto-suggest textbox.
+See also the `AutoSuggestFormElementConfiguration` for configuration of the required datasets.
+
+|`ButtonViewElement`
+|`ButtonViewElementBuilder`
+|Create buttons or button links.
+
+|`CheckboxFormElement`
+|`OptionFormElementBuilder`
+|
+
+|`ColumnViewElement`
+|`ColumnViewElementBuilder`
+|Creates a Bootstrap grid based layout.
+
+|`DateTimeFormElement`
+|`<<DateTimeFormElementBuilder>>`
+|
+
+|`FaIcon`
+|
+|Represents a Font Awesome icon.
+
+|`FieldsetFormElement`
+|`FieldsetFormElementBuilder`
+|
+
+|`FileUploadFormElement`
+|`FileUploadFormElementBuilder`
+|Creates a file input element.
+
+|`FormGroupElement`
+|`<<FormGroupElementBuilder>>`
+|
+
+|`FormViewElement`
+|`FormViewElementBuilder`
+|Create a form element with optional command attribute.
+
+|`Glyphicon`
+|
+|Represents a Glyphicon icon.
+
+|`HiddenFormElement`
+|`HiddenFormElementBuilder`
+|
+
+|`InputGroupFormElement`
+|`InputGroupFormElementBuilder`
+|
+
+|`LabelFormElement`
+|`LabelFormElementBuilder`
+|
+
+|`LinkViewElement`
+|`LinkViewElementBuilder`
+|Regular hyperlink.
+
+|`NumericFormElement`
+|`<<NumericFormElementBuilder>>`
+|
+
+|`RadioFormElement`
+|`<<OptionsFormElementBuilder,OptionFormElementBuilder>>`
+|Creates a single radio button.
+
+|`SelectFormElement`
+|`<<OptionsFormElementBuilder>>`
+|Creates a select control, either a regular HTML dropdown or a {bootstrap-select-url}[bootstrap-select].
+Which type gets created depends on the presence of a `SelectFormElementConfiguration` object (`configuration` property).
+
+|`SelectFormElement.Option`
+|`<<OptionsFormElementBuilder,OptionFormElementBuilder>>`
+|Creates a single select option.
+
+|`StaticFormElement`
+|
+|Creates a readonly form-control.
+
+|`TableViewElement`
+|`<<TableViewElementBuilder>>`
+|
+
+|`TextareaFormElement`
+|`<<TextboxFormElementBuilder>>`
+|Multi-line text field.
+
+|`TextboxFormElement` +
+|`<<TextboxFormElementBuilder>>`
+|Single-line text field - supporting HTML5 types.
+
+|`TooltipViewElement` +
+|`TooltipViewElementBuilder`
+|Generate a simple tooltip element (text shown when hovering).
+By default this is a link with a question mark icon.
+
+
+|===

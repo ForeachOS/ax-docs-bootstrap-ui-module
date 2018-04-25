@@ -1,0 +1,26 @@
+= Utilities
+
+Some general utility functions can be found in `BootstrapElementUtils`.
+
+== Selecting a form control
+
+You can use the `getFormControl()` function to select the first actual form control in a container or `FormGroupElement`.
+
+== Changing control names
+
+You can use `prefixControlNames()` or `replaceControlNamesPrefix()` functions to modify the names of one or multiple controls.
+
+.Prefix all control names in a form
+[source,java]
+----
+FormViewElement form = new FormViewElement();
+TextboxFormElement textbox = new TextboxFormElement();
+textbox.setControlName( "textbox" );
+form.add( textbox );
+
+form.apply( BootstrapElementUtils.prefixControlNames( "custom.prefix" ) );
+
+assertThat( textbox.getControlName() ).isEqualTo( "custom.prefix.textbox" );
+----
+
+See the separate xref:guides:prefixing-control-names.adoc[guide on control name prefixing] for more information.

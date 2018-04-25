@@ -1,0 +1,5 @@
+=== DateTimeFormElementBuilder
+Represented as a date/time picker.
+Uses the {datetime-url}[Eonasdan datetimepicker] JQuery plugin.
+
+See `{javadoc-url}/com/foreach/across/modules/bootstrapui/elements/DateTimeFormElementConfiguration.html[DateTimeFormElementConfiguration]` for configuration options.

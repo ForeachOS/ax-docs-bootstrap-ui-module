@@ -1,0 +1,4 @@
+=== TextboxFormElementBuilder
+Will add textbox or textarea, based on multiline or not.
+Also supports typing a textbox element.
+In case of textarea will by default enable autosizing of the textarea and will register the javascript to do so.

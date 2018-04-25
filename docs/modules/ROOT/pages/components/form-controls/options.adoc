@@ -1,0 +1,45 @@
+=== OptionsFormElementBuilder
+To quickly create a list of options, either as a select, list of checkboxes or list or radio buttons.
+
+[[bootstrap-select]]
+==== bootstrap-select support
+If you want to create a more advanced {bootstrap-select-url}[bootstrap-select dropdown] instead of a simple HTML select, you can do so by specifying a `SelectFormElementConfiguration` object.
+See the respective {javadoc-url}/com/foreach/across/modules/bootstrapui/elements/SelectFormElementConfiguration.html[javadoc for all configuration properties].
+
+.Message codes
+The `SelectFormElementConfiguration` allows you to configure the default text for the control.
+These properties support message code text snippets which will be replaced if a `SelectFormElement` is built using the `OptionsFormElementBuilder`.
+
+The following default message codes are used:
+
+[options=header,cols="1,3,2"]
+|===
+
+| Property
+| Message code
+| Default text
+
+| `selectAllText`
+| BootstrapUiModule.SelectFormElementConfiguration.selectAllText
+| Select all
+
+| `noneSelectedText`
+| BootstrapUiModule.SelectFormElementConfiguration.noneSelectedText
+| Nothing selected
+
+| `maxOptionsText`
+| BootstrapUiModule.SelectFormElementConfiguration.maxOptionsText
+| Limit reached ({0} items max)
+
+| `countSelectedText`
+| BootstrapUiModule.SelectFormElementConfiguration.countSelectedText
+| {0} items selected
+
+| `deselectAllText`
+| BootstrapUiModule.SelectFormElementConfiguration.countSelectedText
+| Deselect all
+
+|===
+
+NOTE: Message code replacement is performed when `SelectFormElementConfiguration.localize()` is called.
+This is done automatically when using an `OptionsFormElementBuilder`.

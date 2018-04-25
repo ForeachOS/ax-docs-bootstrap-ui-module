@@ -1,0 +1,59 @@
+= BootstrapUiModule web resources
+
+To provide the components client-side behaviour, BootstrapUiModule uses several web resource packages.
+These often get registered automatically by the `ViewElementBuilder` used for generating a `ViewElement`.
+Dependent packages will automatically be added as well.
+
+== Web resource packages
+The following packages are available for adding to your template:
+
+[cols="1,1,2",options="header"]
+|===
+
+| Package
+| Package name
+| Description
+
+| `JQueryWebResources`
+| jquery
+| Registers JQuery library.
+
+| `BootstrapUiWebResources`
+| bootstrap
+| Registers default Bootstrap CSS and javascript library. +
+Depends on `JQueryWebResources`.
+
+| `BootstrapUiFormElementsWebResources`
+| bootstrapui-formelements
+| Registers additional javascript and css for form element components like the datepicker, bootstrap-select etc. +
+Depends on `BootstrapUiWebResources`.
+
+|===
+
+[#bootstrapui-javascript]
+== BootstrapUiModule javascript plugin
+When the javascript is registered correctly, a single `BootstrapUiModule` global object is available.
+BootstrapUiModule javascript is fully JQuery based.
+
+All BootstrapUiModule javascript can then be initialized by calling `BootstrapUiModule.initializeFormElements()`.
+This method optionally takes an argument that is the node in which the form elements should be initialized.
+
+This is automatically done on document load, but when using AJAX fragment rendering, you usually want to re-initialize the DOM element that was updated.
+
+.Custom initializers
+You can easily add a custom initializer function by adding it with `BootstrapUiModule.registerInitializer( callback )`.
+There is no need to manually execute your callback on document load, as that will happen automatically by the BootstrapUiModule.
+
+NOTE: Don't execute your callback on document load and then add it to the initializers.
+Execution will happen automatically when calling `registerInitializer()`.
+
+.Example registering a custom initializer
+[source,html,indent=0]
+[subs="verbatim,attributes"]
+----
+BootstrapUiModule.registerInitializer( function( node ) {
+    $( '[data-my-attribute]', node ).each( function() {
+        // initialize all elements with that attribute
+    } );
+} );
+----

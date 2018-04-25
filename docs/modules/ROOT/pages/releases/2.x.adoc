@@ -1,0 +1,26 @@
+= 2.x.x release notes
+
+[#2-1-0]
+== 2.1.0-SNAPSHOT
+
+* fix issues with control name prefixing, add `ControlNamePrefixAdjuster` implementation
+** some utility method `BootstrapElementUtils.prefixControlNames(String)` have been added to cover simple (common) cases
+
+[#2-0-1]
+== 2.0.1.RELEASE
+* DateTimeFormElements now have support for `LocalDate`, `LocalTime`, `LocalDateTime`
+* `FormViewElement` and `FormViewElementBuilder` now allow you to configure either a command object or an `Errors` instance directly
+** this makes it easier to resolve field errors for the `FormGroupElement` members of the form, without having to know the model attribute name
+** when using the `errors` property directly, it is no longer required that the command object binding result is present on the model
+* the default builders now usually support localized text patterns for any text property
+** for example: `BootstrapUiBuilders.button().title("#{my.button=Default text}")`
+* `TextboxFormElement` rendered inside a `FormGroupElement` which detects field errors, will now render the original input value if there are errors present
+* direct use of `BootstrapUiFactory` or `BootstrapUiComponentFactory` is now discouraged, these interfaces have been deprecated
+** use the stateless `BootstrapUiBuilders` facade instead
+* added a `TooltipViewElement` with corresponding builder to quickly generate a tooltip with a default question mark icon
+** see `BootstrapUiBuilders.tooltip()` for a builder method
+* `FormGroupElement` has been refactored to support more descriptions
+** a `tooltip` can be set which will be added to the label - after the label text and required indicator
+** a `descriptionBlock` can be set which will be added to the group before the control
+** a `helpBlock` can be set which will be added to the group after the control
+** the property `renderHelpBlockBeforeControl` has been removed as the `descriptionBlock` is always rendered before the control, and the `helpBlock` always after the control

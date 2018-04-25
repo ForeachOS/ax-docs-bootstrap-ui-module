@@ -1,0 +1,5 @@
+=== NumericFormElementBuilder
+Uses the {autoNumeric-url}[JQuery autoNumeric plugin].
+Supports decimal precision, localization and adding symbols (eg. for currency).
+
+See `{javadoc-url}/com/foreach/across/modules/bootstrapui/elements/NumericFormElementConfiguration.html[NumericFormElementConfiguration]` for configuration options.
