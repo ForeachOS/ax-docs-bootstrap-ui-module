@@ -145,7 +145,7 @@ BootstrapElementUtils.prefixControlNames( "yourbox" )
             .prefixToReplace( "mybox." ) # <2>
             .ignoreUnderscore( false ) # <3>
             .recurse( false ) # <4>
-            .inserDotSeparator( false ) # <5>
+            .insertDotSeparator( false ) # <5>
             .accept( checkbox ); # <6>
 ----
 
