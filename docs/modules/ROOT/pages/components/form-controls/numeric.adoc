@@ -1,4 +1,6 @@
-=== NumericFormElementBuilder
+= NumericFormElementBuilder
+include::{partialsdir}/_attributes.adoc[]
+
 Uses the {autoNumeric-url}[JQuery autoNumeric plugin].
 Supports decimal precision, localization and adding symbols (eg. for currency).
 

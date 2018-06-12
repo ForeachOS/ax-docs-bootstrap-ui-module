@@ -1,4 +1,6 @@
-=== DateTimeFormElementBuilder
+= DateTimeFormElementBuilder
+include::{partialsdir}/_attributes.adoc[]
+
 Represented as a date/time picker.
 Uses the {datetime-url}[Eonasdan datetimepicker] JQuery plugin.
 

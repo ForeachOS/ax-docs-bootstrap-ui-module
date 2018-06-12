@@ -1,8 +1,9 @@
+= Default elements
+include::{partialsdir}/_attributes.adoc[]
 
-== Default elements
 Most default elements can be created through the `BootstrapUiFactory` (instance) of `BootstrapUiBuilders` (static facade to the factories).
 
-=== Overview
+== Overview
 Although elements can be created directly, most have an equivalent `ViewElementBuilder`.
 The builder implementation is rarely created directly but through the `BootstrapUiFactory`.
 

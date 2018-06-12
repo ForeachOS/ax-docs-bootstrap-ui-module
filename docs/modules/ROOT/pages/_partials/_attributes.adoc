@@ -1,0 +1,5 @@
+:module-version: 2.0.1.RELEASE
+:autoNumeric-url: https://github.com/BobKnothe/autoNumeric
+:datetime-url: https://github.com/Eonasdan/bootstrap-datetimepicker
+:bootstrap-select-url: https://silviomoreto.github.io/bootstrap-select/
+:javadoc-url: https://across-docs.foreach.be/across-standard-modules/BootstrapUiModule/{module-version}/javadoc

@@ -44,8 +44,7 @@ model.addAttribute(
 ----
 
 .Thymeleaf template
-[source,xml,indent=0]
-[subs="verbatim,attributes"]
+[source,html,indent=0]
 ----
 <nav>
     <across:view element="${customNav}" />
@@ -53,8 +52,7 @@ model.addAttribute(
 ----
 
 .HTML output generated
-[source,xml,indent=0]
-[subs="verbatim,attributes"]
+[source,html,indent=0]
 ----
 <nav>
     <ul class="nav nav-tabs">
