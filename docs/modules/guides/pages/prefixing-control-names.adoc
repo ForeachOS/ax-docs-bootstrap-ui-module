@@ -129,7 +129,7 @@ container.apply( BootstrapElementUtils.replaceControlNamesPrefix( "nested.", "" 
 The utility methods `prefixControlNames(String)` and `replaceControlNamesPrefix(String, String)` return an instance of `ControlNamePrefixAdjuster`.
 This is a reusable component that will apply control name changes based on the settings configured.
 
-The default settings as as follows:
+The default settings are:
 
 * insert an additional `.` (dot) in the control name when necessary
 * consider a control name that starts with  `_` (underscore) as the hidden variant of another control, apply the prefix *after* the underscore
