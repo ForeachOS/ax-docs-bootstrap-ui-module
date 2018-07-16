@@ -1,7 +1,7 @@
 = 2.x.x release notes
 
 [#2-1-0]
-== 2.1.0-SNAPSHOT
+== 2.1.0.RELEASE
 
 * fixed issues with control name prefixing and added the `ControlNamePrefixAdjuster` implementation
 ** some utility method `BootstrapElementUtils.prefixControlNames(String)` have been added to cover simple (common) cases
