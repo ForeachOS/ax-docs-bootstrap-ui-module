@@ -3,6 +3,9 @@
 [#2-1-1]
 == 2.1.1-SNAPSHOT
 * bugfix: `Style` class is now `Serializable`
+* a `HiddenFormElement` can now be converted into a `FormControlElement`, see the xref:components/form-controls/hidden.adoc[specific documentation for use cases]
+* xref:components/script.adoc[addition of `ScriptViewElement`] for writing `<script>` tags
+** with transparent support for nesting elements in order to generate HTML templates using `ViewElements`
 
 [#2-1-0]
 == 2.1.0.RELEASE

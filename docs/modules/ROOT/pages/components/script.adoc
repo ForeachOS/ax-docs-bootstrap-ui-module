@@ -1,0 +1,124 @@
+= Script elements
+
+A `ScriptViewElement` writes a `<script>` tag to the output.
+This can reference either an external script or hold a body of any type of script.
+
+Nesting `<script>` tags is not supported by browsers.
+Because of this a `ScriptViewElement` will defer nested `ScriptViewElements` to write sequentially instead.
+This makes it a handy tool for building client-side HTML templates using `ViewElements`.
+See the <<html-template,examples>> for a detailed explanation.
+
+== Element and builder
+The `ViewElement` implementation is `ScriptViewElement` and has an equivalent `ScriptViewElementBuilder`.
+A builder can be created using `BootstrapUiBuilders.script()` factory methods.
+
+== Examples
+
+=== Including an external script
+
+Suppose the following builder configuration for including an external script:
+
+[source,java]
+----
+BootstrapUiBuilders.script( "application/javascript" )
+    .source( "http://myscript" )
+    .async( true )
+    .defer( true )
+    .charset( "utf-8" )
+    .build()
+----
+
+This would render the following markup:
+
+[source,html]
+----
+<script type="application/javascript" src="http://myscript" async="async" defer="defer" charset="utf-8"><script>
+----
+
+[html-template]
+=== Including a HTML template
+
+As a `ScriptViewElement` is a regular `NodeViewElement`, you can easily build a HTML template by adding child elements.
+[source,java]
+----
+BootstrapUiBuilders.script( MediaType.TEXT_HTML )
+    .add(
+        BootstrapUiBuilders.paragraph()
+                           .add( BootstrapUiBuilders.text( "hello" ) )
+     )
+    .build()
+----
+
+This would render the following markup:
+
+[source,html]
+----
+<script type="text/html">
+  <p>hello</p>
+</script>
+----
+
+[nested-elements]
+=== Nested script elements
+
+Things get a bit more complicated when you start nesting `ScriptViewElements`.
+Suppose you have the following configuration:
+
+[source,java]
+----
+import static BootstrapUiBuilders.*;
+
+script( MediaType.TEXT_HTML )
+     .add(
+        paragraph().add( BootstrapUiBuilders.text( "hello" ) )
+     )
+     .add(
+        script( MediaType.TEXT_HTML )
+          .add( paragraph().add( BootstrapUiBuilders.text( "nested hello" ) ) )
+     )
+     .add(
+        paragraph().add( BootstrapUiBuilders.text( "goodbye" ) )
+     )
+     .build()
+----
+
+Because nesting of `<script>` tags is not supported by browsers, the nested scripts will be written sequentially instead.
+In the original location a different element will be written with a reference to the actual `<script>` element.
+
+[source,html]
+----
+<script type="text/html">
+  <p>hello</p>
+  <i data-bum-ref-id="[UNIQUE_ID]" style="display: none; visibility: hidden;"></i>
+  <p>goodbye</p>
+</script>
+<script type="text/html" id="[UNIQUE_ID]">
+  <p>nested hello</p>
+</script>
+----
+
+WARNING: Nesting `ScriptViewElements` only works well when using them for HTML (or other HTML-like) templates.
+
+==== Client-side processing
+In this particular case, it is up to the client script to traverse the replacement element to the actual script element written.
+The BootstrapUiModule javascript provides a utility function which can do this transparently using JQuery.
+
+The following snippet would return the JQuery elements with the target nodes:
+
+[source,javascript]
+----
+BootstrapUiModule.refTarget( $( '[data-bum-ref-id]' ) )
+                 .each( function( node ) {
+                    // do something with the html template
+                 } );
+----
+
+
+==== Changing the replacement tag
+You can change the default `i` tag that is used by setting the `refTagName` property.
+
+==== Not rendering a replacement element
+If you do not want to render a replacement element, set the `refTagName` property to an empty string (or use `ScriptViewElement.NO_REF_TAG`).
+
+
+

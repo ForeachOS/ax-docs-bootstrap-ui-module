@@ -31,6 +31,7 @@
 ** xref:components/tables.adoc[Tables]
 ** xref:components/icons.adoc[Icons]
 ** xref:components/tooltips.adoc[Tooltips]
+** xref:components/script.adoc[Script elements]
 
 * xref:utilities/index.adoc[Utilities]
 
