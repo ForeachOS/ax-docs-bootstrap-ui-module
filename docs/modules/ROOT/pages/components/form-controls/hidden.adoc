@@ -1,2 +1,91 @@
 = Hidden fields
 
+A `HiddenFormElement` renders an `<input type="hidden" />` element.
+
+== Element and builder
+The `ViewElement` implementation is `HiddenFormElement` and has an equivalent `HiddenFormElementBuilder`.
+A builder can be created using the `BootstrapUiBuilders.hidden()` factory method.
+
+== Example
+
+The following builder configuration:
+
+[source,java]
+----
+BootstrapUiBuilders.hidden()
+    .controlName( "my-control" )
+    .value( "my-value" )
+    .build()
+----
+
+Would render the following markup:
+
+[source,html]
+----
+<input type="hidden" name="my-control" value="my-value" />
+----
+
+== Form controls and validation
+A `HiddenFormElement` has some limitations, by default it is not a `FormControlElement`.
+This means that when present in a `FormGroupElement`, it will not be considered as the control of the form group and will not be used for looking up validation errors.
+
+This suits most use cases where additional hidden elements are added to a form group to provide the control functionality.
+
+=== Converting to a regular form control
+Sometimes it is useful to use a hidden element as the actual form control for validation.
+You can do so by calling `HiddenFormElement.toFormControl()`.
+
+The output rendered will be identical, the only difference is that the hidden element will be considered a regular form control for retrieval and validation purposes.
+
+.An example
+Consider the following entity:
+
+[source,java]
+----
+class Person {
+    @Setter
+    @Getter
+    private String firstName, lastName;
+
+    @NotBlank
+    @Getter
+    private String name;
+}
+----
+
+Validation only happens on the `name` property, which is the combination of both `firstName` and `lastName`, that need to be set separately.
+
+If we create a single form group with both `firstName` and `lastName` textboxes, the first textbox control (`firstName`) would be used to retrieve the validation errors for the form group.
+A solution would be to add a `hidden` and `disabled` form control as first element to the form group.
+Disabling the control ensures that values will never be posted back, but validation errors will be retrieved when rendering the form.
+
+The form group configuration would look like:
+
+[source,java]
+----
+import static BootstrapUiBuilders.*;
+
+formGroup()
+    .label( label( "Name" ).target( "firstName" ) )
+    .add( hidden().controlName( "name" ).disabled( true ).mapToFormControl() )
+    .add( textbox().controlName( "firstName" ) )
+    .add( textbox().controlName( "lastName" ) )
+    .build()
+----
+
+With the resulting markup:
+
+[source,html]
+----
+<div class="form-group">
+    <label for="firstName" class="control-label">Name</label>
+    <input type="hidden" name="name" id="name" disabled="disabled" />
+    <input type="text" name="firstName" id="firstName" class="form-control" />
+    <input type="text" name="lastName" id="lastName" class="form-control" />
+</div>
+----
+
+NOTE: In our example we are explicitly specifying a `target` on the `label` in order to attach the label to the `firstName` textbox.
+
+
+

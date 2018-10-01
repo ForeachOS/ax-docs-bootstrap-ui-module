@@ -87,6 +87,10 @@ See also the `AutoSuggestFormElementConfiguration` for configuration of the requ
 |`<<OptionsFormElementBuilder,OptionFormElementBuilder>>`
 |Creates a single radio button.
 
+|`ScriptViewElement`
+|`ScriptViewElementBuilder`
+|Add a `<script>` element to the output.
+
 |`SelectFormElement`
 |`<<OptionsFormElementBuilder>>`
 |Creates a select control, either a regular HTML dropdown or a {bootstrap-select-url}[bootstrap-select].

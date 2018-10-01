@@ -97,10 +97,14 @@ In the original location a different element will be written with a reference to
 </script>
 ----
 
+The actual `<script>` element output gets a unique HTML id assigned.
+The replacement element holds a `data` attribute with the same id value for easy retrieval.
+Using the `data-bum-ref-id` attribute client scripts can access the original element output.
+
 WARNING: Nesting `ScriptViewElements` only works well when using them for HTML (or other HTML-like) templates.
 
 ==== Client-side processing
-In this particular case, it is up to the client script to traverse the replacement element to the actual script element written.
+It is up to client scripts to traverse the replacement element to the actual script element written.
 The BootstrapUiModule javascript provides a utility function which can do this transparently using JQuery.
 
 The following snippet would return the JQuery elements with the target nodes:
