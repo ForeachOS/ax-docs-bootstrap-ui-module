@@ -1,0 +1,70 @@
+= Label Elements
+
+A `LabelFormElement` writes a `<label>` tag to the output.
+
+== Element and builder
+
+The `ViewElement` implementation for a label element is a `LabelFormElement` and has a corresponding `LabelFormElementBuilder`.
+A `LabelFormElement` can also be created via the `BootstrapUiBuilders#label` factory methods.
+
+== Examples
+
+=== Creating a LabelFormElement
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.label("Author")
+                   .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<label class="control-label">Author</label>
+----
+
+=== Target element
+
+A label can also have a target element.
+This ensures that the elements are correctly associated by providing a `for` attribute.
+In the following example, we'll also create a xref::components/form-controls/textbox.adoc[textbox element] to refer to.
+
+[source,java,indent=0]
+----
+ViewElement author = BootstrapUiBuilders.textbox()
+                                        .htmlId( "author" )
+                                        .build();
+BootstrapUiBuilders.label("Author")
+                   .target(authorControl)
+----
+
+The aforementioned builder configurations would result in the following markup:
+
+[source,html,indent=0]
+----
+<label for="author" class="control-label">Author</label>
+<input id="author" type="text" class="form-control">
+----
+
+=== Child elements
+
+Label elements can also have other `ViewElement` s as their children.
+These will also be rendered inside the body of the `label` element.
+Let's for example add an xref::components/icons.adoc[icon element] to the label.
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.label( "Author" )
+		           .add( BootstrapUiBuilders.glyphIcon( GlyphIcon.BOOK ) )
+		           .build();
+----
+
+This will result in the following markup
+
+[source,html,indent=0]
+----
+<label class="control-label">Author<span aria-hidden="true" class="glyphicon glyphicon-book"></span></label>
+----
