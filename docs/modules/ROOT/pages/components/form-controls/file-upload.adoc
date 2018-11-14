@@ -1,0 +1,27 @@
+= File upload
+
+A `FileUploadFormElement` writes a `<input>` element type="file" to the output.
+This formElement can be used to select one or multiple form the users device storage.
+
+== Element and builder
+
+The `ViewElement` implementation is `FileUploadFormElement` and has an equivalent `FileUploadFormElementBuilder`.
+A builder can be created using `BootstrapUiBuilders.file()` factory methods.
+
+== FileUploadFormElement attributes
+[cols="1,2,4",options=header]
+|===
+
+|Attribute
+|Description
+|Default
+
+|`accept`
+|A string that defines the file types the file input should accept. This string is a comma-separated list of unique type specifiers. For example "images/*"
+|Accept attribute is not set so All fileTypes are allowed by default
+
+|`multiple`
+|A boolean indicting if multiple files are allowed.
+|Multiple attribute is not set so multiple files are not allowed by default
+
+|===
