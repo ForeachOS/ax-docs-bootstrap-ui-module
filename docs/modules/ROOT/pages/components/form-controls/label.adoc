@@ -38,7 +38,7 @@ ViewElement author = BootstrapUiBuilders.textbox()
                                         .htmlId( "author" )
                                         .build();
 BootstrapUiBuilders.label("Author")
-                   .target(authorControl)
+                   .target(authorControl);
 ----
 
 The aforementioned builder configurations would result in the following markup:
