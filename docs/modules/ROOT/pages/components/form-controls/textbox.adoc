@@ -1,7 +1,6 @@
 = Textbox/Textarea elements
 
-A `TextboxFormElement` writes either an `<input>` or a `textarea` tag to the output.
-It is also a base control element that is reused for several other controls, such as xref::components/form-controls/numeric.adoc[numeric controls] and xref::components/form-controls/datetime.adoc[date controls].
+A `TextboxFormElement` writes either an `<input>` or a `<textarea>` tag to the output.
 
 == Element and builder
 
@@ -9,21 +8,19 @@ The `ViewElement` implementation is `TextboxFormElement`, which also has a speci
 Both of these elements can be configured via a `TextboxViewElementBuilder`.
 A builder can also be created by using the `BootstrapUiBuilders#textbox` or `BootstrapUiBuilders#textarea` factory methods.
 
-== Configurable settings
+== Configurable attributes
 
-A `TextboxFormElement` can easily be customized through a variety of settings.
+A `TextboxFormElement` can easily be customized through a variety of attributes.
 
 [opts="header",cols="1,2"]
 |===
 
-| Setting
+| Attribute
 | Description
 
 | type
-| The type of a `TextBoxFormElement` influences the datatype for which the control is rendered.
-This can be used to for example render a control for a password field instead of a text field.
-
-The default type is `TextBoxFormElement.Type.TEXT`
+| Specifies the `type` attribute on an `<input>` element tag.
+More information and a listing of the available types can be found in the section <<type-attributes,Type attribute>>.
 
 | placeholder
 | Sets a placeholder that is rendered if no data is present.
@@ -58,6 +55,30 @@ A `TextAreaElement` is a specialized `TextBoxFormElement` and contains some addi
 
 |===
 
+[#type-attributes]
+=== Type attribute
+
+The type of a `TextboxFormElement` influences the type of the html element that is rendered.
+For example, instead of a text input element, a password input element could be rendered.
+The default type for a `TextboxFormElement` is `TextboxFormElement.Type.TEXT`
+
+Following is a list of all available types:
+
+* TEXT
+* PASSWORD
+* DATETIME
+* DATETIME_LOCAL
+* DATE
+* MONTH
+* TIME
+* WEEK
+* NUMBER
+* EMAIL
+* URL
+* SEARCH
+* TEL
+* COLOR
+
 == Examples
 
 === Creating a textbox
@@ -78,6 +99,11 @@ The following markup would be rendered:
 ----
 
 === Multiline & Autosizing
+
+Autosizing is provided by the https://www.jacklmoore.com/autosize/[Jack Moore Autosize] library and is registered as an additional web resource via the `BootstrapUiFormElementsWebResources` bundle.
+Its functionality is executed based on the presence of a `js-autosize` html class on the `TextareaFormElement` that is rendered.
+
+Unless explicitly set to false, autosizing will be active for the textarea element that is rendered.
 
 Given the following builder configuration:
 
@@ -100,6 +126,3 @@ The following markup would be rendered:
 ----
 <textarea rows="3" class="form-control js-autosize" style="overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 74px;"></textarea>
 ----
-
-As seen in the markup, additional classes such as js-autosize are provided to support the autosizing.
-Depending on the configuration, additional markup and web resources are added to support settings.
