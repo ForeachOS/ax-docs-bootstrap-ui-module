@@ -1,0 +1,56 @@
+= FavIcon
+
+A `FaIcon` writes a `<i>` element with the chosen faIcon as class to the output.
+It's possible to compose your own faIcon strings but the `FaIcon` viewElement has a whole set of `FaIcon` predefined.
+The predefined `FaIcon` are categorized the following way:
+
+* WebApp
+* Transport
+* Gender
+* FileType
+* Spin
+* Form
+* Payment
+* Chart
+* Currency
+* TextEditor
+* Directional
+* VideoPlayer
+* Brand
+* Medical
+
+== Element and builder
+The `FaIcon` extends the `IconViewElement` which holds the information needed the render the `BootstrapUiElements.ICON`.
+A builder can be created using `BootstrapUiBuilders.faIcon` factory methods.
+
+NOTE: The IconViewElement also has a xref:components/glyphIcon.adoc[GlyphIcon implementation].
+
+== Favicon attributes
+[cols="1,2,4",options=header]
+|===
+
+|Attribute
+|Description
+|Default
+
+|`glyph`
+|A string that defines the favIcon to render. For example "fa-ambulance".
+|Not set by default
+
+|===
+
+== Examples
+=== Creating a basic FaIcon
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.faIcon( FaIcon.WebApp.BOOK );
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<i aria-hidden="true" class="fa fa-book"></i>
+----
