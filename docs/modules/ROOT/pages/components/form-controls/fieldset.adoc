@@ -1,0 +1,84 @@
+= Fieldset elements
+
+A `FieldsetFormElement` writes a `<fieldset>` tag to the output.
+
+== Element and builder
+
+The `ViewElement` implementation for a fieldset element is a `FieldsetFormElement` and has a corresponding `FieldsetFormElementBuilder`.
+A `FieldsetFormElement` can also be created via the `BootstrapUiBuilders#fieldset` factory methods.
+
+== Examples
+
+=== Creating a fieldset
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.fieldset("Author")
+                   .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<fieldset><legend>Author</legend></fieldset>
+----
+
+=== Child elements
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.fieldset( "Author" )
+                   .add( BootstrapUiBuilders.textbox() )
+                   .build()
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<fieldset><legend>Author</legend><input type="text" class="form-control"></fieldset>
+----
+
+=== Customizing the legend
+
+The legend can also have additional child view elements, which can be added through the `Legend` builder of the fieldset.
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.fieldset()
+                   .legend() # <1>
+                   .text( "Author" )
+                   .add( BootstrapUiBuilders.glyphIcon( GlyphIcon.USER ) )
+                   .and()
+                   .build()
+----
+
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<fieldset><legend>Author<span aria-hidden="true" class="glyphicon glyphicon-user"></span></legend></fieldset>
+----
+
+[WARNING]
+====
+Providing a value to the `legend` method will not give access to the builder for the legend element.
+As such, the following configuration will add the provided view elements to the fieldset instead of to the legend.
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.fieldset()
+                   .legend( "Author" )
+                   .add( BootstrapUiBuilders.glyphIcon( GlyphIcon.USER ) )
+                   .build()
+----
+====
+
