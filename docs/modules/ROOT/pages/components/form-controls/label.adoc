@@ -66,5 +66,7 @@ This will result in the following markup
 
 [source,html,indent=0]
 ----
-<label class="control-label">Author<span aria-hidden="true" class="glyphicon glyphicon-book"></span></label>
+<label class="control-label">Author
+    <span aria-hidden="true" class="glyphicon glyphicon-book"></span>
+</label>
 ----

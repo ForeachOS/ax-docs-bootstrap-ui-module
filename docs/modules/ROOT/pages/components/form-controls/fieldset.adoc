@@ -23,7 +23,9 @@ The following markup would be rendered:
 
 [source,html,indent=0]
 ----
-<fieldset><legend>Author</legend></fieldset>
+<fieldset>
+    <legend>Author</legend>
+</fieldset>
 ----
 
 === Child elements
@@ -41,7 +43,10 @@ The following markup would be rendered:
 
 [source,html,indent=0]
 ----
-<fieldset><legend>Author</legend><input type="text" class="form-control"></fieldset>
+<fieldset>
+    <legend>Author</legend>
+    <input type="text" class="form-control">
+</fieldset>
 ----
 
 === Customizing the legend
@@ -65,7 +70,11 @@ The following markup would be rendered:
 
 [source,html,indent=0]
 ----
-<fieldset><legend>Author<span aria-hidden="true" class="glyphicon glyphicon-user"></span></legend></fieldset>
+<fieldset>
+    <legend>Author
+        <span aria-hidden="true" class="glyphicon glyphicon-user"></span>
+    </legend>
+</fieldset>
 ----
 
 [WARNING]

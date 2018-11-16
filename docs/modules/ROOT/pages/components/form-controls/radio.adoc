@@ -1,0 +1,81 @@
+= Radio button elements
+
+A `RadioFormElement` writes a `<input type="radio">` tag to the output.
+It shares the same functionality as the xref::components/form-controls/checkbox.adoc[CheckboxFormElement], but uses the `radio` type instead.
+
+== Element and builder
+
+The `ViewElement` implementation for a radio button element is a `RadioFormElement` which is a `CheckboxFormElement` that specifies a different input type.
+A builder can be created via the `OptionFormElementBuilder#radio` method or via the `BootstrapUiBuilders#radio` factory methods.
+
+== Thymeleaf model writer
+
+The `RadioFormElementWriter` is a specialized version of the `CheckboxFormElementWriter` that ensures that the label and/or wrapping element are closed correctly.
+
+== Examples
+
+=== Creating a radio button
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.radio()
+                   .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div class="radio">
+    <input type="radio">
+</div>
+----
+
+=== Providing a label
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.radio()
+                   .label( "John" ) # <1>
+                   .build()
+----
+<1> A label for a radio button can also be provided using the `text` method on the `OptionFormElementBuilder`.
+The value set via the `label` method always takes precedence over the `text` value.
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div class="radio">
+    <label>
+        <input type="radio">John</label>
+</div>
+----
+
+=== Child elements
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.radio()
+                   .label( "John" )
+                   .add( BootstrapUiBuilders.glyphIcon( GlyphIcon.USER ) )
+                   .build()
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div class="radio">
+    <label>
+        <input type="radio">John
+        <span aria-hidden="true" class="glyphicon glyphicon-user"></span>
+    </label>
+</div>
+----
