@@ -1,7 +1,110 @@
-= NumericFormElementBuilder
+= NumericFormElement
 include::{partialsdir}/_attributes.adoc[]
 
-Uses the {autoNumeric-url}[JQuery autoNumeric plugin].
-Supports decimal precision, localization and adding symbols (eg. for currency).
+A `NumericFormElement` writes an `<input>` element with a type="text" to the output.
+It uses the {autoNumeric-url}[JQuery autoNumeric plugin] to support decimal precision, localization and adding symbols (eg. for currency).
 
-See `{javadoc-url}/com/foreach/across/modules/bootstrapui/elements/NumericFormElementConfiguration.html[NumericFormElementConfiguration]` for configuration options.
+
+== Element and builder
+The `ViewElement` implementation is `NumericFormElement` and has an equivalent `NumericFormElementBuilder`.
+A builder can be created using `BootstrapUiBuilders.numeric()` factory methods.
+
+== NumericFormElement attributes
+[cols="1,2,4",options=header]
+|===
+
+|Attribute
+|Description
+|Default
+
+|`NumericFormElementConfiguration`
+|See `{javadoc-url}/com/foreach/across/modules/bootstrapui/elements/NumericFormElementConfiguration.html[NumericFormElementConfiguration]` for configuration options.
+|Not set by default
+
+|===
+
+== Examples
+=== Creating a basic numeric form element
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.numeric()
+        .simple()
+        .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<input type="text" class="numeric form-control">
+----
+
+=== Creating an integer number form element
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.numeric()
+        .integer()
+        .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<input data-bootstrapui-numeric="{&quot;aSep&quot;:&quot;,&quot;,&quot;vMin&quot;:-9223372036854775808,&quot;aDec&quot;:&quot;.&quot;,&quot;mDec&quot;:0}" type="text" class="numeric form-control">
+----
+
+=== Creating a decimal number form element
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.numeric()
+        .decimal(2)
+        .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<input data-bootstrapui-numeric="{&quot;aSep&quot;:&quot;,&quot;,&quot;vMin&quot;:-9223372036854775808,&quot;aDec&quot;:&quot;.&quot;,&quot;mDec&quot;:2}" type="text" class="numeric form-control">
+----
+
+=== Creating a percentage number form element
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.numeric()
+        .percentage()
+        .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<input data-bootstrapui-numeric="{&quot;aSign&quot;:&quot;%&quot;,&quot;aSep&quot;:&quot;,&quot;,&quot;mRound&quot;:&quot;S&quot;,&quot;mDec&quot;:2,&quot;vMin&quot;:-9223372036854775808,&quot;pSign&quot;:&quot;s&quot;,&quot;aDec&quot;:&quot;.&quot;}" type="text" class="numeric form-control">
+----
+
+=== Creating a currency number form element
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.numeric()
+        .currency( Currency.getInstance("EUR"))
+        .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<input data-bootstrapui-numeric="{&quot;nBracket&quot;:&quot;(,)&quot;,&quot;aSign&quot;:&quot;€&quot;,&quot;aSep&quot;:&quot;,&quot;,&quot;mRound&quot;:&quot;B&quot;,&quot;mDec&quot;:2,&quot;vMin&quot;:-9223372036854775808,&quot;pSign&quot;:&quot;p&quot;,&quot;aDec&quot;:&quot;.&quot;}" type="text" class="numeric form-control">
+----
