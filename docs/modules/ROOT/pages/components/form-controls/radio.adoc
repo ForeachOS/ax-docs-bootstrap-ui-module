@@ -6,11 +6,11 @@ It shares the same functionality as the xref::components/form-controls/checkbox.
 == Element and builder
 
 The `ViewElement` implementation for a radio button element is a `RadioFormElement` which is a `CheckboxFormElement` that specifies a different input type.
-A builder can be created via the `OptionFormElementBuilder#radio` method or via the `BootstrapUiBuilders#radio` factory methods.
+A builder can be created via the `OptionFormElementBuilder#radio` builder or via the `BootstrapUiBuilders#radio` factory methods.
 
 == Thymeleaf model writer
 
-The `RadioFormElementWriter` is a specialized version of the `CheckboxFormElementWriter` that ensures that the label and/or wrapping element are closed correctly.
+The `RadioFormElementWriter` is a specialized version of the xref::components/form-controls/checkbox.adoc#thymeleaf-model-writer[CheckboxFormElementWriter] that ensures that the label and/or wrapping element are closed correctly.
 
 == Examples
 
@@ -29,7 +29,7 @@ The following markup would be rendered:
 [source,html,indent=0]
 ----
 <div class="radio">
-    <input type="radio">
+    <input type="radio"></input>
 </div>
 ----
 
@@ -51,8 +51,7 @@ The following markup would be rendered:
 [source,html,indent=0]
 ----
 <div class="radio">
-    <label>
-        <input type="radio">John</label>
+    <label><input type="radio"></input>John</label>
 </div>
 ----
 
@@ -74,7 +73,7 @@ The following markup would be rendered:
 ----
 <div class="radio">
     <label>
-        <input type="radio">John
+        <input type="radio"></input>John
         <span aria-hidden="true" class="glyphicon glyphicon-user"></span>
     </label>
 </div>
