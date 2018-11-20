@@ -1,0 +1,67 @@
+= Link elements
+
+A `LinkViewElement` writes an `<a>` tag to the output.
+
+== Element and builder
+
+The `ViewElement` implementation for a checkbox element is a `LinkViewElement` and has a corresponding `LinkViewElementBuilder`.
+A `LinkViewElement` can also be created via the `BootstrapUiBuilders#link` factory method.
+
+== Examples
+
+=== Creating a link
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.link()
+                   .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<a href="#"></a>
+----
+
+=== Providing text
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.link()
+                   .url( "https://google.com" )
+                   .text( "Google" )
+                   .build()
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<a href="https://google.com">Google</a>
+----
+
+=== Child elements
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.link()
+                   .url( "https://google.com" )
+                   .add( BootstrapUiBuilders.glyphIcon( GlyphIcon.SEARCH ) )
+                   .build()
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<a href="https://google.com">
+    <span aria-hidden="true" class="glyphicon glyphicon-search"></span>
+</a>
+----
