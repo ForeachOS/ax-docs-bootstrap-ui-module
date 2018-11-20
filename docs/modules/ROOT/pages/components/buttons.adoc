@@ -1,0 +1,103 @@
+=== ButtonViewElement
+include::{partialsdir}/_attributes.adoc[]
+
+A `ButtonViewElement` writes a `<button>` element to the output.
+
+== Element and builder
+The `ButtonViewElement` has an equivalent `ButtonViewElementBuilder`.
+A builder can be created using `BootstrapUiBuilders.button()` factory methods.
+
+== ButtonViewElement attributes
+[cols="1,2,4",options=header]
+|===
+
+|Attribute
+|Description
+|Default
+
+|`Type`
+|A `ButtonViewElement` can have the following type: BUTTON, BUTTON_SUBMIT, BUTTON_RESET, INPUT, INPUT_SUBMIT, INPUT_RESET,LINK
+|BUTTON
+
+|`State`
+|A `ButtonViewElement` can have the following states: ACTIVE, DISABLED
+|ACTIVE
+
+|`Icon`
+|A `GlyphIcon` can be provided to show on the button. It can be aligned left, right or set as iconOnly.
+|Not set by default
+
+|`Link`
+|Transform the `ButtonViewElement` into a link.
+|Not set by default
+
+
+|===
+
+
+== Examples
+=== Creating a simple button
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders
+    .button()
+    .text( "Click me" )
+    .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<button type="button" class="btn btn-default">Click me</button>
+----
+
+
+=== Button as link with icon
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders
+    .button()
+    .text( "To google  " )
+    .link( "http://www.foreach.be" )
+    .iconRight()
+    .icon( BootstrapUiBuilders.glyphIcon( GlyphIcon.ARROW_RIGHT ))
+    .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<a role="button" href="http://www.foreach.be" class="btn btn-link">To google  <span aria-hidden="true" class="glyphicon glyphicon-arrow-right"></span></a>
+----
+
+
+=== Large submit button
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders
+    .button()
+    .submit()
+    .size(Size.LARGE )
+    .text( "Submit" )
+    .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<button type="submit" class="btn btn-default btn-lg">Submit</button>
+----
+
+
+
+
+
