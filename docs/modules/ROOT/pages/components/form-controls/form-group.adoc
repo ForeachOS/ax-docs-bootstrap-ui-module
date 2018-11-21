@@ -1,4 +1,205 @@
-=== FormGroupElementBuilder
-Takes a label and a control.
-Can optionally take some help text.
-Will render as a form group and will attempt to link the label to the control.
+= Form group elements
+include::{partialsdir}/_attributes.adoc[]
+
+A `FormGroupElement` represents a form control with an associated label and description texts.
+It helps with automatic styling of forms based on a general form layout.
+
+Form groups elements wrap around other view elements and are represented as a `<div>` tag with the css class `form-group`.
+
+== Element and builder
+
+The `ViewElement` implementation for a checkbox element is a `FormGroupElement` and has a corresponding `FormGroupElementBuilder`.
+A `FormGroupElement` can also be created via the `BootstrapUiBuilders#formGroup` factory method.
+
+== FormGroupElement attributes
+
+A FormGroupElement can easily be customized through a variety of attributes.
+
+[opts="header",cols="1,2"]
+|===
+
+| Attribute
+| Description
+
+| formLayout
+| Specifies the layout of the form group.
+A layout can specify a xref::components/grid-system.adoc[grid], a type and whether labels should be rendered.
+
+| required
+| Defines whether the form group should be marked as required.
+
+| detectFieldErrors
+| Whether the form group should look for field errors in the thymeleaf context.
+
+|===
+
+== Thymeleaf model writer
+
+The `FormGroupElementModelWriter` is responsible for writing a form group and its child elements to the Thymeleaf model.
+Depending on the configuration of the form group, additional markup or elements may be added.
+
+Required::
+If a form group is required, an additional `<sup class="required">*</sup>` tag will be added to the label.
+
+Connecting label & control::
+The FormGroupElementModelWriter will attempt to automatically link the label and control of the form group if the label has not yet specified a target.
+
+Additional text elements::
+FormGroupElements support additional help, description and tooltip blocks.
+If these controls are present, they will be added at a specific position.
++
+A tooltip will be added inside the label, the description block before the control and the help block after the control.
+These blocks will also be referenced by the control element via an {bootstrap-docs-url}css/#forms-help-text[`aria-describedby`] attribute.
+
+FormLayout::
+A `FormLayout` can be defined on the `FormGroupElement` to specify in which direction the containing elements should render.
++
+If the form layout is of type `INLINE`, the label, help and description block will have an additional {bootstrap-docs-url}css/#helper-classes-screen-readers[`sr-only`] class added.
+Additionally, if no placeholder has been set on the control element, the label will be added as a placeholder.
+
+Errors::
+If the form group should detect field errors, it will attempt to look up the property in the template context to check for binding errors.
+The property will be looked up by using the control name that is specified on the form control.
+Should any errors be present, the form group will be rendered in an {bootstrap-docs-url}css/#forms-control-validation[error validation state].
+
+== Examples
+
+=== Creating a form group
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.formGroup()
+                   .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div class="form-group"></div>
+----
+
+=== Label & Control
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.formGroup()
+                   .label( BootstrapUiBuilders.label( "Author" )
+                                              .add( BootstrapUiBuilders.glyphIcon( GlyphIcon.USER ) ) )
+                   .control(
+                           BootstrapUiBuilders.textbox()
+                                              .controlName( "author-name" )
+                   )
+                   .build()
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div class="form-group">
+    <label for="author-name" class="control-label">Author
+        <span aria-hidden="true" class="glyphicon glyphicon-user"></span>
+    </label>
+    <input name="author-name" id="author-name" type="text" class="form-control"></input>
+</div>
+----
+
+=== Configurable text elements
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.formGroup()
+                   .label( "Author" )
+                   .control( BootstrapUiBuilders.textbox() )
+                   .tooltip( "This is a tooltip. I appear as a part of the label." )
+                   .descriptionBlock( "This is a description block. I come before the control and after the label." )
+                   .helpBlock( "This is a help block. I come after the control." )
+                   .build()
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div class="form-group">
+    <label class="control-label">Author
+        <a data-toggle="tooltip" title="This is a tooltip. I appear as a part of the label." class="tooltip-link text-muted"
+            data-html="true">
+            <i aria-hidden="true" class="fa fa-question-circle"></i>
+        </a>
+    </label>
+    <span class="help-block form-text-description">This is a description block. I come before the control and after the label.</span>
+    <input type="text" class="form-control"></input>
+    <span class="help-block form-text-help">This is a help block. I come after the control.</span>
+</div>
+----
+
+=== Child elements
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.formGroup()
+                   .label( "Author" )
+                   .control( BootstrapUiBuilders.textbox() )
+                   .add( BootstrapUiBuilders.link()
+                                            .url( "https://google.com" )
+                                            .text( "Click here for more information" ) )
+                   .build()
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div class="form-group">
+    <label class="control-label">Author</label>
+    <input type="text" class="form-control"></input>
+    <a href="https://google.com">Click here for more information</a>
+</div>
+----
+
+=== Field errors
+
+Given the following builder configuration for a form group that belongs to a xref::components/forms.adoc[form element].
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.formGroup()
+                   .label( "My number" )
+                   .tooltip( tooltip( "another tooltip" ) )
+                   .required()
+                   .detectFieldErrors( true ) # <1>
+                   .control(
+                   		BootstrapUiBuilders.textbox()
+                   				.controlName( "number" )
+                   				.text( "" + data.getNumber() )
+                   )
+----
+<1> If an object is bound to the form and it contains validation errors, the form group will try to detect whether field errors are present for the current control.
+    Should one or more errors be available, they will be rendered in the form group.
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div class="form-group required has-error">
+    <label for="number" class="control-label">My number
+        <sup class="required">*</sup>
+        <a data-toggle="tooltip" title="another tooltip" class="tooltip-link text-muted" data-html="true">
+            <i aria-hidden="true" class="fa fa-question-circle"></i>
+        </a>
+    </label>
+    <input name="number" id="number" type="text" class="form-control" value="not a number" aria-describedby="number.tooltip"></input>
+    <div class="small text-danger">Failed to convert property value of type java.lang.String to required type int for property number; nested exception
+        is java.lang.NumberFormatException: For input string: "not a number"</div>
+</div>
+----
