@@ -1,3 +1,104 @@
-=== TableViewElementBuilder
-Generate Bootstrap markup table structures.
-Holds nested builders for head, foot and body sections.
+=== TableViewElement
+include::{partialsdir}/_attributes.adoc[]
+
+A `TableViewElement` writes a `<table>` element to the output.
+
+== Element and builder
+The `TableViewElement` has an equivalent `TableViewElementBuilder`.
+A builder can be created using `BootstrapUiBuilders.table()` factory methods.
+This builder holds nested builders for head, foot and body sections.
+
+== TableViewElement attributes
+[cols="1,2,4",options=header]
+|===
+
+|Attribute
+|Description
+|Default
+
+|`Body`
+|A table caption shown above the table. Can be build with `BootstrapUiBuilders.tableBody()`.
+|Not set by default
+
+|`Caption`
+|A table caption shown above the table. Can be build with `BootstrapUiBuilders.tableCaption()`.
+|Not set by default
+
+|`Footer`
+|A table caption shown above the table. Can be build with `BootstrapUiBuilders.tableFooter()`.
+|Not set by default
+
+|`Header`
+|A table header that can be build with `BootstrapUiBuilders.tableHeader()`.
+|Not set by default
+
+|`Row`
+|A table row that can be build with `BootstrapUiBuilders.tableRow()`.
+|Not set by default
+
+|===
+
+
+== Examples
+=== Creating a table with header, body & footer
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders
+    .table()
+    .header(
+        BootstrapUiBuilders.tableHeader().add(
+            BootstrapUiBuilders.tableHeaderCell().text( "Name" )
+        ).add(
+            BootstrapUiBuilders.tableHeaderCell().text( "Value" )
+        )
+    )
+    .body(
+        BootstrapUiBuilders.tableBody().add(
+            BootstrapUiBuilders.tableRow().add(
+                BootstrapUiBuilders.tableCell().text( "Height" )
+            ).add(
+                BootstrapUiBuilders.tableCell().text( "128" )
+            )
+        )
+    )
+    .footer(
+        BootstrapUiBuilders.tableFooter().add(
+            BootstrapUiBuilders.tableRow().add(
+                BootstrapUiBuilders.tableCell()
+                    .columnSpan( 2 )
+                    .text( "Table footer" )
+                    .heading( true )
+            )
+        )
+    )
+    .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Height</td>
+            <td>128</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="2">Table footer</th>
+        </tr>
+    </tfoot>
+</table>
+----
+
+
