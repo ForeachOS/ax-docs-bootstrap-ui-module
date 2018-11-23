@@ -1,0 +1,39 @@
+=== ButtonViewElement
+
+A `AlertViewElement` writes a `<button>` element to the output.
+
+== Element and builder
+The `AlertViewElement` has an equivalent `AlertViewElementBuilder`.
+A builder can be created using `BootstrapUiBuilders.alert()` factory methods.
+
+== ButtonViewElement attributes
+[cols="1,2,4",options=header]
+|===
+
+|Attribute
+|Description
+|Default
+
+|===
+
+
+== Examples
+=== Creating a simple button
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders
+    .alert()
+    .danger()
+    .text( "This is a danger alert—check it out!\n" )
+    .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div role="alert" class="alert alert-danger">This is a danger alert—check it out!</div>
+----
+
