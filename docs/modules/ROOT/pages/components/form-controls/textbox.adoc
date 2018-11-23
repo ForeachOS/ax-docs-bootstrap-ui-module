@@ -1,4 +1,5 @@
 = Textbox/Textarea elements
+include::{partialsdir}/_attributes.adoc[]
 
 A `TextboxFormElement` writes either an `<input>` or a `<textarea>` tag to the output.
 
@@ -100,7 +101,7 @@ The following markup would be rendered:
 
 === Multiline & Autosizing
 
-Autosizing is provided by the https://www.jacklmoore.com/autosize/[Jack Moore Autosize] library and is registered as an additional web resource via the `BootstrapUiFormElementsWebResources` bundle.
+Autosizing is provided by the {autosize-url}[Jack Moore Autosize] library and is registered as an additional web resource via the `BootstrapUiFormElementsWebResources` bundle.
 Its functionality is executed based on the presence of a `js-autosize` html class on the `TextareaFormElement` that is rendered.
 
 Unless explicitly set to false, autosizing will be active for the textarea element that is rendered.
