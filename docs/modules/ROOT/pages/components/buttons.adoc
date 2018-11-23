@@ -1,5 +1,4 @@
 === ButtonViewElement
-include::{partialsdir}/_attributes.adoc[]
 
 A `ButtonViewElement` writes a `<button>` element to the output.
 
