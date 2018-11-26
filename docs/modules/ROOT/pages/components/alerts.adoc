@@ -1,12 +1,12 @@
-=== ButtonViewElement
+=== AlertViewElement
 
-A `AlertViewElement` writes a `<button>` element to the output.
+An `AlertViewElement` writes a `<div>` element with the role "alert" to the output.
 
 == Element and builder
 The `AlertViewElement` has an equivalent `AlertViewElementBuilder`.
 A builder can be created using `BootstrapUiBuilders.alert()` factory methods.
 
-== ButtonViewElement attributes
+== AlertViewElement attributes
 [cols="1,2,4",options=header]
 |===
 
@@ -14,11 +14,23 @@ A builder can be created using `BootstrapUiBuilders.alert()` factory methods.
 |Description
 |Default
 
+|`Type`
+|A `AlertViewElement` has the following default styles: `INFO`,`WARNING`,`DANGER`, `SUCCESS`
+|Not set by default
+
+|`closeLabel`
+|An aria-label shown for the close icon
+|Not set by default
+
+|`dismissible`
+|A boolean indicating if the `AlertViewElement` can be dismissed
+|False by default
+
 |===
 
 
 == Examples
-=== Creating a simple button
+=== Creating a simple alert
 Given the following builder configuration
 
 [source,java,indent=0]
@@ -37,3 +49,28 @@ The following markup would be rendered:
 <div role="alert" class="alert alert-danger">This is a danger alert—check it out!</div>
 ----
 
+=== Creating an alert with several options
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders
+    .alert()
+    .closeLabel( "Close alert" )
+    .dismissible( false )
+    .success()
+    .text( "This is a success alert—check it out!\n" )
+    .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div role="alert" class="alert alert-dismissible alert-success">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close alert">
+        <span aria-hidden="true">×</span>
+    </button>
+    This is a success alert—check it out!
+</div>
+----
