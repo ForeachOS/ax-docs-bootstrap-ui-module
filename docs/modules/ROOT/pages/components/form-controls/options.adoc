@@ -3,8 +3,61 @@ include::{partialsdir}/_attributes.adoc[]
 
 To quickly create a list of options, either as a select, list of checkboxes or list or radio buttons.
 
+== Element and builder
+The `OptionsFormElementBuilder` builds an `AbstractNodeViewElement`.
+A builder can be created using `BootstrapUiBuilders.options()` factory methods.
+
+This builder can be used to create a list of options.
+The default implementation is a `select` element which can be extended with a `bootstrap-select` implementation.
+
+== OptionsFormElementBuilder attributes
+[cols="1,2,4",options=header]
+|===
+
+|Attribute
+|Description
+|Default
+
+|`Type`
+|The type can be SELECT, RADIO or CHECKBOX
+|SELECT by default
+
+|`multiple`
+|Multiple options can be selected
+|False by default
+
+|`controlName`
+|Name of the element
+|Not set by default
+
+|===
+
+== Examples
+=== Creating an option list for a select field
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders
+    .options()
+    .controlName( "demo" )
+    .add( BootstrapUiBuilders.option().label( "Orange" ).value( "orange" ) )
+    .add( BootstrapUiBuilders.option().label( "Apple" ).value( "apple" ) )
+    .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<select name="demo" id="demo" class="form-control">
+    <option id="demo1" value="orange">Orange</option>
+    <option id="demo2" value="apple">Apple</option>
+</select>
+----
+
 [[bootstrap-select]]
-== bootstrap-select support
+=== Bootstrap-Select
 If you want to create a more advanced {bootstrap-select-url}[bootstrap-select dropdown] instead of a simple HTML select, you can do so by specifying a `SelectFormElementConfiguration` object.
 See the respective {javadoc-url}/com/foreach/across/modules/bootstrapui/elements/SelectFormElementConfiguration.html[javadoc for all configuration properties].
 
@@ -45,3 +98,43 @@ The following default message codes are used:
 
 NOTE: Message code replacement is performed when `SelectFormElementConfiguration.localize()` is called.
 This is done automatically when using an `OptionsFormElementBuilder`.
+
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+SelectFormElementConfiguration configuration = new SelectFormElementConfiguration();
+configuration.setDeselectAllText( null );
+configuration.setSelectAllText( null );
+configuration.setCountSelectedText( null );
+configuration.setMaxOptionsText( null );
+configuration.setNoneSelectedText( null );
+
+BootstrapUiBuilders
+    .options()
+    .select( configuration )
+    .multiple()
+    .controlName( "boxName" )
+    .add( BootstrapUiBuilders.option().label( "Orange" ).value( "orange" ) )
+    .add( BootstrapUiBuilders.option().label( "Apple" ).value( "apple" ) )
+    .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div class="btn-group bootstrap-select show-tick form-control">
+   <button type="button" class="btn dropdown-toggle btn-default bs-placeholder" data-toggle="dropdown" role="button" data-id="boxName" title="Nothing selected" aria-expanded="false"><span class="filter-option pull-left">Nothing selected</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button>
+   <div class="dropdown-menu open" role="combobox" style="max-height: 581.554px; overflow: hidden; min-height: 0px;">
+      <ul class="dropdown-menu inner" role="listbox" aria-expanded="false" style="max-height: 571.554px; overflow-y: auto; min-height: 0px;">
+         <li data-original-index="0" class=""><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Orange</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+         <li data-original-index="1" class=""><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Apple</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+      </ul>
+   </div>
+   <select data-bootstrapui-select="{&quot;dropupAuto&quot;:false}" name="boxName" multiple="multiple" id="boxName" class="form-control" tabindex="-98">
+      <option id="boxName1" value="orange">Orange</option>
+      <option id="boxName2" value="apple">Apple</option>
+   </select>
+</div>
+----
