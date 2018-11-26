@@ -1,0 +1,68 @@
+= AutoSuggest elements
+
+An `AutoSuggestFormElement` writes a `<div>` tag to the output containing all markup for an autoSuggest control.
+
+== Element and builder
+
+The `AutoSuggestFormElement` has an equivalent `AutoSuggestFormElementBuilder`.
+A builder can be created using `BootstrapUiBuilders.autosuggest()` factory methods.
+
+== AutoSuggestFormElementConfiguration
+The autoSuggest control takes in a `AutoSuggestFormElementConfiguration` to configure the dataSet options
+
+[options=header,cols="1,1"]
+|===
+
+| Method
+| Description
+
+| `withDataSet`
+| Configure the dataset with the given name, if it is not yet present, it will be added first.
+
+| `setEndpoint`
+| Sets the remote url endpoint where to fetch suggestions.
+
+| `showHint`
+| Should the textbox show a hint for auto-completion.
+
+| `highlight`
+| Highlight the matching input text in the suggestions.
+
+| `minLength`
+| Minimum length the input value should have before fetching suggestiong.
+
+|===
+
+== Examples
+
+=== Creating an autoSuggest element
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders
+    .autosuggest()
+    .configuration(
+            AutoSuggestFormElementConfiguration.withDataSet(
+                    dataSet -> dataSet.remoteUrl( "/bootstrapAutosuggest/suggest?query={{query}}" )
+            )
+    ).build()
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div class="axbum-typeahead" data-bootstrapui-autosuggest="{&quot;highlight&quot;:true,&quot;hint&quot;:true,&quot;minLength&quot;:1,&quot;_datasets&quot;:[{&quot;name&quot;:&quot;default&quot;,&quot;bloodhound&quot;:{&quot;remote&quot;:{&quot;url&quot;:&quot;/bootstrapAutosuggest/suggest?query={{query}}&quot;}}}]}">
+   <span class="twitter-typeahead" style="position: relative; display: inline-block;">
+      <input autocomplete="off" type="search" class="js-typeahead form-control tt-hint" readonly="" spellcheck="false" tabindex="-1" dir="ltr" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; opacity: 1; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);"><input autocomplete="off" type="search" class="js-typeahead form-control tt-input" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;">
+      <pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre>
+      <div class="tt-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;">
+         <div class="tt-dataset tt-dataset-default"></div>
+      </div>
+   </span>
+   <input type="hidden" class="js-typeahead-value">
+</div>
+----
+
