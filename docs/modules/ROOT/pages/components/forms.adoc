@@ -1,0 +1,143 @@
+=== FormViewElement
+include::{partialsdir}/_attributes.adoc[]
+
+A `FormViewElement` writes a `<form>` element to the output.
+
+== Element and builder
+The `FormViewElement` has an equivalent `FormViewElementBuilder`.
+A builder can be created using `BootstrapUiBuilders.form()` factory methods.
+
+== FormViewElement attributes
+[cols="1,2,4",options=header]
+|===
+
+|Attribute
+|Description
+|Default
+
+|`commandObject`
+|Set the command object that should be bound to this form.
+|Not set by default
+
+|`errors`
+|Set the `Errors` that should be used for field error binding by the `FormGroupElement` members of this form.
+|Not set by default
+
+|`action`
+|Url to use for the action attribute
+|Not set by default
+
+|`multipart`
+|Create a multipart form by setting the correct encType. The `FormViewElement` support the following encTypes: `ENCTYPE_PLAIN, ENCTYPE_MULTIPART, ENCTYPE_URLENCODED`
+|Not set by default
+
+|`formLayout`
+|Set the formLayout to be used: `DEFAULT, INLINE or HORIZONTAL`
+|By default uses the `DEFAULT` formLayout
+
+|`ViewElementPostProcessor`
+|Add a `ViewElementPostProcessor` to customise the formElement
+|Not set by default
+
+|`customTemplate`
+|Provide a `customTemplate` to render the form
+|Not set by default
+
+|===
+
+
+== Examples
+=== Simple form with no elements
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders
+    .form()
+    .formName( "contact" )
+    .noValidate()
+    .htmlId( "contact" )
+    .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<form role="form" method="post" novalidate="novalidate" name="contact" id="contact"></form>
+----
+
+
+=== Full form example
+Given the following builder configuration (BootstrapUiBuilders are imported statically)
+
+[source,java,indent=0]
+----
+form()
+    .commandObject( data )
+    .add(
+        formGroup()
+            .label( "My number" )
+            .tooltip( tooltip( "another tooltip" ) )
+            .required()
+            .detectFieldErrors( true )
+            .control(
+                textbox()
+                .controlName( "number" )
+                .text( "" + data.getNumber() )
+            )
+        )
+        .add(
+            formGroup().tooltip( tooltip( "hello" ) ).control( checkbox().controlName( "checkme" ).label( "Check me out" ) )
+        )
+        .add(
+            formGroup()
+                .label( "My text" )
+                .descriptionBlock( "My text is a very important field containing... your text!" )
+                .helpBlock( "Please fill in all the data" )
+                .control( textbox().controlName( "mytext" ) )
+        )
+        .add(
+            formGroup()
+                .control( checkbox().controlName( "checkmetoo" ).label( "Try me babe" ) )
+                .helpBlock( "Try clicking *on* the checkbox in front of you." )
+        )
+        .add( row().add( column( Grid.Device.MD.width( 12 ) ).add( button().submit().text( "Update" ) ) ) );
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<form role="form" method="post">
+    <div class="form-group required">
+        <label for="number" class="control-label">My number<sup class="required">*</sup><a data-toggle="tooltip" title="" class="tooltip-link text-muted" data-html="true" data-original-title="another tooltip"><i aria-hidden="true" class="fa fa-question-circle"></i></a></label>
+        <input name="number" id="number" type="text" class="form-control" value="0" aria-describedby="number.tooltip">
+    </div>
+    <div class="form-group checkbox">
+        <div class="checkbox">
+            <label for="checkme">
+                <input name="checkme" id="checkme" type="checkbox" aria-describedby="checkme.tooltip">Check me out<a data-toggle="tooltip" title="" class="tooltip-link text-muted" data-html="true" data-original-title="hello"><i aria-hidden="true" class="fa fa-question-circle"></i></a></label>
+            <input name="_checkme" type="hidden" value="on">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="mytext" class="control-label">My text</label><span class="help-block form-text-description" id="mytext.description">My text is a very important field containing... your text!</span>
+        <input name="mytext" id="mytext" type="text" class="form-control" aria-describedby="mytext.description mytext.help"><span class="help-block form-text-help" id="mytext.help">Please fill in all the data</span></div>
+    <div class="form-group checkbox">
+        <div class="checkbox">
+            <label for="checkmetoo">
+                <input name="checkmetoo" id="checkmetoo" type="checkbox" aria-describedby="checkmetoo.help">Try me babe</label>
+            <input name="_checkmetoo" type="hidden" value="on">
+        </div>
+        <span class="help-block form-text-help" id="checkmetoo.help">Try clicking *on* the checkbox in front of you.</span>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-default">Update</button>
+        </div>
+    </div>
+</form>
+----
+
+
