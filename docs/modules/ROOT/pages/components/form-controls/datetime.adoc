@@ -1,7 +1,88 @@
-= DateTimeFormElementBuilder
+= DateTime elements
 include::{partialsdir}/_attributes.adoc[]
 
-Represented as a date/time picker.
-Uses the {datetime-url}[Eonasdan datetimepicker] JQuery plugin.
-
+A `DateTimeFormElement` writes an `<input>` element type="text" with the right classes to the output.
+To represent a date/time picker it uses the {datetime-url}[Eonasdan datetimepicker] JQuery plugin.
 See `{javadoc-url}/com/foreach/across/modules/bootstrapui/elements/DateTimeFormElementConfiguration.html[DateTimeFormElementConfiguration]` for configuration options.
+
+== Element and builder
+
+The `DateTimeFormElement` has an equivalent `DateTimeFormElementBuilder`.
+A builder can be created using `BootstrapUiBuilders.datetime()` factory methods.
+
+== FileUploadFormElement attributes
+[cols="1,2,4",options=header]
+|===
+
+|Attribute
+|Description
+|Default
+
+|`value`
+|A Date, LocalDate, LocalTime, LocalDateTime or null value can be provided
+|Null be default
+
+|`configuration`
+|A `DateTimeFormElementConfiguration` can be provided
+|Null be default
+
+|`format`
+|Requires a `DateTimeFormElementConfiguration.Format` to set the format.
+A few helper methods are provided to set the format such as `datetime`, `date` and `time`.
+|Not set by default
+
+|===
+
+== Examples
+=== Simple datepicker
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+datetime()
+    .value( new Date() )
+    .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div data-bootstrapui-datetimepicker="{&quot;format&quot;:&quot;L LT&quot;,&quot;extraFormats&quot;:[&quot;YYYY-MM-DD HH:mm&quot;,&quot;L&quot;,&quot;YYYY-MM-DD&quot;],&quot;datepickerInput&quot;:&quot;input[type=text]&quot;,&quot;locale&quot;:&quot;nl-BE&quot;,&quot;exportFormat&quot;:&quot;YYYY-MM-DD HH:mm&quot;}" class="input-group js-form-datetimepicker date">
+    <input type="text" class="form-control" value="2018-12-05 16:12">
+    <span class="input-group-addon">
+        <span aria-hidden="true" class="glyphicon glyphicon-calendar"></span>
+    </span>
+    <input type="hidden" value="2018-12-05 16:12">
+</div>
+----
+
+=== Localized fr_FR Date
+
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+DateTimeFormElementBuilder builder = datetime();
+DateTimeFormElementConfiguration config = builder.getConfiguration();
+config.setLocale( Locale.forLanguageTag( "fr-FR" ) );
+config.setFormat( DateTimeFormElementConfiguration.Format.DATETIME_FULL );
+config.setLocalizePatterns( false );
+return builder
+        .configuration( config )
+        .value( LocalDateTime.now() )
+        .build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div data-bootstrapui-datetimepicker="{&quot;format&quot;:&quot;LLL&quot;,&quot;extraFormats&quot;:[&quot;YYYY-MM-DD HH:mm&quot;,&quot;L&quot;,&quot;L LT&quot;,&quot;YYYY-MM-DD&quot;],&quot;datepickerInput&quot;:&quot;input[type=text]&quot;,&quot;locale&quot;:&quot;fr-FR&quot;,&quot;exportFormat&quot;:&quot;YYYY-MM-DD HH:mm&quot;}" class="input-group js-form-datetimepicker date">
+    <input type="text" class="form-control" value="2018-12-05 16:12">
+    <span class="input-group-addon">
+        <span aria-hidden="true" class="glyphicon glyphicon-calendar"></span>
+    </span>
+    <input type="hidden" value="2018-12-05 16:12">
+</div>
+----
