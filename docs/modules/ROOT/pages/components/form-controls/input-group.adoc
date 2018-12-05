@@ -1,0 +1,66 @@
+= InputGroupFormElement
+:imagesdir: assets/images
+
+With input groups you can easily extend form controls by adding text, buttons, button groups on either side of textual inputs, custom selects, and custom file inputs.
+An `InputGroupFormElement` wraps a `<div>` tag with the class `input-group` around your control.
+
+== Element and builder
+
+The `InputGroupFormElement` implementation has a corresponding `InputGroupElementBuilder`.
+An `InputGroupFormElement` can also be created via the `BootstrapUiBuilders.inputGroup()` factory method.
+
+== InputGroupFormElement attributes
+
+A FormGroupElement can easily be customized through a variety of attributes.
+
+[opts="header",cols="1,2"]
+|===
+
+| Attribute
+| Description
+
+| formLayout
+| Specifies the layout of the form group.
+A layout can specify a xref::components/grid-system.adoc[grid], a type and whether labels should be rendered.
+
+| required
+| Defines whether the form group should be marked as required.
+
+| detectFieldErrors
+| Whether the form group should look for field errors in the thymeleaf context.
+
+|===
+
+
+== Examples
+
+=== Creating a InputGroupFormElement with a left addon
+
+image::inputGroup.png[FormGroup]
+
+Given the following builder configuration:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders.inputGroup()
+      .control(
+          BootstrapUiBuilders
+            .textbox()
+            .placeholder( "Username" )
+            .type( TextboxFormElement.Type.EMAIL )
+      )
+      .addonBefore(
+          BootstrapUiBuilders
+            .label( "@" )
+      ).build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div class="input-group"><span class="input-group-addon"><label class="control-label">@</label></span>
+    <input placeholder="Username" type="email" class="form-control">
+</div>
+----
+
