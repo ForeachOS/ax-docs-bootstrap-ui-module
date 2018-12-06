@@ -1,0 +1,26 @@
+= Static elements
+include::{partialsdir}/_attributes.adoc[]
+
+A `StaticFormElement` writes a `<p>` tag with the class "form-control-static" to the output.
+
+== Element and builder
+
+The `StaticFormElement` implementation has no builder because of it's simplicity.
+
+== Examples
+
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+		StaticFormElement staticFormElement = new StaticFormElement();
+		staticFormElement.setText( "Static text" );
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<p class="form-control-static">Static text</p>
+----
+
