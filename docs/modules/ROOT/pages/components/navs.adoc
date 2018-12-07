@@ -24,8 +24,8 @@ All builders extend `NavComponentBuilder` and support some of the same options.
 
 |===
 
-==== Example
-An example of generating a nav structure from a `Menu`.
+== Example
+=== An example of generating a nav structure from a `Menu`.
 
 .Custom menu definition and rendering
 [source,java,indent=0]
@@ -70,7 +70,7 @@ model.addAttribute(
 </nav>
 ----
 
-==== Supported nav styles
+=== Supported nav styles
 You can generate specific nav structures using the `DefaultNavComponentBuilder` by specifying a nav style.
 
 [cols="1,2,4",options=header]
