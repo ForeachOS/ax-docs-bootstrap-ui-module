@@ -1,0 +1,156 @@
+= Panel navigation element
+
+When generating a panel navigation a `<div>` element is written to the output.
+
+== Element and builder
+The `PanelsNavComponentBuilder` is provided to easily build panel navigation.
+A builder can be created using `BootstrapUiBuilders.panels()` factory methods which takes in a `Menu` as parameter.
+
+== PanelsNavComponentBuilder attributes
+[cols="1,2,4",options=header]
+|===
+
+|Attribute
+|Description
+|Default
+
+|`ATTR_PANEL_STYLE`
+|Holds the CSS class that determines the panel styling.
+|Not set by default
+
+|`ATTR_RENDER_AS_PANEL`
+|If set to `false` on a group name a sidebar nav list will be rendered instead of a panel.
+|True by default
+
+|===
+
+== Examples
+=== Creating a simple panel navigation
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+Menu menu = new PathBasedMenuBuilder()
+        .item( "/one", "one" ).and()
+        .item( "/one/sub", "sub one" ).and()
+        .item( "/one/sub2", "sub one 2" ).and()
+        .item( "/two", "two" ).and()
+        .build();
+
+menu.select( MenuSelector.byTitle( "Panel example" ) );
+menu.setTitle( "Bootstrap Ui Module" );
+
+NodeViewElement panelNav = BootstrapUiBuilders.panels( menu ).build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<nav class="nav nav-panels">
+   <ul class="nav nav-sidebar">
+      <li><a href="/one" title="one">one</a></li>
+      <li><a href="/two" title="two">two</a></li>
+   </ul>
+</nav>
+----
+
+=== Creating a panel navigation with groups
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+Menu menu = new PathBasedMenuBuilder()
+    .item( "/one", "one" )
+    .attribute( ATTR_ICON, new GlyphIcon( GlyphIcon.APPLE ) )
+    .group( true ).and()
+    .item( "/one/sub", "sub one" ).and()
+    .item( "/one/sub2", "sub one 2" ).and()
+    .build();
+
+menu.select( MenuSelector.byTitle( "Panel example" ) );
+menu.setTitle( "Bootstrap Ui Module" );
+
+NodeViewElement panelNav = BootstrapUiBuilders.panels( menu ).build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<nav class="nav nav-panels">
+   <div class="panel panel-default">
+      <div class="panel-heading">
+         <h3 class="panel-title"><span aria-hidden="true" class="glyphicon glyphicon-apple"></span> one</h3>
+      </div>
+      <ul class="nav nav-sidebar list-group">
+         <li class="list-group-item"><a href="/one/sub" title="sub one">sub one</a></li>
+         <li class="list-group-item"><a href="/one/sub2" title="sub one 2">sub one 2</a></li>
+      </ul>
+   </div>
+</nav>
+----
+
+=== Creating a panel navigation with styling
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+Menu menu = new PathBasedMenuBuilder()
+    .item( "/one", "" )
+    .group( true )
+    .attribute( PanelsNavComponentBuilder.ATTR_PANEL_STYLE, "panel-danger" ).and()
+    .item( "/one/sub", "sub one" ).and()
+    .item( "/one/sub2", "sub one 2" ).and()
+    .build();
+
+menu.select( MenuSelector.byTitle( "Panel example" ) );
+menu.setTitle( "Bootstrap Ui Module" );
+
+NodeViewElement panelNav = BootstrapUiBuilders.panels( menu ).build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<nav class="nav nav-panels">
+   <div class="panel panel-danger">
+      <ul class="nav nav-sidebar list-group">
+         <li class="list-group-item"><a href="/one/sub" title="sub one">sub one</a></li>
+         <li class="list-group-item"><a href="/one/sub2" title="sub one 2">sub one 2</a></li>
+      </ul>
+   </div>
+</nav>
+----
+
+=== Creating a sidebar nav list
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+Menu menu = new PathBasedMenuBuilder()
+    .item( "/one", "one" ).group( true )
+    .attribute( ATTR_RENDER_AS_PANEL, false ).and()
+    .item( "/one/sub", "sub one" ).and()
+    .item( "/one/sub2", "sub one 2" ).and()
+    .build();
+
+menu.select( MenuSelector.byTitle( "Panel example" ) );
+menu.setTitle( "Bootstrap Ui Module" );
+
+NodeViewElement panelNav = BootstrapUiBuilders.panels( menu ).build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<nav class="nav nav-panels">
+   <ul class="nav nav-sidebar">
+      <li class="nav-title">one</li>
+      <li><a href="/one/sub" title="sub one">sub one</a></li>
+      <li><a href="/one/sub2" title="sub one 2">sub one 2</a></li>
+   </ul>
+</nav>
+----

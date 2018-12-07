@@ -1,4 +1,4 @@
-=== TableViewElement
+= TableViewElement
 include::{partialsdir}/_attributes.adoc[]
 
 A `TableViewElement` writes a `<table>` element to the output.

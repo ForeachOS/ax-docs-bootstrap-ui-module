@@ -1,4 +1,4 @@
-=== ButtonViewElement
+= ButtonViewElement
 
 A `ButtonViewElement` writes a `<button>` element to the output.
 

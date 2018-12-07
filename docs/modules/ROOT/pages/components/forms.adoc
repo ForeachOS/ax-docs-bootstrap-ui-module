@@ -1,4 +1,4 @@
-=== FormViewElement
+= FormViewElement
 include::{partialsdir}/_attributes.adoc[]
 
 A `FormViewElement` writes a `<form>` element to the output.

@@ -1,4 +1,4 @@
-=== Breadcrumb element
+= Breadcrumb element
 
 When generating a breadcrumb an `<ol>` element containing all necessary menu items is written to the output.
 
@@ -83,12 +83,12 @@ Given the following builder configuration
 [source,java,indent=0]
 ----
 Menu menu = new PathBasedMenuBuilder()
-        .item( "components", "Components" )
-        .attribute( NavComponentBuilder.ATTR_ICON, new GlyphIcon( GlyphIcon.APPLE ) )
-        .attribute( NavComponentBuilder.ATTR_ICON_ONLY, true ).and()
-        .item( "components/breadcrumb", "Breadcrumb example" )
-        .attribute( NavComponentBuilder.ATTR_ICON, new GlyphIcon( GlyphIcon.MUSIC ) )
-        .and().build();
+    .item( "components", "Components" )
+    .attribute( NavComponentBuilder.ATTR_ICON, new GlyphIcon( GlyphIcon.HOME ) )
+    .attribute( NavComponentBuilder.ATTR_ICON_ONLY, true ).and()
+    .item( "components/breadcrumb", "Breadcrumb example" )
+    .attribute( NavComponentBuilder.ATTR_ICON, new GlyphIcon( GlyphIcon.HOURGLASS ) )
+    .and().build();
 
 menu.select( MenuSelector.byTitle( "Breadcrumb example" ) );
 menu.setTitle( "Bootstrap Ui Module" );
@@ -102,7 +102,7 @@ The following markup would be rendered:
 ----
 <ol class="breadcrumb">
    <li><a href="/" title="Bootstrap Ui Module">Bootstrap Ui Module</a></li>
-   <li><a href="/components" title="Components"><span aria-hidden="true" class="glyphicon glyphicon-apple"></span> Components</a></li>
-   <li class="active"><span aria-hidden="true" class="glyphicon glyphicon-music"></span> <span class="nav-item-title">Breadcrumb example</span></li>
+   <li><a href="/components" title="Components"><span aria-hidden="true" class="glyphicon glyphicon-home"></span> <span class="nav-item-title">Components</span></a></li>
+   <li class="active"><span aria-hidden="true" class="glyphicon glyphicon-hourglass"></span> Breadcrumb example</li>
 </ol>
 ----

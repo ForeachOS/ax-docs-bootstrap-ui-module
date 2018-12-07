@@ -1,4 +1,4 @@
-=== AlertViewElement
+= AlertViewElement
 
 An `AlertViewElement` writes a `<div>` element with the role "alert" to the output.
 

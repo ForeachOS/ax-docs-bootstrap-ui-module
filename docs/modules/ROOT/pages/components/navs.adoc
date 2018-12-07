@@ -1,5 +1,5 @@
 [[NavComponentBuilder]]
-=== Rendering menus
+= Rendering menus
 The `BootstrapUiComponentFactory` provides several builders for generating markup based on an Across `Menu`.
 All builders extend `NavComponentBuilder` and support some of the same options.
 
