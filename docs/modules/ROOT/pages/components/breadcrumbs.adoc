@@ -1,0 +1,108 @@
+=== Breadcrumb element
+
+When generating a breadcrumb an `<ol>` element containing all necessary menu items is written to the output.
+
+== Element and builder
+The `BreadcrumbNavComponentBuilder` is provided to easily build breadcrumbs.
+A builder can be created using `BootstrapUiBuilders.breadcrumb()` factory methods which takes in a `Menu` as parameter.
+
+== BreadcrumbNavComponentBuilder attributes
+[cols="1,2,4",options=header]
+|===
+
+|Attribute
+|Description
+|Default
+
+|`iconAllowedLevels`
+|Set the number of levels (breadcrumb segments) for which the icon will be rendered if there is one.
+|By default all items will have their icons rendered.
+
+|`iconOnlyLevels`
+|Set the number of levels (breadcrumb segments) that will be rendered as just the icon if NavComponentBuilder#ATTR_ICON_ONLY}` is `true`.
+|By default all segments might be rendered this way.
+
+|===
+
+== Breadcrumb items
+The first step in building a breadcrumb is determining the menu items that will be used.
+When a menu item is disabled or filtered out, it will not be used to render the breadcrumb items.
+All menuItems that should be visible as breadcrumb items in the breadcrumb are build and the last item will be set active.
+
+.MenuItem attributes
+[cols="1,2,4",options=header]
+|===
+
+|Attribute
+|Description
+|Default
+
+|`NavComponentBuilder.ATTR_ICON`
+|When set a `ViewElement` or `ViewElementBuilder` will be added before the item text.
+|Not set by default
+
+|`NavComponentBuilder.ATTR_ICON_ONLY`
+|If set to `true` and a `NavComponentBuilder.ATTR_ICON` is set, only the icon element will be rendered if the menu item is at the top level.
+Note that the actual title will still be added wrapped in a span with class `nav-item-title`.
+|Not set by default
+
+|===
+
+For all the attributes consult the javadoc of `NavComponentBuilder`.
+
+== Examples
+=== Creating a simple breadcrumb navigation
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+Menu menu = new PathBasedMenuBuilder()
+        .item( "components", "Components" ).and()
+        .item( "components/breadcrumb", "Breadcrumb example" ).and().build();
+
+menu.select( MenuSelector.byTitle( "Breadcrumb example" ) );
+menu.setTitle( "Bootstrap UI Module" );
+
+NodeViewElement breadcrumbNav = BootstrapUiBuilders.breadcrumb( menu ).build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<ol class="breadcrumb">
+   <li><a href="/" title="Bootstrap UI Module">Bootstrap UI Module</a></li>
+   <li><a href="/components" title="Components">Components</a></li>
+   <li class="active">Breadcrumb example</li>
+</ol>
+----
+
+=== Creating a breadcrumb navigation with icons
+Given the following builder configuration
+
+[source,java,indent=0]
+----
+Menu menu = new PathBasedMenuBuilder()
+        .item( "components", "Components" )
+        .attribute( NavComponentBuilder.ATTR_ICON, new GlyphIcon( GlyphIcon.APPLE ) )
+        .attribute( NavComponentBuilder.ATTR_ICON_ONLY, true ).and()
+        .item( "components/breadcrumb", "Breadcrumb example" )
+        .attribute( NavComponentBuilder.ATTR_ICON, new GlyphIcon( GlyphIcon.MUSIC ) )
+        .and().build();
+
+menu.select( MenuSelector.byTitle( "Breadcrumb example" ) );
+menu.setTitle( "Bootstrap Ui Module" );
+
+NodeViewElement breadcrumbNav = BootstrapUiBuilders.breadcrumb( menu ).build();
+----
+
+The following markup would be rendered:
+
+[source,html,indent=0]
+----
+<ol class="breadcrumb">
+   <li><a href="/" title="Bootstrap Ui Module">Bootstrap Ui Module</a></li>
+   <li><a href="/components" title="Components"><span aria-hidden="true" class="glyphicon glyphicon-apple"></span> Components</a></li>
+   <li class="active"><span aria-hidden="true" class="glyphicon glyphicon-music"></span> <span class="nav-item-title">Breadcrumb example</span></li>
+</ol>
+----
