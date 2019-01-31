@@ -1,0 +1,55 @@
+= Checkbox/Radio Control Adapter
+
+Handles form elements which render a single `input[type="checkbox"]` or `input[type='radio']` element.
+
+== Registration
+
+xref:components/form-controls/checkbox.adoc[`Checkbox`]- and xref:components/form-controls/radio.adoc[`RadioFormElement`]s are automatically created with the `checkbox` type attribute.
+This ensures that a checkbox control adapter is initialized on the node.
+By removing the `data-bootstrapui-adapter-type` attribute this can be prevented.
+
+== Target element
+
+The `input[type="checkbox"]` or `input[type="radio"]` element on which the adapter is registered or which has been wrapped.
+
+== Retrieving the current value
+
+Returns an array holding a single `BootstrapUiControlValueHolder` if the target element is checked.
+If it is not checked, an empty array is returned.
+
+The context is the target element of the adapter.
+The label holds the inner text of the linked `label` element, or is not set if no label has been linked.
+The value holds the `value` attribute which is registered on the target element of the adapter.
+
+.Example output
+[source,javascript,indent=0]
+----
+// checked
+adapter.selectValue( true );
+[{
+    label: "Active",
+    value: "Yes",
+    context: input#ca-checkbox
+}]
+
+// unchecked
+adapter.selectValue( false );
+[]
+----
+
+== Selecting a value
+
+Accepts a boolean value which checks the target if `true`.
+
+[source,javascript,indent=0]
+----
+// check
+adapter.selectValue( true );
+// uncheck
+adapter.selectValue( false );
+----
+
+== Event triggers
+
+`bootstrapui.change`::
+Triggered when a `change` event is triggered on the target element.

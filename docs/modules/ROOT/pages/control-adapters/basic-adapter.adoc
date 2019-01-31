@@ -1,0 +1,43 @@
+= Basic Control Adapter
+
+Most basic control adapter that manages its values using https://api.jquery.com/val/[`jQuery#val`].
+
+== Registration
+
+xref:components/form-controls/textbox.adoc[`TextboxFormElement`]s are automatically created with the `basic` type attribute.
+This ensures that a basic control adapter is initialized on the node.
+By removing the `data-bootstrapui-adapter-type` attribute this can be prevented.
+
+== Target element
+
+The node on which the adapter is registered/initialized.
+
+== Retrieving the current value
+
+Returns an array holding a single `BootstrapUiControlValueHolder`.
+The context is the target element of the adapter.
+The label and the value hold the same value, which is retrieved using `jQuery#val` on the target element.
+
+.Example output
+[source,javascript,indent=0]
+----
+[{
+    label: "Moby dick",
+    value: "Moby dick",
+    context: input#ca-textbox.form-control
+}]
+----
+
+== Selecting a value
+
+Sets the value using `jQuery#val`.
+
+[source,javascript,indent=0]
+----
+adapter.selectValue( "Moby dick" );
+----
+
+== Event triggers
+
+`bootstrapui.change`::
+Triggered when a `change` event is triggered on the target element.

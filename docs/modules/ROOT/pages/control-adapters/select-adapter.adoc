@@ -1,0 +1,74 @@
+= Select Control Adapter
+
+Supports HTML `select` elements.
+
+== Registration
+
+Basic xref:components/form-controls/options.adoc[`OptionsFormElement`]s and xref:components/form-controls/select.adoc[`SelectFormElement`]s are automatically created with the `select` type attribute.
+This ensures that a select control adapter is initialized on the node.
+By removing the `data-bootstrapui-adapter-type` attribute this can be prevented.
+
+== Target element
+
+The node on which the adapter is registered/initialized.
+
+== Retrieving the current value
+
+Returns an array holding a single `BootstrapUiControlValueHolder`.
+The context is the option element that defines the selected value.
+The label holds the innerHTML of the selected option element.
+The value is retrieved from the option element via `jQuery#val`.
+
+.Example output
+[source,javascript,indent=0]
+----
+// single selected value
+[{
+    label: "One",
+    value: "1",
+    context: option#ca-select1
+}]
+
+// multi selected value
+[{
+    label: "One",
+    value: "1",
+    context: option#ca-select1
+},{
+    label: "Two",
+    value: "2",
+    context: option#ca-select2
+}]
+----
+
+== Selecting a value
+
+Sets the value using `jQuery#val`.
+
+[source,javascript,indent=0]
+----
+// single value
+adapter.selectValue( 1 );
+
+// multi value, in case of a multi select
+adapter.selectValue( [1, 2] );
+----
+
+== Event triggers
+
+`bootstrapui.change`::
+Triggered when a `change` event is triggered on the target element.
+
+[#bootstrap-select]
+== Bootstrap Select
+
+The bootstrap select control adapter is a variant of the select control adapter for https://developer.snapappointments.com/bootstrap-select/[bootstrap-select] elements.
+It differs from the default select adapter behaviour for
+
+selecting a value::
+The value is set via the https://developer.snapappointments.com/bootstrap-select/methods/#selectpickerval[`selectpicker`] plugin.
+
+triggering of events::
+* `bootstrapui.change`: triggered when the `changed.bs.select` event is triggered on the target element.
+
+The adapter automatically registered on xref:components/form-controls/options.adoc[`OptionsFormElement`]s and xref:components/form-controls/select.adoc[`SelectFormElement`]s with the `bootstrap-select` type attribute.

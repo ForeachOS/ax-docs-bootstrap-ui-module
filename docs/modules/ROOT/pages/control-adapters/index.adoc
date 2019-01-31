@@ -1,0 +1,104 @@
+= Control Adapters
+
+Control adapters make it easier to manage the state of controls that are rendered on a webpage.
+Often, checking what the value is for a specific control is difficult because there are differences in:
+
+* HTML output
+** Elements are wrapped or the dom tree has been modified after using a
+* Setting/retrieving the value
+** When using libraries this often requires the execution of functions on a specific object.
+* When a value is actually changed
+** custom events that are triggered by third party libraries, value is defined by a different html element...
+
+This makes it more difficult because you always need to know in which context you are working as well as the specifics of the library that is being used.
+Control adapters generalise this, by providing a contract to manage the state of the element.
+
+== How it works
+
+By default, control adapters are registered on html nodes which have a known `data-bootstrapui-adapter-type` attribute.
+These adapters all uphold a certain contract, which defines:
+
+* the target element
+* retrieving the value
+* setting the value
+* the trigger for bootstrapui events
+** a event of type `bootstrapui.change` should be triggered when the value is actually modified
+
+The initialization of these elements is done by the `ControlAdapterFactory` which is registered on the xref:web-resources/index.adoc#bootstrapui-javascript[`BootstrapUiModule` plugin].
+It also allows to initialize a node with a specific control adapter.
+
+.Manually setting or overriding a control adapter
+[source,javascript,indent=0]
+[subs="verbatim,quotes,attributes"]
+----
+BootstrapUiModule.ControlAdapterFactory
+                 .initializeControlAdapter( 'basic', $('input[type="text"]')[0], true ); # <1>
+----
+<1> Initializes the element with a control adapter of type basic.
+If a control adapter should already exist on the element, it should be overridden.
+
+=== BootstrapUiControlAdapter
+
+A control adapter defines a contract to manage the state of an element.
+
+[cols="1,3",options=header]
+|===
+
+| method
+| description
+
+| getValue() : BootstrapUiControlValueHolder[]
+a| Fetch the selected value(s) of the control.
+The value is represented as an array holding all the selected values.
+
+A `BootstrapUiControlValueHolder` is an object that has a
+
+* *label*: the displayed value
+* *value*: the value that would be submitted
+* *context object*: which references the origin of the value
+
+| selectValue(newValue)
+| Sets the value of the control.
+
+| reset()
+| Resets the value of the control to its initial value.
+
+| getTarget()
+| Fetch the target of the control adapter.
+
+| triggerChange()
+| Triggers `bootstrapui.change` on the target element.
+This event should be triggered when the value of the target element is actually changed.
+
+|===
+
+=== ControlAdapterFactory
+
+The ControlAdapterFactory allows you to register custom control adapter initializers, override existing initializers as well as the initialization of nodes (with a specific control adapter).
+
+[cols="1,2,2",options=header]
+|===
+
+| method
+| parameters
+| description
+
+| register(type, initializer)
+| *type*: the key for the type (`string`)
+
+*initializer*: a function that takes a node and returns the `BootstrapUiControlAdapter` to register on the node
+| Registers a control adapter initializer under a specific type.
+
+| initializeNode(node)
+| *node*: a dom element / jquery node
+| Registers control adapters on elements in the node which have the `[data-bootstrapui-adapter-type]` attribute if none has been registered yet.
+
+| initializeControlAdapter(type, node, force)
+| *type*: the key for the type (`string`)
+
+*node*: a dom element/jquery node on which the element should be registered
+
+*force*: whether a control adapter should be created and registered even if one already exists (`boolean`, optional)
+| Register a control adapter of a specific type on a node.
+
+|===

@@ -33,6 +33,16 @@
 ** xref:components/script.adoc[Script elements]
 ** xref:components/tables.adoc[Tables]
 ** xref:components/tooltips.adoc[Tooltips]
+
+* xref:control-adapters/index.adoc[Control adapters]
+** xref:control-adapters/basic-adapter.adoc[Basic adapter]
+** xref:control-adapters/datetime-adapter.adoc[Datetime adapter]
+** xref:control-adapters/select-adapter.adoc[Select adapter]
+** xref:control-adapters/checkbox-radio-adapter.adoc[Checkbox/Radio adapter]
+** xref:control-adapters/numeric-adapter.adoc[Numeric adapter]
+** xref:control-adapters/autosuggest-adapter.adoc[Autosuggest adapter]
+** xref:control-adapters/container-adapter.adoc[Container adapter]
+
 * xref:utilities/index.adoc[Utilities]
 
 * xref:extending/index.adoc[Extending BootstrapUiModule]

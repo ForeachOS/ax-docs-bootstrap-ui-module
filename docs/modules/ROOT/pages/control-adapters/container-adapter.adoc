@@ -1,0 +1,46 @@
+= Container Control Adapter
+
+Container control adapters group nested control adapters.
+Methods that are executed, will be executed against the nested adapters.
+
+== Registration
+
+Checkbox or radio xref:components/form-controls/options.adoc[`OptionsFormElement`]s are automatically created with the `container` type attribute.
+This ensures that a container control adapter is initialized on the node.
+By removing the `data-bootstrapui-adapter-type` attribute this can be prevented.
+
+== Target element
+
+The element on which the adapter is registered.
+
+== Retrieving the current value
+
+Returns an array holding the values of underlying control adapter elements.
+
+.Example output
+[source,javascript,indent=0]
+----
+[{
+    label: "One",
+    value: "1",
+    context: input#ca-multi-checkbox
+},
+{
+    label: "3",
+    value: "Three",
+    context: input#ca-multi-checkbox2
+}]
+----
+
+NOTE: In the above example, two control adapters for a checkbox have been nested in the target element of the container adapter.
+
+== Selecting a value
+
+Not supported for container elements.
+
+== Event triggers
+
+`bootstrapui.change`::
+Triggered when a `change` event is triggered on one of the nested control adapter target elements.
+
+//TODO check event.stopPropagation when triggering control adapter elements

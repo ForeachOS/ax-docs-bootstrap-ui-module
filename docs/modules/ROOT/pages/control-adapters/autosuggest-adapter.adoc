@@ -1,0 +1,62 @@
+= Autosuggest Control Adapter
+
+An autosuggest control adapter supports xref:components/form-controls/auto-suggest.adoc[`AutosuggestFormElement`]s.
+
+== Registration
+
+Autosuggest form elements are created with the `autosuggest` type attribute.
+This ensures that an autosuggest control adapter is initialized on the node.
+By removing the `data-bootstrapui-adapter-type` attribute this can be prevented.
+
+== Target element
+
+The input element that holds the label.
+This is the nested element with css classes `js-typeahead tt-input`.
+
+== Retrieving the current value
+
+Returns an array holding a single `BootstrapUiControlValueHolder`.
+The label is retrieved using the https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#jquerytypeaheadval[typeahead] plugin on the target of the adapter.
+The value is retrieved using `jquery#val` on the typeaheadValue element.
+The context is an object with two properties:
+
+typeahead::
+The target element.
+
+typeaheadValue::
+The input element that holds the value that will be submitted.
+This is the nested element with css class `js-typehead-value`.
+
+.Example output
+[source,javascript,indent=0]
+----
+[{
+    label: 'New York, USA',
+    value: 523,
+    context: {
+        typeahead: input.js-typeahead.form-control.tt-input
+        typeaheadValue: input.js-typeahead-value
+    }
+}]
+----
+
+== Selecting a value
+
+Takes an object that holds a label and a value.
+
+[source,javascript,indent=0]
+----
+var toSelect = {
+    label: 'New York, USA',
+    value: 523
+};
+adapter.selectValue( toSelect );
+----
+
+== Event triggers
+
+`bootstrapui.change`::
+Triggered when a `typeahead:change`, `typeahead:open` or `typeahead:select` event is triggered on the target element.
+
+NOTE: When `typeahead:open` is triggered, the value of the typeaheadValue element is cleared as the user is making his selection.
+The label is not cleared until the user either selects an option or removes focus of the control.

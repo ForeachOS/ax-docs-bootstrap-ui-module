@@ -1,0 +1,44 @@
+= Numeric Control Adapter
+
+* control adapter that handles NumericFormElements
+* handles elements initialized with ...
+
+== Registration
+
+xref:components/form-controls/numeric.adoc[`NumericFormElement`]s are automatically created with the `numeric` type attribute.
+This ensures that a numeric control adapter is initialized on the node.
+By removing the `data-bootstrapui-adapter-type` attribute this can be prevented.
+
+== Target element
+
+The node on which the adapter is registered/initialized.
+
+== Retrieving the current value
+
+Returns an array holding a single `BootstrapUiControlValueHolder`.
+The context is the target element of the adapter.
+The label retrieves the value from the target element and the value fetches the value using the [`autoNumeric`] plugin on the target.
+
+.Example output
+[source,javascript,indent=0]
+----
+[{
+    label: "EUR1,234.12",
+    value: "1234.12",
+    context: input#ca-numeric.numeric.form-control
+}]
+----
+
+== Selecting a value
+
+Sets the value using the `autoNumeric` plugin.
+
+[source,javascript,indent=0]
+----
+adapter.selectValue( 1234.12 );
+----
+
+== Event triggers
+
+`bootstrapui.change`::
+Triggered when a `change` event is triggered on the target element.

@@ -1,0 +1,45 @@
+= Datepicker Control Adapter
+
+Supports elements initialized with an http://eonasdan.github.io/bootstrap-datetimepicker/[Eonasdan DatePicker].
+
+== Registration
+
+xref:components/form-controls/datetime.adoc[`DateTimeFormElement`]s are automatically created with the `datetime` type attribute.
+This ensures that a datetime control adapter is initialized on the node.
+By removing the `data-bootstrapui-adapter-type` attribute this can be prevented.
+
+NOTE: If a `data-bootstrapui-datetimepicker` attribute is present on the target element, the exportFormat property of that object will be used to format the value.
+
+== Target element
+
+The node on which the adapter is registered/initialized.
+
+== Retrieving the current value
+
+Returns an array holding a single `BootstrapUiControlValueHolder`.
+The context is the target element of the adapter.
+The label holds the formatted date and the value represents the date on the http://eonasdan.github.io/bootstrap-datetimepicker/Options/#date[date picker] plugin.
+
+.Example output
+[source,javascript,indent=0]
+----
+[{
+    label: "2019-01-23 00:00",
+    value: Moment,
+    context: div.input-group.js-form-datetimepicker.date
+}]
+----
+
+== Selecting a value
+
+Sets the value using the `DateTimePicker` plugin.
+
+[source,javascript,indent=0]
+----
+adapter.selectValue( "2019-01-23 00:00" );
+----
+
+== Event triggers
+
+`bootstrapui.change`::
+Triggered when a `dp.change` event is triggered on the target element.
