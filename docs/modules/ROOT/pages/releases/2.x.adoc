@@ -1,10 +1,13 @@
 = 2.x.x release notes
 
-[#2-2-0]
-== 2.2.0.RELEASE
+[#2-2-1]
+== 2.2.1.RELEASE
 * addition of xref:control-adapters/index.adoc[`ControlAdapter`] to generalise handling the state of view elements.
 * all xref:web-resources/index.adoc[web resources] are now included as webjars and registered using the xref:across:across-web:web-views/web-resources.adoc[updated infrastructure from Across 3.2.0]
 * bugfix: unable to unselect all values from a multi-select `select` control
+
+WARNING: Release 2.2.1 is an integral replacement for 2.2.0, fixing an issue with numeric controls.
+Consumers should refrain from linking to 2.2.0.
 
 [#2-1-1]
 == 2.1.1.RELEASE

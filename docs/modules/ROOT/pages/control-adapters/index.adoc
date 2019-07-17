@@ -35,7 +35,7 @@ BootstrapUiModule.ControlAdapterFactory
                  .initializeControlAdapter( 'basic', $('input[type="text"]')[0], true ); # <1>
 ----
 <1> Initializes the element with a control adapter of type basic.
-If a control adapter should already exist on the element, it should be overridden.
+If a control adapter already exists on the element, it will be replaced.
 
 === BootstrapUiControlAdapter
 
