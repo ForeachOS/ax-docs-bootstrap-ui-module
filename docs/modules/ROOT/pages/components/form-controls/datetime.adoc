@@ -10,7 +10,7 @@ See `{javadoc-url}/com/foreach/across/modules/bootstrapui/elements/DateTimeFormE
 The `DateTimeFormElement` has an equivalent `DateTimeFormElementBuilder`.
 A builder can be created using `BootstrapUiBuilders.datetime()` factory methods.
 
-== FileUploadFormElement attributes
+== DateTimeFormElement attributes
 [cols="1,2,4",options=header]
 |===
 
