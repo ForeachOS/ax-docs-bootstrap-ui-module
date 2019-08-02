@@ -7,6 +7,53 @@ An `AutoSuggestFormElement` writes a `<div>` tag to the output containing all ma
 The `AutoSuggestFormElement` has an equivalent `AutoSuggestFormElementBuilder`.
 A builder can be created using `BootstrapUiBuilders.autosuggest()` factory methods.
 
+The `AutoSuggestFormElementBuilder` supports configuring templates by specifying a `ViewElementBuilder` for the given template.
+Depending on the template, different objects are available within the context of the template.
+These can be specified with curly braces, for example `{\{query}}`, within the template and will be interpolated when the element is rendered.
+The following templates are available:
+
+[options=header,cols="1,3"]
+|===
+
+| Template name
+| Description
+
+| header
+| Rendered at the top of the dataset when suggestions are present.
+In the rendering context, the `query` and the `suggestions` will be available.
+
+| footer
+| Rendered at the top of the dataset when suggestions are present.
+In the rendering context, the `query` and the `suggestions` will be available.
+
+| pending
+| Rendered when there are no synchronous suggestions available, but asynchronous suggestions are being fetched.
+In the rendering context the `query` will be available.
+
+| suggestion
+| Used to render a single suggestion.
+The associated suggestion object will be available in the context.
+If no template is configured, the default template `<div>{\{value}}</div>` will be used.
+
+| notFound
+| Rendered when no suggestions could be found for the current query.
+In the rendering context the `query` will be available.
+
+|===
+
+When configuring a template, optionally a dataset id can be specified for which the template should be added.
+
+.Configuring a template for a specific dataset
+[source,java,indent=0]
+----
+BootstrapUiBuilders
+    .autosuggest()
+    .notFoundTemplate( "people" ,BootstrapUiBuilders.text("No results found") ) # <1>
+    .build()
+----
+<1> Configure a `notFound` template for the dataset with id `people`.
+If the id is not specified, the template would be applied for the default dataset.
+
 == AutoSuggestFormElementConfiguration
 The autoSuggest control takes in a `AutoSuggestFormElementConfiguration` to configure the dataSet options
 
@@ -66,3 +113,27 @@ The following markup would be rendered:
 </div>
 ----
 
+=== Configuring a template
+
+The following builder configuration adds a `notFound` template:
+
+[source,java,indent=0]
+----
+BootstrapUiBuilders
+    .autosuggest()
+    .configuration(
+            AutoSuggestFormElementConfiguration.withDataSet(
+                    dataSet -> dataSet.remoteUrl( "/bootstrapAutosuggest/suggest?query={{query}}" )
+            )
+    )
+    .notFoundTemplate( BootstrapUiBuilders.div().css( "autosuggest-not-found" )
+                                          .add( BootstrapUiBuilders.text( "There are no results available for '{{query}}'" ) ) ) # <1>
+    .build()
+----
+
+Given the query 'John', the following markup would be rendered in the suggestions dropdown if there are no results:
+
+[source,html,indent=0]
+----
+<div class="autosuggest-not-found">There are no results available for 'John'</div>
+----
