@@ -1,6 +1,6 @@
 name: bootstrap-ui-module
 title: "Module: Bootstrap UI"
-version: 2.2.2-dev
+version: 2.2.2-SNAPSHOT
 nav:
 - modules/ROOT/nav.adoc
 - modules/guides/nav.adoc
