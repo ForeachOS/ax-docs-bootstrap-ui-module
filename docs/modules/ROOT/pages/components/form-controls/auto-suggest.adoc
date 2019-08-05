@@ -7,9 +7,64 @@ An `AutoSuggestFormElement` writes a `<div>` tag to the output containing all ma
 The `AutoSuggestFormElement` has an equivalent `AutoSuggestFormElementBuilder`.
 A builder can be created using `BootstrapUiBuilders.autosuggest()` factory methods.
 
+By default, the autosuggest form element expects an `id` and a `value` property on the fetched results.
+The `id` is the underlying value that will be saved, and the `value` is the value that is displayed by default.
+
+
+=== AutoSuggestFormElementConfiguration
+The autoSuggest control takes in a `AutoSuggestFormElementConfiguration` to configure the dataSet options
+
+[options=header,cols="1,1"]
+|===
+
+| Method
+| Description
+
+| `withDataSet`
+| Configure the dataset with the given name, if it is not yet present, it will be added first.
+
+| `showHint`
+| Should the textbox show a hint for auto-completion.
+
+| `highlight`
+| Highlight the matching input text in the suggestions.
+
+| `minLength`
+| Minimum length the input value should have before fetching suggestion.
+
+|===
+
+.Example of a simple autosuggest configuration
+[source,java,indent=0]
+----
+BootstrapUiBuilders
+    .autosuggest()
+    .configuration(
+            AutoSuggestFormElementConfiguration.withDataSet( # <1>
+                    dataSet -> dataSet.remoteUrl( "/bootstrapAutosuggest/suggest?query={{query}}" )
+            ).minLength( 2 )
+    )
+    .build()
+----
+<1> configure a dataset which fetches data from an url, once at least 2 characters are present
+
+Given the above configuration, the following markup would be rendered:
+
+[source,html,indent=0]
+----
+<div data-bootstrapui-adapter-type="autosuggest" class="axbum-typeahead"
+    data-bootstrapui-autosuggest="{&quot;highlight&quot;:true,&quot;hint&quot;:true,&quot;minLength&quot;:1,&quot;_datasets&quot;:[{&quot;name&quot;:&quot;default&quot;,&quot;bloodhound&quot;:{&quot;remote&quot;:{&quot;url&quot;:&quot;/bootstrapAutosuggest/suggest?query={{query}}&quot;}}}]}">
+    <input autocomplete="off" type="search" class="js-typeahead form-control"></input>
+    <input type="hidden" class="js-typeahead-value"></input>
+</div>
+----
+
+== Configuring templates
+
 The `AutoSuggestFormElementBuilder` supports configuring templates by specifying a `ViewElementBuilder` for the given template.
-Depending on the template, different objects are available within the context of the template.
+Depending on the configuration, different objects are available within the context of the template.
 These can be specified with curly braces, for example `{\{query}}`, within the template and will be interpolated when the element is rendered.
+
 The following templates are available:
 
 [options=header,cols="1,3"]
@@ -43,42 +98,31 @@ In the rendering context the `query` will be available.
 
 When configuring a template, optionally a dataset id can be specified for which the template should be added.
 
-.Configuring a template for a specific dataset
+.Configuring a template
 [source,java,indent=0]
 ----
 BootstrapUiBuilders
     .autosuggest()
-    .notFoundTemplate( "people" ,BootstrapUiBuilders.text("No results found") ) # <1>
-    .build()
+    .notFoundTemplate( BootstrapUiBuilders.div().css( "autosuggest-not-found" )
+                                          .add( BootstrapUiBuilders.text( "There are no results available for '{{query}}'" ) ) )
+    .build();
 ----
-<1> Configure a `notFound` template for the dataset with id `people`.
-If the id is not specified, the template would be applied for the default dataset.
 
-== AutoSuggestFormElementConfiguration
-The autoSuggest control takes in a `AutoSuggestFormElementConfiguration` to configure the dataSet options
+Given the query 'John', the following markup would be rendered in the suggestions dropdown if there are no results:
 
-[options=header,cols="1,1"]
-|===
+[source,html,indent=0]
+----
+<div class="autosuggest-not-found">There are no results available for 'John'</div>
+----
 
-| Method
-| Description
-
-| `withDataSet`
-| Configure the dataset with the given name, if it is not yet present, it will be added first.
-
-| `setEndpoint`
-| Sets the remote url endpoint where to fetch suggestions.
-
-| `showHint`
-| Should the textbox show a hint for auto-completion.
-
-| `highlight`
-| Highlight the matching input text in the suggestions.
-
-| `minLength`
-| Minimum length the input value should have before fetching suggestion.
-
-|===
+.Configuring a template for a dataset
+[source,java,indent=0]
+----
+BootstrapUiBuilders
+    .autosuggest()
+    .notFoundTemplate( "people", BootstrapUiBuilders.text("No results found") )
+    .build();
+----
 
 [#dynamic-configuration-dataset]
 == Dynamic configuration of a dataset
@@ -96,61 +140,3 @@ $( '[data-bootstrapui-adapter-type="autosuggest"]' ) # <1>
 In this case, we're selecting an autosuggest form element by its corresponding xref:control-adapters/autosuggest-adapter.adoc[control adapter].
 <2> Find the dataset by name and reconfigure the remote url.
 Now the new url will be used when data is fetched.
-
-== Examples
-
-=== Creating an autoSuggest element
-
-Given the following builder configuration:
-
-[source,java,indent=0]
-----
-BootstrapUiBuilders
-    .autosuggest()
-    .configuration(
-            AutoSuggestFormElementConfiguration.withDataSet(
-                    dataSet -> dataSet.remoteUrl( "/bootstrapAutosuggest/suggest?query={{query}}" )
-            )
-    ).build()
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<div class="axbum-typeahead" data-bootstrapui-autosuggest="{&quot;highlight&quot;:true,&quot;hint&quot;:true,&quot;minLength&quot;:1,&quot;_datasets&quot;:[{&quot;name&quot;:&quot;default&quot;,&quot;bloodhound&quot;:{&quot;remote&quot;:{&quot;url&quot;:&quot;/bootstrapAutosuggest/suggest?query={{query}}&quot;}}}]}">
-   <span class="twitter-typeahead" style="position: relative; display: inline-block;">
-      <input autocomplete="off" type="search" class="js-typeahead form-control tt-hint" readonly="" spellcheck="false" tabindex="-1" dir="ltr" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; opacity: 1; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);"><input autocomplete="off" type="search" class="js-typeahead form-control tt-input" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;">
-      <pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre>
-      <div class="tt-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;">
-         <div class="tt-dataset tt-dataset-default"></div>
-      </div>
-   </span>
-   <input type="hidden" class="js-typeahead-value">
-</div>
-----
-
-=== Configuring a template
-
-The following builder configuration adds a `notFound` template:
-
-[source,java,indent=0]
-----
-BootstrapUiBuilders
-    .autosuggest()
-    .configuration(
-            AutoSuggestFormElementConfiguration.withDataSet(
-                    dataSet -> dataSet.remoteUrl( "/bootstrapAutosuggest/suggest?query={{query}}" )
-            )
-    )
-    .notFoundTemplate( BootstrapUiBuilders.div().css( "autosuggest-not-found" )
-                                          .add( BootstrapUiBuilders.text( "There are no results available for '{{query}}'" ) ) ) # <1>
-    .build()
-----
-
-Given the query 'John', the following markup would be rendered in the suggestions dropdown if there are no results:
-
-[source,html,indent=0]
-----
-<div class="autosuggest-not-found">There are no results available for 'John'</div>
-----
