@@ -2,7 +2,9 @@
 
 [#2-2-2]
 == 2.2.2-SNAPSHOT
-* support for configuring templates on xref:components/form-controls/auto-suggest.adoc[AutoSuggest controls]
+* improved autosuggest support
+** allow configuring of templates for xref:components/form-controls/auto-suggest.adoc[autosuggest controls]
+** support client-side reconfiguration of xref:components/form-controls/auto-suggest.adoc#dynamic-configuration-dataset[datasets]
 
 [#2-2-1]
 == 2.2.1.RELEASE

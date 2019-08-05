@@ -76,9 +76,26 @@ The autoSuggest control takes in a `AutoSuggestFormElementConfiguration` to conf
 | Highlight the matching input text in the suggestions.
 
 | `minLength`
-| Minimum length the input value should have before fetching suggestiong.
+| Minimum length the input value should have before fetching suggestion.
 
 |===
+
+[#dynamic-configuration-dataset]
+== Dynamic configuration of a dataset
+
+An autosuggest form element supports clientside modification of the active dataset(s).
+On the autosuggest element itself an attribute `datasets` is available which holds the configured https://github.com/twitter/typeahead.js/blob/master/doc/bloodhound.md[Bloodhound] search engines.
+By accessing the datasets, the urls used to fetch the data can be modified:
+
+[source,javascript,indent=0]
+----
+$( '[data-bootstrapui-adapter-type="autosuggest"]' ) # <1>
+    .data( 'datasets' )['default'].remote.url = '/active-users'; # <2>
+----
+<1> Select the autosuggest for which you want to modify a dataset.
+In this case, we're selecting an autosuggest form element by its corresponding xref:control-adapters/autosuggest-adapter.adoc[control adapter].
+<2> Find the dataset by name and reconfigure the remote url.
+Now the new url will be used when data is fetched.
 
 == Examples
 
