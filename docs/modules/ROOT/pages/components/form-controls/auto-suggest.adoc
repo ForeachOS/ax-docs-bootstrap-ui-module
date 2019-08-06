@@ -12,7 +12,7 @@ The `id` is the reference to the domain object, and the `value` is the value tha
 
 
 === AutoSuggestFormElementConfiguration
-The autoSuggest control takes in a `AutoSuggestFormElementConfiguration` to configure the dataSet options
+The autosuggest control takes in an `AutoSuggestFormElementConfiguration` to configure a datasets and has the following options:
 
 [options=header,cols="1,1"]
 |===
@@ -61,11 +61,11 @@ Given the above configuration, the following markup would be rendered:
 
 == Configuring templates
 
-The `AutoSuggestFormElementBuilder` supports configuring templates by specifying a `ViewElementBuilder` for the given template.
+An `AutoSuggestFormElementBuilder` supports configuring templates by specifying a `ViewElementBuilder` for the given template.
 Depending on the configuration, different objects are available within the context of the template.
 These can be specified with curly braces, for example `{\{query}}`, within the template and will be interpolated when the element is rendered.
 
-The following templates are available:
+The following templates can be configured:
 
 [options=header,cols="1,3"]
 |===
