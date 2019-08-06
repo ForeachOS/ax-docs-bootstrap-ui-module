@@ -8,7 +8,7 @@ The `AutoSuggestFormElement` has an equivalent `AutoSuggestFormElementBuilder`.
 A builder can be created using `BootstrapUiBuilders.autosuggest()` factory methods.
 
 By default, the autosuggest form element expects an `id` and a `value` property on the fetched results.
-The `id` is the underlying value that will be saved, and the `value` is the value that is displayed by default.
+The `id` is the reference to the domain object, and the `value` is the value that is displayed by default.
 
 
 === AutoSuggestFormElementConfiguration
