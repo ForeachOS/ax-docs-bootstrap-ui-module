@@ -1,0 +1,12 @@
+= 3.x.x release notes
+
+[#3-0-0]
+== 3.0.0-SNAPSHOT
+
+* updated versions for external libraries and upgraded to their Bootstrap 4 variants
+** updated autoNumeric from `1.9.30` to `4.5.4`
+** updated MomentJS from `2.10.6` to `2.24.0`
+** migrated from `Eonasdan DateTimePicker 4.14.30` to `Tempus Dominus DateTimePicker 5.1.2`
+** updated autoSize from `3.0.20` to `4.0.2`
+** updated bootstrap select from `1.12.2` to `1.13.10`
+** updated jQuery from `1.11.3` to `3.4.1`
