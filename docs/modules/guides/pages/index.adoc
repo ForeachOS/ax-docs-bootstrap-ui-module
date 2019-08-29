@@ -3,7 +3,7 @@
 A guide or how-to page zooms in on one or more specific aspects.
 The following guides are available:
 
-* xref:prefixing-control-names.adoc[Prefixing control names]
 * xref:customizing-a-datetimepicker.adoc[Customizing a Date picker]
-
+* xref:prefixing-control-names.adoc[Prefixing control names]
+* xref:custom-control-adapter.adoc[Creating a custom control adapter]
 

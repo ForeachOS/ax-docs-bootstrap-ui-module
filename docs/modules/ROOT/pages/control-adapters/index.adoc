@@ -37,6 +37,18 @@ BootstrapUiModule.ControlAdapterFactory
 <1> Initializes the element with a control adapter of type basic.
 If a control adapter already exists on the element, it will be replaced.
 
+=== Accessing a control adapter
+
+Control adapters are registered using jQuery under a `data-bootstrapui-adapter` attribute on the same element that defines the `data-bootstrapui-adapter-type` attribute.
+For a control adapter to be available, a registrar that creates the control adapter for the given type is required.
+
+.Example fetching a control adapter
+----
+$('[data-bootstrapui-adapter-type='datetime']', node)
+    .data('bootstrapui-adapter');
+----
+
+[#control-adapter]
 === BootstrapUiControlAdapter
 
 A control adapter defines a contract to manage the state of an element.
@@ -72,6 +84,7 @@ This event should be triggered when the value of the target element is actually 
 
 |===
 
+[[control-adapter-factory]]
 === ControlAdapterFactory
 
 The ControlAdapterFactory allows you to register custom control adapter initializers, override existing initializers as well as the initialization of nodes (with a specific control adapter).
@@ -102,3 +115,7 @@ The ControlAdapterFactory allows you to register custom control adapter initiali
 | Register a control adapter of a specific type on a node.
 
 |===
+
+== Related documentation
+
+* xref:guides:custom-control-adapter.adoc[Creating a custom control adapter]

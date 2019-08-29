@@ -1,0 +1,191 @@
+= Creating a custom Control Adapter
+
+In this guide you'll learn:
+
+* [*] how to create a custom xref:ROOT:control-adapters/index.adoc[control adapter]
+* [*] registering the control adapter in the xref:ROOT:control-adapters/index.adoc#control-adapter-factory[ControlAdapterFactory].
+
+== Creating a control adapter
+
+A control adapter must at the very least implement the xref:ROOT:control-adapters/index.adoc#control-adapter[predefined contract].
+In the following sections, we'll create a select control adapter, step by step.
+
+=== getTarget
+
+The most basic part of the control adapter is the target.
+The target of the control adapter is where the `bootstrapui.change` event is emitted.
+For ease of configuration, the target is usually the html element that hands the easiest access to modifying the values of the control.
+In the case of a select element, this is the select itself.
+
+.Configuring getTarget()
+[source,javascript,indent=0]
+----
+class SelectControlAdapter
+{
+    constructor(node){
+        this.target = node; # <1>
+    }
+
+    getTarget() {
+        return this.target;
+    }
+}
+----
+<1> In this case, we assume that the `data-bootstrapui-adapter-type` is configured on the select element itself.
+
+=== getValue
+
+The primary feature of `ControlAdapters` is to easily access information of a control, such as which value it holds.
+Because a value isn't usually a single value, but a mix of:
+
+* the label: the displayed value
+* the value: the value that is submitted
+* the context: where the value originated from
+
+In the case of a select, the active values are defined by the `option` elements which are checked.
+
+.Configuring getValue()
+[source,javascript,indent=0]
+----
+getValue() {
+    const selected = [];
+    const selectedOptions = $( this.getTarget() ).find( 'option:checked' );
+    selectedOptions.each( function () {
+        const element = $( this );
+        selected.push( {label: element.html(), value: element.val(), context: this} );
+    } );
+    return selected;
+}
+----
+
+=== selectValue
+
+Values for controls can easily be modified by using `selectValue`.
+The format on how values should be passed, depends on the control adapter.
+
+.Configuring selectValue()
+[source,javascript,indent=0]
+----
+selectValue(newValue) {
+    $( this.getTarget() ).val( newValue );
+}
+----
+
+In this case, our control adapter will support both a single value and an array of values (in case of a multiselect).
+
+=== reset
+
+Reset allows us to revert the control to its initial state.
+To do so, we'll simply hold the initial selection when the control adapter is created.
+
+.Configuring reset
+[source,javascript,indent=0]
+----
+constructor(node){
+    // ...
+    this.initialValue = $( this.getTarget() ).val();
+}
+
+reset() {
+    this.selectValue(this.initialValue);
+}
+----
+
+=== triggerChange
+
+Whenever the control is modified, we sent out an event so that others know the value has changed.
+This way, they can opt in to make changes to fetch the new value.
+How and when a control is seen as modified, depends on its context.
+
+.Configuring triggerChange
+[source,javascript,indent=0]
+----
+constructor(node){
+   // ...
+    $( this.getTarget() ).on( 'change', event => this.triggerChange() ); # <1>
+}
+
+triggerChange() {
+    $( this.getTarget() ).trigger( 'bootstrapui.change', [this] );  # <2>
+}
+----
+<1> Whenever a change event triggered on the `select` html element, the value has changed, so we'll emit a `bootstrapui.change` event as well.
+<2> By default, whenever a change event is sent out, we'll also provide the control adapter as an additional parameter.
+This allows those who are listening to the event to easily access the control adapter responsible.
+
+=== Completed example
+
+[source,javascript,indent=0]
+[subs="verbatim,quotes,attributes"]
+----
+export class SelectControlAdapter
+{
+    constructor( target ) {
+        this.target = target;
+        this.initialValue = $( this.getTarget() ).val();
+        $( this.getTarget() ).on( 'change', event => this.triggerChange() );
+    }
+
+    getTarget() {
+        return this.target;
+    }
+
+    getValue() {
+        const selected = [];
+        const selectedOptions = $( this.getTarget() ).find( 'option:checked' );
+        selectedOptions.each( function () {
+            const element = $( this );
+            selected.push( {label: element.html(), value: element.val(), context: this} );
+        } );
+        return selected;
+    }
+
+    selectValue(newValue) {
+        $( this.getTarget() ).val( newValue );
+    }
+
+    reset() {
+        this.selectValue(this.initialValue);
+    }
+
+    triggerChange(): void {
+        $( this.getTarget() ).trigger( 'bootstrapui.change', [this] );
+    }
+}
+----
+
+== Adding a registrar to the ControlAdapterFactory
+
+To use the control adapter, it must be registered to the `ControlAdapterFactory`, so that it can be initialized on the element whenever the corresponding type is used.
+Registration is done by creating a control adapter initializer and registering it under a specific key.
+
+.Configuring the control adapter initializer
+[source,javascript,indent=0]
+----
+export function createSelectControlAdapter( node ) { # <1>
+    return new SelectControlAdapter( node );
+}
+----
+<1> The node that specifies the key as the value for its `data-bootstrapui-adapter-type` attribute will be passed to the adapter.
+
+.Registering the initializer to the `ControlAdapterFactory`
+----
+BootstrapUiModule.ControlAdapterFactory.register( 'select', createSelectControlAdapter );
+----
+
+== Registering the javascript to be used
+
+Before we can use our adapter, we'll have to make sure that our added code is loaded at the right time.
+Using `WebResources` we'll register the javascript *after* the javascript that is loaded by `BootstrapUiModule`.
+This ensures that the control adapter factory is available.
+Once the page has fully loaded, an adapter will be created and added to the html elements specifying their key.
+
+.Registering the javascript as a WebResource
+[source,java,indent=0]
+----
+webResourceRegistry.apply(
+					WebResourceRule.add( WebResource.javascript( "@static:/js/select-control-adapter.js" ) )
+					               .toBucket( WebResource.JAVASCRIPT_PAGE_END )
+					               .after( BootstrapUiWebResources.NAME )
+			);
+----
