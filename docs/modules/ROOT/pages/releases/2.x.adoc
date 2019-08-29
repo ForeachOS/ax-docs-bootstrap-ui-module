@@ -1,7 +1,7 @@
 = 2.x.x release notes
 
 [#2-2-2]
-== 2.2.2-SNAPSHOT
+== 2.2.2.RELEASE
 * improved autosuggest support
 ** allow configuring of templates for xref:components/form-controls/auto-suggest.adoc[autosuggest controls]
 ** support client-side reconfiguration of xref:components/form-controls/auto-suggest.adoc#dynamic-configuration-dataset[datasets]
