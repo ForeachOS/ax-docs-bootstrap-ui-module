@@ -6,7 +6,7 @@ Arne Vandamme
 :module-name: BootstrapUiModule
 :module-artifact: bootstrap-ui-module
 :module-url: https://across.dev/modules/bootstrap-ui
-:javadoc-url: https://across-docs.foreach.be/across-standard-modules/BootstrapUiModule/{module-version}/javadoc
+:javadoc-url: https://docs.across.dev/across-standard-modules/BootstrapUiModule/{module-version}/javadoc
 :autoNumeric-url: https://github.com/BobKnothe/autoNumeric
 :datetime-url: https://github.com/Eonasdan/bootstrap-datetimepicker
 :bootstrap-select-url: https://silviomoreto.github.io/bootstrap-select/
