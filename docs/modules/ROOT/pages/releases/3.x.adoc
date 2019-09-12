@@ -24,6 +24,7 @@
 * reduced custom css in favor of Bootstrap 4 utility classes
 * panels have been removed and migrated to cards
 * iconOnly menu items are hidden using sr-only
+* added various strongly typed helper classes for bootstrap 4 styles, see BootstrapStyles.css`
 
 === Improvements & New Features
 
@@ -34,4 +35,4 @@
 ** IconSets can be used to maintain a set of icons throughout modules
 ** registered icons within an IconSet can be overridden for ease of customization
 ** default IconSets are registered for https://fontawesome.com/[FontAwesome 5] Regular, Solid and Brands styles
-* added `checkbox-list`, `toggle-list` and `radio-list` as CSS class to the wrapping div in case of `OptionsFormElementBuilders` for ease of customization
+* added `checkbox-list`, `toggle-`list` and `radio-list` as CSS class to the wrapping div in case of `OptionsFormElementBuilders` for ease of customization
