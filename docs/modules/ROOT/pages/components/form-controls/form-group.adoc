@@ -146,6 +146,5 @@ bootstrap.builders.formGroup()
                                .text( "1" )
      ).build();
 ----
-<1> If an object is bound to the form and it contains validation errors, the form group will try to detect whether field errors are present for the current control.
-    Should one or more errors be available, they will be rendered in the form group.
+
 

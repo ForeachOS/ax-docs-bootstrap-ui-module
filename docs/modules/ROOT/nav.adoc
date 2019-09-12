@@ -24,6 +24,7 @@
 *** xref:components/form-controls/radio.adoc[Radio button]
 *** xref:components/form-controls/select.adoc[Select]
 *** xref:components/form-controls/textbox.adoc[Textbox]
+*** xref:components/form-controls/toggle.adoc[Toggle]
 *** xref:components/form-controls/static-control.adoc[Static control]
 ** xref:components/grid-system.adoc[Grid system]
 ** xref:components/favicon.adoc[Favicon]
