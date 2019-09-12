@@ -1,26 +1,23 @@
-= Radio button elements
+= Toggle button elements
 
-A `RadioFormElement` writes a `<input type="radio">` tag to the output.
-It shares the same functionality as the xref::components/form-controls/checkbox.adoc[CheckboxFormElement], but uses the `radio` type instead.
+A `ToggleFormElement` writes a `<input type="checkbox">` tag to the output.
+It shares the same functionality as the xref::components/form-controls/checkbox.adoc[CheckboxFormElement], but uses the `toggle` type instead.
+For more information see the https://getbootstrap.com/docs/4.2/components/forms/#switches[bootstrap 4 toggle switch documentation].
 
 == Element and builder
 
-The `ViewElement` implementation for a radio button element is a `RadioFormElement` which is a `CheckboxFormElement` that specifies a different input type.
-A builder can be created via the `BootstrapElements.bootstrap.builders#radio` factory methods.
-
-== Thymeleaf model writer
-
-The `RadioFormElementWriter` is a specialized version of the xref::components/form-controls/checkbox.adoc#thymeleaf-model-writer[CheckboxFormElementWriter] that ensures that the label and/or wrapping element are closed correctly.
+The `ViewElement` implementation for a toggle switch element is a `ToggleFormElement` which is a `CheckboxFormElement` that specifies a different input type.
+A builder can be created via the `BootstrapElements.bootstrap.builders#toggle` factory methods.
 
 == Examples
 
-=== Creating a radio button
+=== Creating a toggle switch
 
 [source,java,indent=0]
 ----
 import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
 
-bootstrap.builders.radio()
+bootstrap.builders.toggle()
                    .build();
 ----
 
@@ -30,11 +27,11 @@ bootstrap.builders.radio()
 ----
 import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
 
-bootstrap.builders.radio()
+bootstrap.builders.toggle()
                    .label( "John" ) # <1>
                    .build()
 ----
-<1> A label for a radio button can also be provided using the `text` method on the `OptionFormElementBuilder`.
+<1> A label for a toggle switch can also be provided using the `text` method on the `OptionFormElementBuilder`.
 The value set via the `label` method always takes precedence over the `text` value.
 
 === Child elements
@@ -43,19 +40,19 @@ The value set via the `label` method always takes precedence over the `text` val
 ----
 import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
 
-bootstrap.builders.radio()
+bootstrap.builders.toggle()
                    .label( "John" )
                    .add( IconSet.iconSet( FONT_AWESOME_SOLID_ICON_SET ).icon( "user" ) )
                    .build()
 ----
 
-== Radiobutton list
+== Toggle list
 
 [source,java,indent=0]
 ----
 import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
 
-bootstrap.builders.radioList()
+bootstrap.builders.toggleList()
     .label( "John" )
     .add( bootstrap.builders.option.option().text( "" ).value( 0 ) )
 	.add( bootstrap.builders.option.option().text( "option 1" ).value( 1 ) )

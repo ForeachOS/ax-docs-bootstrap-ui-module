@@ -1,15 +1,17 @@
 = NumericFormElement
+
 include::{partialsdir}/_attributes.adoc[]
 
 A `NumericFormElement` writes an `<input>` element with a type="text" to the output.
 It uses the {autoNumeric-url}[JQuery autoNumeric plugin] to support decimal precision, localization and adding symbols (eg. for currency).
 
-
 == Element and builder
+
 The `ViewElement` implementation is `NumericFormElement` and has an equivalent `NumericFormElementBuilder`.
 A builder can be created using `BootstrapViewElements.bootstrap.builders.numeric()` factory methods.
 
 == NumericFormElement attributes
+
 [cols="1,2,4",options=header]
 |===
 
@@ -24,87 +26,61 @@ A builder can be created using `BootstrapViewElements.bootstrap.builders.numeric
 |===
 
 == Examples
+
 === Creating a basic numeric form element
-Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.numeric()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.numeric()
         .simple()
         .build();
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<input type="text" class="numeric form-control">
-----
-
 === Creating an integer number form element
-Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.numeric()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.numeric()
         .integer()
         .build();
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<input data-bootstrapui-numeric="{&quot;aSep&quot;:&quot;,&quot;,&quot;vMin&quot;:-9223372036854775808,&quot;aDec&quot;:&quot;.&quot;,&quot;mDec&quot;:0}" type="text" class="numeric form-control">
-----
-
 === Creating a decimal number form element
-Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.numeric()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.numeric()
         .decimal(2)
         .build();
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<input data-bootstrapui-numeric="{&quot;aSep&quot;:&quot;,&quot;,&quot;vMin&quot;:-9223372036854775808,&quot;aDec&quot;:&quot;.&quot;,&quot;mDec&quot;:2}" type="text" class="numeric form-control">
-----
-
 === Creating a percentage number form element
-Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.numeric()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.numeric()
         .percentage()
         .build();
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<input data-bootstrapui-numeric="{&quot;aSign&quot;:&quot;%&quot;,&quot;aSep&quot;:&quot;,&quot;,&quot;mRound&quot;:&quot;S&quot;,&quot;mDec&quot;:2,&quot;vMin&quot;:-9223372036854775808,&quot;pSign&quot;:&quot;s&quot;,&quot;aDec&quot;:&quot;.&quot;}" type="text" class="numeric form-control">
-----
-
 === Creating a currency number form element
+
 Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.numeric()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.numeric()
         .currency( Currency.getInstance("EUR"))
         .build();
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<input data-bootstrapui-numeric="{&quot;nBracket&quot;:&quot;(,)&quot;,&quot;aSign&quot;:&quot;€&quot;,&quot;aSep&quot;:&quot;,&quot;,&quot;mRound&quot;:&quot;B&quot;,&quot;mDec&quot;:2,&quot;vMin&quot;:-9223372036854775808,&quot;pSign&quot;:&quot;p&quot;,&quot;aDec&quot;:&quot;.&quot;}" type="text" class="numeric form-control">
-----

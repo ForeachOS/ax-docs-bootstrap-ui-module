@@ -11,19 +11,12 @@ A `LabelFormElement` can also be created via the `BootstrapViewElements.bootstra
 
 === Creating a LabelFormElement
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.label("Author")
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.label("Author")
                    .build();
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<label class="control-label">Author</label>
 ----
 
 === Target element
@@ -34,19 +27,13 @@ In the following example, we'll also create a xref::components/form-controls/tex
 
 [source,java,indent=0]
 ----
-ViewElement author = BootstrapViewElements.bootstrap.builders.textbox()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+ViewElement author = bootstrap.builders.textbox()
                                         .htmlId( "author" )
                                         .build();
-BootstrapViewElements.bootstrap.builders.label("Author")
+bootstrap.builders.label("Author")
                    .target(authorControl);
-----
-
-The aforementioned builder configurations would result in the following markup:
-
-[source,html,indent=0]
-----
-<label for="author" class="control-label">Author</label>
-<input id="author" type="text" class="form-control">
 ----
 
 === Child elements
@@ -57,16 +44,9 @@ Let's for example add an xref::components/icons.adoc[icon element] to the label.
 
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.label( "Author" )
-		           .add( BootstrapViewElements.bootstrap.builders.glyphIcon( GlyphIcon.BOOK ) )
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.label( "Author" )
+		           .add( IconSet.iconSet( FONT_AWESOME_BRANDS_ICON_SET ).icon( "apple" ) )
 		           .build();
-----
-
-This will result in the following markup
-
-[source,html,indent=0]
-----
-<label class="control-label">Author
-    <span aria-hidden="true" class="glyphicon glyphicon-book"></span>
-</label>
 ----

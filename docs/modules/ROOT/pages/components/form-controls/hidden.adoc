@@ -8,21 +8,14 @@ A builder can be created using the `BootstrapViewElements.bootstrap.builders.hid
 
 == Example
 
-The following builder configuration:
-
 [source,java]
 ----
-BootstrapViewElements.bootstrap.builders.hidden()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.hidden()
     .controlName( "my-control" )
     .value( "my-value" )
     .build()
-----
-
-Would render the following markup:
-
-[source,html]
-----
-<input type="hidden" name="my-control" value="my-value" />
 ----
 
 == Form controls and validation
@@ -59,33 +52,17 @@ If we create a single form group with both `firstName` and `lastName` textboxes,
 A solution would be to add a `hidden` and `disabled` form control as first element to the form group.
 Disabling the control ensures that values will never be posted back, but validation errors will be retrieved when rendering the form.
 
-The form group configuration would look like:
-
 [source,java]
 ----
-import static BootstrapViewElements.bootstrap.builders.*;
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
 
-formGroup()
-    .label( label( "Name" ).target( "firstName" ) )
-    .add( hidden().controlName( "name" ).disabled( true ).mapToFormControl() )
-    .add( textbox().controlName( "firstName" ) )
-    .add( textbox().controlName( "lastName" ) )
-    .build()
-----
-
-With the resulting markup:
-
-[source,html]
-----
-<div class="form-group">
-    <label for="firstName" class="control-label">Name</label>
-    <input type="hidden" name="name" id="name" disabled="disabled" />
-    <input type="text" name="firstName" id="firstName" class="form-control" />
-    <input type="text" name="lastName" id="lastName" class="form-control" />
-</div>
+bootstrap.builders.formGroup()
+      .label( bootstrap.builders.label( "Name" ).target( "firstName" ) )
+      .add( bootstrap.builders.hidden().controlName( "name" ).disabled( true ).mapToFormControl() )
+      .add( bootstrap.builders.textbox().controlName( "firstName" ) )
+      .add( bootstrap.builders.textbox().controlName( "lastName" ) )
+      .build()
 ----
 
 NOTE: In our example we are explicitly specifying a `target` on the `label` in order to attach the label to the `firstName` textbox.
-
-
 

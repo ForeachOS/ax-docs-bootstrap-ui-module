@@ -7,66 +7,42 @@ For more information about the OptionsFormElementBuilder see the xref::component
 == Element and builder
 
 The `SelectFormElement` implementation has an equivalent `OptionsFormElementBuilder`.
-A builder can be created using the `BootstrapUiBuilders.options().select()` factory method.
+A builder can be created using the `BootstrapElements.bootstrap.builders.select()` factory method.
 
 == Examples
 === Single select
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.options()
-  .select()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.select()
   .controlName( "controlName" )
   .name( "internalName" )
   .readonly( false )
-  .add( BootstrapUiBuilders.option().value( "one" ).text( "Inner text" ) )
-  .add( BootstrapUiBuilders.option().value( "twoe" ).text( "Second text" ) )
+  .add( bootstrap.builders.select.option().value( "one" ).text( "Inner text" ) )
+  .add( bootstrap.builders.select.option().value( "twoe" ).text( "Second text" ) )
   .build();
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<select name="controlName" id="controlName" data-ax-dev-view-element="internalName" class="form-control">
-   <option id="controlName1" value="one">Inner text</option>
-   <option id="controlName2" value="two">Inner text 2</option>
-</select>
 ----
 
 === Multiple select with optionGroups
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
 SelectFormElement.OptionGroup group = new SelectFormElement.OptionGroup();
 group.setLabel( "Group label" );
-group.addChild(BootstrapUiBuilders.option().value( "two" ).text( "Inner text 2" ).build());
-group.addChild(BootstrapUiBuilders.option()value( "Short two" )text( "Some text" ).build());
+group.addChild(bootstrap.builders.select.option().value( "two" ).text( "Inner text 2" ).build());
+group.addChild(bootstrap.builders.select.option()value( "Short two" )text( "Some text" ).build());
 
-return BootstrapUiBuilders.options()
-  .select()
+return bootstrap.builders.select()
   .add( group )
   .multiple( true )
   .controlName( "controlName" )
   .name( "internalName" )
   .readonly( false )
   .build();
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<select name="controlName" multiple="multiple" id="controlName3" data-ax-dev-view-element="internalName" class="form-control">
-   <optgroup label="Group label">
-      <option value="two">Inner text 2</option>
-      <option value="Short two">Some text</option>
-   </optgroup>
-</select>
 ----
 
 [[bootstrap-select]]
@@ -112,35 +88,15 @@ The following default message codes are used:
 NOTE: Message code replacement is performed when `SelectFormElementConfiguration.localize()` is called.
 This is done automatically when using an `OptionsFormElementBuilder`.
 
-Given the following builder configuration
-
 [source,java,indent=0]
 ----
-BootstrapUiBuilders
-    .options()
-    .select( SelectFormElementConfiguration.simple() )
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders
+    .select( SelectFormElementConfiguration.simple())
     .multiple()
     .controlName( "boxName" )
-    .add( BootstrapUiBuilders.option().label( "Orange" ).value( "orange" ) )
-    .add( BootstrapUiBuilders.option().label( "Apple" ).value( "apple" ) )
+    .add( bootstrap.builders.select.option().label( "Orange" ).value( "orange" ) )
+    .add( bootstrap.builders.select.option().label( "Apple" ).value( "apple" ) )
     .build();
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<div class="btn-group bootstrap-select show-tick form-control">
-   <button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" data-id="boxName" title="Nothing selected"><span class="filter-option pull-left">Nothing selected</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button>
-   <div class="dropdown-menu open" role="combobox">
-      <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
-         <li data-original-index="0"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Orange</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
-         <li data-original-index="1"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Apple</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
-      </ul>
-   </div>
-   <select data-bootstrapui-select="{&quot;countSelectedText&quot;:&quot;{0} items selected&quot;,&quot;deselectAllText&quot;:&quot;Deselect all&quot;,&quot;dropupAuto&quot;:false,&quot;maxOptionsText&quot;:&quot;Limit reached ({0} items max)&quot;,&quot;noneSelectedText&quot;:&quot;Nothing selected&quot;,&quot;selectAllText&quot;:&quot;Select all&quot;,&quot;selectOnTab&quot;:true}" name="boxName" multiple="multiple" id="boxName" class="form-control" tabindex="-98">
-      <option id="boxName1" value="orange">Orange</option>
-      <option id="boxName2" value="apple">Apple</option>
-   </select>
-</div>
 ----

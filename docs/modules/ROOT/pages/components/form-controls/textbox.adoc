@@ -1,4 +1,5 @@
 = Textbox/Textarea elements
+
 include::{partialsdir}/_attributes.adoc[]
 
 A `TextboxFormElement` writes either an `<input>` or a `<textarea>` tag to the output.
@@ -7,7 +8,7 @@ A `TextboxFormElement` writes either an `<input>` or a `<textarea>` tag to the o
 
 The `ViewElement` implementation is `TextboxFormElement`, which also has a specialized version `TextareaFormElement`.
 Both of these elements can be configured via a `TextboxViewElementBuilder`.
-A builder can also be created by using the `BootstrapViewElements.bootstrap.builders#textbox` or `BootstrapViewElements.bootstrap.builders#textarea` factory methods.
+A builder can also be created by using the `BootstrapViewElements.bootstrap.builders#textbox` factory methods.
 
 == Configurable attributes
 
@@ -84,19 +85,12 @@ Following is a list of all available types:
 
 === Creating a textbox
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.textbox()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.textbox()
                    .build();
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<input type="text" class="form-control">
 ----
 
 === Multiline & Autosizing
@@ -106,24 +100,11 @@ Its functionality is executed based on the presence of a `js-autosize` html clas
 
 Unless explicitly set to false, autosizing will be active for the textarea element that is rendered.
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.textbox()
+bootstrap.builders.textbox()
                    .autoSize()
                    .multiLine( 3 )
                    .build();
 
-// Equivalent configuration as the above
-BootstrapViewElements.bootstrap.builders.textarea()
-                   .build();
-
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<textarea rows="3" class="form-control js-autosize" style="overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 74px;"></textarea>
 ----

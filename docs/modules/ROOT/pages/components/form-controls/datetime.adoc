@@ -35,54 +35,31 @@ A few helper methods are provided to set the format such as `datetime`, `date` a
 
 == Examples
 === Simple datepicker
-Given the following builder configuration
 
 [source,java,indent=0]
 ----
-datetime()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.datetime()
     .value( new Date() )
     .build();
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<div data-bootstrapui-datetimepicker="{&quot;format&quot;:&quot;L LT&quot;,&quot;extraFormats&quot;:[&quot;YYYY-MM-DD HH:mm&quot;,&quot;L&quot;,&quot;YYYY-MM-DD&quot;],&quot;datepickerInput&quot;:&quot;input[type=text]&quot;,&quot;locale&quot;:&quot;nl-BE&quot;,&quot;exportFormat&quot;:&quot;YYYY-MM-DD HH:mm&quot;}" class="input-group js-form-datetimepicker date">
-    <input type="text" class="form-control" value="2018-12-05 16:12">
-    <span class="input-group-addon">
-        <span aria-hidden="true" class="glyphicon glyphicon-calendar"></span>
-    </span>
-    <input type="hidden" value="2018-12-05 16:12">
-</div>
-----
-
 === Localized fr_FR Date
-
-Given the following builder configuration
 
 [source,java,indent=0]
 ----
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
 DateTimeFormElementBuilder builder = datetime();
 DateTimeFormElementConfiguration config = builder.getConfiguration();
 config.setLocale( Locale.forLanguageTag( "fr-FR" ) );
 config.setFormat( DateTimeFormElementConfiguration.Format.DATETIME_FULL );
 config.setLocalizePatterns( false );
-return builder
+
+return bootstrap.builders.datetime()
         .configuration( config )
         .value( LocalDateTime.now() )
         .build();
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<div data-bootstrapui-datetimepicker="{&quot;format&quot;:&quot;LLL&quot;,&quot;extraFormats&quot;:[&quot;YYYY-MM-DD HH:mm&quot;,&quot;L&quot;,&quot;L LT&quot;,&quot;YYYY-MM-DD&quot;],&quot;datepickerInput&quot;:&quot;input[type=text]&quot;,&quot;locale&quot;:&quot;fr-FR&quot;,&quot;exportFormat&quot;:&quot;YYYY-MM-DD HH:mm&quot;}" class="input-group js-form-datetimepicker date">
-    <input type="text" class="form-control" value="2018-12-05 16:12">
-    <span class="input-group-addon">
-        <span aria-hidden="true" class="glyphicon glyphicon-calendar"></span>
-    </span>
-    <input type="hidden" value="2018-12-05 16:12">
-</div>
-----

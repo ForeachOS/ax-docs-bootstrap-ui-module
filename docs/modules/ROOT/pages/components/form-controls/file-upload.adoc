@@ -28,20 +28,14 @@ A builder can be created using `BootstrapViewElements.bootstrap.builders.file()`
 
 == Examples
 === Creating a basic FileUploadFormElement
-Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.file()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.file()
         .controlName( "singleFile" )
         .build();
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<input name="singleFile" id="singleFile" type="file">
 ----
 
 === Handle multiFile upload
@@ -51,17 +45,12 @@ Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.file()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.file()
       .controlName( "multiFIle" )
       .multiple( true )
       .build();
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<input multiple="true" name="multiFIle" id="multiFIle" type="file">
 ----
 
 === Change what files to accept
@@ -72,15 +61,11 @@ Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.file()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.file()
       .controlName( "pdfFile" )
       .accept( ".pdf" )
       .build();
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<input name="singleFile" id="singleFile1" type="file" accept=".pdf">
-----

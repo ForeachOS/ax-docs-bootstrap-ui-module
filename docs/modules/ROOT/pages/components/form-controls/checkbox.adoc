@@ -5,7 +5,7 @@ A `CheckboxFormElement` writes a `<input type="checkbox">` tag to the output.
 == Element and builder
 
 The `ViewElement` implementation for a checkbox element is a `CheckboxFormElement`.
-A builder can be created via the `OptionFormElementBuilder#checkbox` builder or via the `BootstrapViewElements.bootstrap.builders#checkbox` factory methods.
+A builder can be created via the `BootstrapViewElements.bootstrap.builders#checkbox` factory methods.
 
 [#thymeleaf-model-writer]
 == Thymeleaf model writer
@@ -18,44 +18,26 @@ If it holds text or child elements, a label will be added.
 
 === Creating a checkbox
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.checkbox()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.checkbox()
                    .build();
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<div class="checkbox">
-    <input type="checkbox"></input>
-</div>
 ----
 
 === Providing a label
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.checkbox()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.checkbox()
                    .label( "John" ) # <1>
                    .build()
 ----
 <1> A label for a checkbox button can also be provided using the `text` method on the `OptionFormElementBuilder`.
 The value set via the `label` method always takes precedence over the `text` value.
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<div class="checkbox">
-    <label><input type="checkbox"></input>John</label>
-</div>
-----
 
 === Not wrapping a checkbox
 
@@ -63,43 +45,37 @@ Checkbox elements are wrapped inside a `div` by default.
 By specifying the `wrapped` property on a `CheckboxFormElement`, this behaviour can be prevented.
 If a checkbox element is not wrapped, it will be rendered within the label if one is present.
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.checkbox()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.checkbox()
                    .label( "John" )
                    .wrapped( false )
                    .build()
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<label><input type="checkbox"></input>john</label>
-----
-
 === Child elements
-
-Given the following builder configuration:
 
 [source,java,indent=0]
 ----
-BootstrapViewElements.bootstrap.builders.checkbox()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.checkbox()
                    .label( "John" )
-                   .add( BootstrapViewElements.bootstrap.builders.glyphIcon( GlyphIcon.USER ) )
+                   .add( IconSet.iconSet( FONT_AWESOME_SOLID_ICON_SET ).icon( "user" ) )
                    .build()
 ----
 
-The following markup would be rendered:
+== Multi checkbox
 
-[source,html,indent=0]
+[source,java,indent=0]
 ----
-<div class="checkbox">
-    <label>
-        <input type="checkbox"></input>John
-        <span aria-hidden="true" class="glyphicon glyphicon-user"></span>
-    </label>
-</div>
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.checkboxList()
+    .label( "John" )
+    .add( bootstrap.builders.option.option().text( "" ).value( 0 ) )
+	.add( bootstrap.builders.option.option().text( "option 1" ).value( 1 ) )
+	.build()
 ----
