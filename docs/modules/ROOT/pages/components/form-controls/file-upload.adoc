@@ -6,7 +6,7 @@ This formElement can be used to select one or multiple files form the users devi
 == Element and builder
 
 The `ViewElement` implementation is `FileUploadFormElement` and has an equivalent `FileUploadFormElementBuilder`.
-A builder can be created using `BootstrapUiBuilders.file()` factory methods.
+A builder can be created using `BootstrapViewElements.bootstrap.builders.file()` factory methods.
 
 == FileUploadFormElement attributes
 [cols="1,2,4",options=header]
@@ -32,7 +32,7 @@ Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.file()
+BootstrapViewElements.bootstrap.builders.file()
         .controlName( "singleFile" )
         .build();
 ----
@@ -51,7 +51,7 @@ Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.file()
+BootstrapViewElements.bootstrap.builders.file()
       .controlName( "multiFIle" )
       .multiple( true )
       .build();
@@ -72,7 +72,7 @@ Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.file()
+BootstrapViewElements.bootstrap.builders.file()
       .controlName( "pdfFile" )
       .accept( ".pdf" )
       .build();

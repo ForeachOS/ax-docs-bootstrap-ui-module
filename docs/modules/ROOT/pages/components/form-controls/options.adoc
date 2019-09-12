@@ -5,7 +5,7 @@ To quickly create a list of options, either as a select, list of checkboxes or l
 
 == Element and builder
 The `OptionsFormElementBuilder` builds an `AbstractNodeViewElement`.
-A builder can be created using `BootstrapUiBuilders.options()` factory methods.
+A builder can be created using `BootstrapViewElements.bootstrap.builders.options()` factory methods.
 
 This builder can be used to create a list of options.
 The default implementation is a `select` element which can be extended with a `bootstrap-select` implementation.
@@ -50,11 +50,11 @@ Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders
+BootstrapViewElements.bootstrap.builders
     .options()
     .controlName( "demo" )
-    .add( BootstrapUiBuilders.option().label( "Orange" ).value( "orange" ) )
-    .add( BootstrapUiBuilders.option().label( "Apple" ).value( "apple" ) )
+    .add( BootstrapViewElements.bootstrap.builders.option().label( "Orange" ).value( "orange" ) )
+    .add( BootstrapViewElements.bootstrap.builders.option().label( "Apple" ).value( "apple" ) )
     .build();
 ----
 

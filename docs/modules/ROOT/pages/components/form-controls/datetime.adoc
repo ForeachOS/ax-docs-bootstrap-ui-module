@@ -8,7 +8,7 @@ See `{javadoc-url}/com/foreach/across/modules/bootstrapui/elements/DateTimeFormE
 == Element and builder
 
 The `DateTimeFormElement` has an equivalent `DateTimeFormElementBuilder`.
-A builder can be created using `BootstrapUiBuilders.datetime()` factory methods.
+A builder can be created using `BootstrapViewElements.bootstrap.builders.datetime()` factory methods.
 
 == DateTimeFormElement attributes
 [cols="1,2,4",options=header]

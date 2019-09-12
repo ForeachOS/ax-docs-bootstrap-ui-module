@@ -4,7 +4,7 @@ A `HiddenFormElement` renders an `<input type="hidden" />` element.
 
 == Element and builder
 The `ViewElement` implementation is `HiddenFormElement` and has an equivalent `HiddenFormElementBuilder`.
-A builder can be created using the `BootstrapUiBuilders.hidden()` factory method.
+A builder can be created using the `BootstrapViewElements.bootstrap.builders.hidden()` factory method.
 
 == Example
 
@@ -12,7 +12,7 @@ The following builder configuration:
 
 [source,java]
 ----
-BootstrapUiBuilders.hidden()
+BootstrapViewElements.bootstrap.builders.hidden()
     .controlName( "my-control" )
     .value( "my-value" )
     .build()
@@ -63,7 +63,7 @@ The form group configuration would look like:
 
 [source,java]
 ----
-import static BootstrapUiBuilders.*;
+import static BootstrapViewElements.bootstrap.builders.*;
 
 formGroup()
     .label( label( "Name" ).target( "firstName" ) )

@@ -7,7 +7,7 @@ A `TextboxFormElement` writes either an `<input>` or a `<textarea>` tag to the o
 
 The `ViewElement` implementation is `TextboxFormElement`, which also has a specialized version `TextareaFormElement`.
 Both of these elements can be configured via a `TextboxViewElementBuilder`.
-A builder can also be created by using the `BootstrapUiBuilders#textbox` or `BootstrapUiBuilders#textarea` factory methods.
+A builder can also be created by using the `BootstrapViewElements.bootstrap.builders#textbox` or `BootstrapViewElements.bootstrap.builders#textarea` factory methods.
 
 == Configurable attributes
 
@@ -88,7 +88,7 @@ Given the following builder configuration:
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.textbox()
+BootstrapViewElements.bootstrap.builders.textbox()
                    .build();
 ----
 
@@ -110,13 +110,13 @@ Given the following builder configuration:
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.textbox()
+BootstrapViewElements.bootstrap.builders.textbox()
                    .autoSize()
                    .multiLine( 3 )
                    .build();
 
 // Equivalent configuration as the above
-BootstrapUiBuilders.textarea()
+BootstrapViewElements.bootstrap.builders.textarea()
                    .build();
 
 ----

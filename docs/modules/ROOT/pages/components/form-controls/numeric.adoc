@@ -7,7 +7,7 @@ It uses the {autoNumeric-url}[JQuery autoNumeric plugin] to support decimal prec
 
 == Element and builder
 The `ViewElement` implementation is `NumericFormElement` and has an equivalent `NumericFormElementBuilder`.
-A builder can be created using `BootstrapUiBuilders.numeric()` factory methods.
+A builder can be created using `BootstrapViewElements.bootstrap.builders.numeric()` factory methods.
 
 == NumericFormElement attributes
 [cols="1,2,4",options=header]
@@ -29,7 +29,7 @@ Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.numeric()
+BootstrapViewElements.bootstrap.builders.numeric()
         .simple()
         .build();
 ----
@@ -46,7 +46,7 @@ Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.numeric()
+BootstrapViewElements.bootstrap.builders.numeric()
         .integer()
         .build();
 ----
@@ -63,7 +63,7 @@ Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.numeric()
+BootstrapViewElements.bootstrap.builders.numeric()
         .decimal(2)
         .build();
 ----
@@ -80,7 +80,7 @@ Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.numeric()
+BootstrapViewElements.bootstrap.builders.numeric()
         .percentage()
         .build();
 ----
@@ -97,7 +97,7 @@ Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.numeric()
+BootstrapViewElements.bootstrap.builders.numeric()
         .currency( Currency.getInstance("EUR"))
         .build();
 ----

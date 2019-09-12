@@ -1,0 +1,62 @@
+= Icons
+All icons are eventually represetned as an `AbstractNodeViewElement` and are all grouped withi a seperate `IconSet`.
+The `conSetRegistry` is responsible for adding, remvoing a getting iconsets.
+
+Each `IconSet` can have a default iconResolver which is a function that will return an `AbstractNodeViewElement` for the requested icon.
+Beside a default iconResolver, a more specific iconResolver function can be registered per icon.
+For more information see the xref:icons.adoc#3-0-0[define a new iconSet] section.
+
+NOE:
+An `IllegalArgumentException` will be thrown when no iconResolver can be found for a requested icon.
+
+== BootstrapUIModule icon sets
+
+Each standard module will define there own `IconSet` containing the icons used by that module.
+BootstrapUiModule will register the regular, solid and brand font awesome iconSets (see `FontAwesomeIconSetConfiguration` for the iconSet names).
+
+== Getting an Icon viewElement
+
+The following code can be used to get the `AbstractNodeViewElement` representing the requested icon.
+
+.Getting an icon from an icon set
+[source,java,indent=0]
+----
+IconSet.iconSet( FONT_AWESOME_SOLID_ICON_SET ).icon( "download" )
+----
+
+[#defening-a-icon-set]
+== Define a new iconSet
+
+You can define an iconSet by registering it in the `iconSetRegistry` with a unique name and optionally giving it a `defaultIconResolver`.
+When no `defaultIconResolver` is provided for an icon set, seperate icon resolvers must be provided for each icon that is registered.
+
+.Define a new icon set
+[source,java,indent=0]
+----
+IconSetRegistry.addIconSet( "my-new-icon-set", createNewIconSet() );
+
+private SimpleIconSet createNewIconSet( ) {
+    SimpleIconSet simpleiconset = new SimpleIconSet();
+    simpleiconset.setDefaultIconResolver( ( iconName ) -> html.i( css( " custom-" + iconName ) ) );
+    return simpleiconset;
+}
+----
+
+== Adding an icon to a iconSet
+
+You can add a new icon to an icon set by working with the `conSetRegistry`.
+
+.Add an icon
+[source,java,indent=0]
+----
+
+SimpleIconSet customIconSet = new SimpleIconSet();
+
+customIconSet.add( "delete", ( imageName ) -> IconSet.iconSet( FONT_AWESOME_SOLID_ICON_SET ).icon( "trash" ) );
+
+IconSetRegistry.addIconSet( "custom", customIconSet );
+----
+
+NOTE: If you want to override an icon you don't have to remove it first.
+You can fetch the icon set from the `IconSetRegistry` and add a new icon implementation with the same key as the icon you want to override.
+

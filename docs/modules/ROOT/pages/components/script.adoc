@@ -10,17 +10,15 @@ See the <<html-template,examples>> for a detailed explanation.
 
 == Element and builder
 The `ViewElement` implementation is `ScriptViewElement` and has an equivalent `ScriptViewElementBuilder`.
-A builder can be created using `BootstrapUiBuilders.script()` factory methods.
+A builder can be created using `BootstrapViewElements.bootstrap.builders.script()` factory methods.
 
 == Examples
 
 === Including an external script
 
-Suppose the following builder configuration for including an external script:
-
 [source,java]
 ----
-BootstrapUiBuilders.script( "application/javascript" )
+BootstrapViewElements.bootstrap.builders.script( "application/javascript" )
     .source( "http://myscript" )
     .async( true )
     .defer( true )
@@ -28,34 +26,21 @@ BootstrapUiBuilders.script( "application/javascript" )
     .build()
 ----
 
-This would render the following markup:
-
-[source,html]
-----
-<script type="application/javascript" src="http://myscript" async="async" defer="defer" charset="utf-8"><script>
-----
 
 [html-template]
 === Including a HTML template
 
 As a `ScriptViewElement` is a regular `NodeViewElement`, you can easily build a HTML template by adding child elements.
+
 [source,java]
 ----
-BootstrapUiBuilders.script( MediaType.TEXT_HTML )
-    .add(
-        BootstrapUiBuilders.paragraph()
-                           .add( BootstrapUiBuilders.text( "hello" ) )
-     )
+import static com.foreach.across.modules.web.ui.elements.HtmlViewElements.html;
+import static com.foreach.across.modules.web.ui.elements.TextViewElement.text;
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.script().type( MediaType.TEXT_HTML )
+   				.add( html.builders.p().add( bootstrap.builders.text( "hello" )  ) )
     .build()
-----
-
-This would render the following markup:
-
-[source,html]
-----
-<script type="text/html">
-  <p>hello</p>
-</script>
 ----
 
 [nested-elements]
@@ -66,18 +51,16 @@ Suppose you have the following configuration:
 
 [source,java]
 ----
-import static BootstrapUiBuilders.*;
-
-script( MediaType.TEXT_HTML )
+bootstrap.builders.script( ).type( MediaType.TEXT_HTML )
      .add(
-        paragraph().add( BootstrapUiBuilders.text( "hello" ) )
+        html.builders.p().add( bootstrap.builders.text( "hello" ) )
      )
      .add(
-        script( MediaType.TEXT_HTML )
-          .add( paragraph().add( BootstrapUiBuilders.text( "nested hello" ) ) )
+        script( ).type( MediaType.TEXT_HTML )
+          .add( html.builders.p().add( bootstrap.builders.text( "nested hello" ) ) )
      )
      .add(
-        paragraph().add( BootstrapUiBuilders.text( "goodbye" ) )
+        html.builders.p().add( bootstrap.builders.text( "goodbye" ) )
      )
      .build()
 ----

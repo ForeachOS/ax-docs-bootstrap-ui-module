@@ -5,7 +5,7 @@ A `FieldsetFormElement` writes a `<fieldset>` tag to the output.
 == Element and builder
 
 The `ViewElement` implementation for a fieldset element is a `FieldsetFormElement` and has a corresponding `FieldsetFormElementBuilder`.
-A `FieldsetFormElement` can also be created via the `BootstrapUiBuilders#fieldset` factory methods.
+A `FieldsetFormElement` can also be created via the `BootstrapViewElements.bootstrap.builders#fieldset` factory methods.
 
 == Examples
 
@@ -15,7 +15,7 @@ Given the following builder configuration:
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.fieldset("Author")
+BootstrapViewElements.bootstrap.builders.fieldset("Author")
                    .build();
 ----
 
@@ -34,8 +34,8 @@ Given the following builder configuration:
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.fieldset( "Author" )
-                   .add( BootstrapUiBuilders.textbox() )
+BootstrapViewElements.bootstrap.builders.fieldset( "Author" )
+                   .add( BootstrapViewElements.bootstrap.builders.textbox() )
                    .build()
 ----
 
@@ -57,10 +57,10 @@ Given the following builder configuration:
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.fieldset()
+BootstrapViewElements.bootstrap.builders.fieldset()
                    .legend() # <1>
                    .text( "Author" )
-                   .add( BootstrapUiBuilders.glyphIcon( GlyphIcon.USER ) )
+                   .add( BootstrapViewElements.bootstrap.builders.glyphIcon( GlyphIcon.USER ) )
                    .and()
                    .build()
 ----
@@ -84,9 +84,9 @@ As such, the following configuration will add the provided view elements to the 
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.fieldset()
+BootstrapViewElements.bootstrap.builders.fieldset()
                    .legend( "Author" )
-                   .add( BootstrapUiBuilders.glyphIcon( GlyphIcon.USER ) )
+                   .add( BootstrapViewElements.bootstrap.builders.glyphIcon( GlyphIcon.USER ) )
                    .build()
 ----
 ====

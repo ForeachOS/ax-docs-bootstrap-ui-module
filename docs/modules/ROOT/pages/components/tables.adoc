@@ -5,8 +5,8 @@ A `TableViewElement` writes a `<table>` element to the output.
 
 == Element and builder
 The `TableViewElement` has an equivalent `TableViewElementBuilder`.
-A builder can be created using `BootstrapUiBuilders.table()` factory methods.
-This builder holds nested builders for head, foot and body sections.
+A builder can be created using `BootstrapViewElements.bootstrap.builders.table()` factory methods.
+This builder holds nested builders for head, foot and body sections and can be found under `BootstrapViewElements.bootstrap.builders.table`.
 
 == TableViewElement attributes
 [cols="1,2,4",options=header]
@@ -17,23 +17,23 @@ This builder holds nested builders for head, foot and body sections.
 |Default
 
 |`Body`
-|A table caption shown above the table. Can be build with `BootstrapUiBuilders.tableBody()`.
+|A table caption shown above the table. Can be build with `BootstrapViewElements.bootstrap.builders.body()`.
 |Not set by default
 
 |`Caption`
-|A table caption shown above the table. Can be build with `BootstrapUiBuilders.tableCaption()`.
+|A table caption shown above the table. Can be build with `BootstrapViewElements.bootstrap.builders.caption()`.
 |Not set by default
 
 |`Footer`
-|A table caption shown above the table. Can be build with `BootstrapUiBuilders.tableFooter()`.
+|A table caption shown above the table. Can be build with `BootstrapViewElements.bootstrap.builders.footer()`.
 |Not set by default
 
 |`Header`
-|A table header that can be build with `BootstrapUiBuilders.tableHeader()`.
+|A table header that can be build with `BootstrapViewElements.bootstrap.builders.header()`.
 |Not set by default
 
 |`Row`
-|A table row that can be build with `BootstrapUiBuilders.tableRow()`.
+|A table row that can be build with `BootstrapViewElements.bootstrap.builders.row()`.
 |Not set by default
 
 |===
@@ -41,64 +41,38 @@ This builder holds nested builders for head, foot and body sections.
 
 == Examples
 === Creating a table with header, body & footer
-Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders
+bootstrap.builders
     .table()
     .header(
-        BootstrapUiBuilders.tableHeader().add(
-            BootstrapUiBuilders.tableHeaderCell().text( "Name" )
-        ).add(
-            BootstrapUiBuilders.tableHeaderCell().text( "Value" )
-        )
+            bootstrap.builders.table.header().add(
+                    bootstrap.builders.table.headerCell().text( "Name" )
+            ).add(
+                    bootstrap.builders.table.headerCell().text( "Value" )
+            )
     )
     .body(
-        BootstrapUiBuilders.tableBody().add(
-            BootstrapUiBuilders.tableRow().add(
-                BootstrapUiBuilders.tableCell().text( "Height" )
-            ).add(
-                BootstrapUiBuilders.tableCell().text( "128" )
+            bootstrap.builders.table.body().add(
+                    bootstrap.builders.table.row().add(
+                            bootstrap.builders.table.cell().text( "Height" )
+                    ).add(
+                            bootstrap.builders.table.cell().text( "128" )
+                    )
+
             )
-        )
     )
     .footer(
-        BootstrapUiBuilders.tableFooter().add(
-            BootstrapUiBuilders.tableRow().add(
-                BootstrapUiBuilders.tableCell()
-                    .columnSpan( 2 )
-                    .text( "Table footer" )
-                    .heading( true )
+            bootstrap.builders.table.footer().add(
+                    bootstrap.builders.table.row().add(
+                            bootstrap.builders.table.cell()
+                                                    .columnSpan( 2 )
+                                                    .text( "Table footer" )
+                                                    .heading( true )
+                    )
             )
-        )
     )
     .build();
 ----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Value</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Height</td>
-            <td>128</td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <th colspan="2">Table footer</th>
-        </tr>
-    </tfoot>
-</table>
-----
-
 

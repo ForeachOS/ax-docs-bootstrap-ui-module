@@ -5,7 +5,7 @@ A `CheckboxFormElement` writes a `<input type="checkbox">` tag to the output.
 == Element and builder
 
 The `ViewElement` implementation for a checkbox element is a `CheckboxFormElement`.
-A builder can be created via the `OptionFormElementBuilder#checkbox` builder or via the `BootstrapUiBuilders#checkbox` factory methods.
+A builder can be created via the `OptionFormElementBuilder#checkbox` builder or via the `BootstrapViewElements.bootstrap.builders#checkbox` factory methods.
 
 [#thymeleaf-model-writer]
 == Thymeleaf model writer
@@ -22,7 +22,7 @@ Given the following builder configuration:
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.checkbox()
+BootstrapViewElements.bootstrap.builders.checkbox()
                    .build();
 ----
 
@@ -41,7 +41,7 @@ Given the following builder configuration:
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.checkbox()
+BootstrapViewElements.bootstrap.builders.checkbox()
                    .label( "John" ) # <1>
                    .build()
 ----
@@ -67,7 +67,7 @@ Given the following builder configuration:
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.checkbox()
+BootstrapViewElements.bootstrap.builders.checkbox()
                    .label( "John" )
                    .wrapped( false )
                    .build()
@@ -86,9 +86,9 @@ Given the following builder configuration:
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.checkbox()
+BootstrapViewElements.bootstrap.builders.checkbox()
                    .label( "John" )
-                   .add( BootstrapUiBuilders.glyphIcon( GlyphIcon.USER ) )
+                   .add( BootstrapViewElements.bootstrap.builders.glyphIcon( GlyphIcon.USER ) )
                    .build()
 ----
 

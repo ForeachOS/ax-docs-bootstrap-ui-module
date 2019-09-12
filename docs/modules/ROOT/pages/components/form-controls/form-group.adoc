@@ -9,7 +9,7 @@ Form groups elements wrap around other view elements and are represented as a `<
 == Element and builder
 
 The `ViewElement` implementation for a checkbox element is a `FormGroupElement` and has a corresponding `FormGroupElementBuilder`.
-A `FormGroupElement` can also be created via the `BootstrapUiBuilders#formGroup` factory method.
+A `FormGroupElement` can also be created via the `BootstrapViewElements.bootstrap.builders#formGroup` factory method.
 
 == FormGroupElement attributes
 
@@ -70,7 +70,7 @@ Given the following builder configuration:
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.formGroup()
+BootstrapViewElements.bootstrap.builders.formGroup()
                    .build();
 ----
 
@@ -87,9 +87,9 @@ Given the following builder configuration:
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.formGroup()
-                   .label( BootstrapUiBuilders.label( "Author" )
-                                              .add( BootstrapUiBuilders.glyphIcon( GlyphIcon.USER ) ) )
+BootstrapViewElements.bootstrap.builders.formGroup()
+                   .label( BootstrapViewElements.bootstrap.builders.label( "Author" )
+                                              .add( BootstrapViewElements.bootstrap.builders.glyphIcon( GlyphIcon.USER ) ) )
                    .control(
                            BootstrapUiBuilders.textbox()
                                               .controlName( "author-name" )
