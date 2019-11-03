@@ -3,7 +3,15 @@
 [#3-0-0]
 == 3.0.0-SNAPSHOT
 
-*Requires Across 5.0.0*
+This version requires Across 5.0.0.
+
+=== Extension module
+BootstrapUiModule configuration has been modified to extend the AcrossWebModule configuration.
+It no longer starts its own `ApplicationContext`.
+
+Most applications should have no effect from this, but any code directly accessing the BootstrapUiModule bean factory would now fail.
+
+Module configurations added to BootstrapUiModule should be added to AcrossWebModule instead.
 
 === Library upgrades
 
@@ -29,7 +37,7 @@
 
 === Improvements & New Features
 
-* removed `BootstrapUiBuilders` in favor of `BootstrapViewElements`.
+* removed `BootstrapUiBuilders` in favour of `BootstrapViewElements`.
 `BootstrapViewElements` provides a static variable `bootstrap` through which `ViewElements` can be created, with a corresponding `bootstrap.builders` to easily create `ViewElementBuilders`.
 * removed various attributes in favor of `WitherSetter`s to support both extendability and easy customization of @ViewElements`
 * added an IconSetRegistry in which xref:[IconSets] can be registered
