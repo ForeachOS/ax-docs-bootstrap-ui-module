@@ -34,14 +34,16 @@ Module configurations added to BootstrapUiModule should be added to AcrossWebMod
 * iconOnly menu items are hidden using sr-only
 * added various strongly typed helper classes for bootstrap 4 styles, see `BootstrapStyles.css`
 * bootstrap select items enable `dropUp` by default
+* the default button style (`ButtonViewElement`) is now simply `btn` instead of `btn btn-default`
 
 === Improvements & New Features
 
 * removed `BootstrapUiBuilders` in favour of `BootstrapViewElements`.
 `BootstrapViewElements` provides a static variable `bootstrap` through which `ViewElements` can be created, with a corresponding `bootstrap.builders` to easily create `ViewElementBuilders`.
-* removed various attributes in favor of `WitherSetter`s to support both extendability and easy customization of @ViewElements`
+* removed various attributes in favor of `WitherSetter` to support both extendability and easy customization of `ViewElement`
 * added an IconSetRegistry in which xref:[IconSets] can be registered
 ** IconSets can be used to maintain a set of icons throughout modules
 ** registered icons within an IconSet can be overridden for ease of customization
 ** default IconSets are registered for https://fontawesome.com/[FontAwesome 5] Regular, Solid and Brands styles
-* added `checkbox-list`, `toggle-`list` and `radio-list` as CSS class to the wrapping div in case of `OptionsFormElementBuilders` for ease of customization
+* added `checkbox-list`, `toggle-list` and `radio-list` as CSS class to the wrapping div in case of `OptionsFormElementBuilders` for ease of customization
+* `FormGroupElement` now allows the configuration of the field errors that should be fetched from the `BindingResult` (which can be multiple), this provides more flexibility for validation scenarios
