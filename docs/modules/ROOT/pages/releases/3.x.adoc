@@ -47,3 +47,4 @@ Module configurations added to BootstrapUiModule should be added to AcrossWebMod
 ** default IconSets are registered for https://fontawesome.com/[FontAwesome 5] Regular, Solid and Brands styles
 * added `checkbox-list`, `toggle-list` and `radio-list` as CSS class to the wrapping div in case of `OptionsFormElementBuilders` for ease of customization
 * `FormGroupElement` now allows the configuration of the field errors that should be fetched from the `BindingResult` (which can be multiple), this provides more flexibility for validation scenarios
+* `NavComponentBuilder` has an additional `includePathAsDataAttribute` property which can be used to include the `Menu.getPath()` as HTML attribute `data-ax-menu-path` on generated nav items
