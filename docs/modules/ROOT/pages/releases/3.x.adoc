@@ -28,8 +28,10 @@ Module configurations added to BootstrapUiModule should be added to AcrossWebMod
 === Bootstrap 4 upgrades
 
 * migrated from bootstrap 3 to https://getbootstrap.com/docs/4.3/getting-started/introduction/[Bootstrap 4] resulting in various breaking changes
-* added support for Bootstrap 4 Switches, these can be found as xref:...[`ToggleFormElements`]
+* added support for Bootstrap 4 Switches, these can be found as xref:components/form-controls/toggle.adoc[`ToggleFormElements`]
 * reduced custom css in favor of Bootstrap 4 utility classes
+** A variant containing the prefix `axu-` was provided for utility classes that make use of `!important`.
+These can be found in `AcrossBootstrapStyles`. The original classes can still be found in `BootstrapStyles` and are not modified.
 * panels have been removed and migrated to cards
 * iconOnly menu items are hidden using sr-only
 * added various strongly typed helper classes for bootstrap 4 styles, see `BootstrapStyles.css`
