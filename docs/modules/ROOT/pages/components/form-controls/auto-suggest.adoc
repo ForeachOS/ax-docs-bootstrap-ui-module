@@ -5,7 +5,7 @@ An `AutoSuggestFormElement` writes a `<div>` tag to the output containing all ma
 == Element and builder
 
 The `AutoSuggestFormElement` has an equivalent `AutoSuggestFormElementBuilder`.
-A builder can be created using `BootstrapUiBuilders.autosuggest()` factory methods.
+A builder can be created using `BootstrapViewElements.bootstrap.builders.autosuggest()` factory methods.
 
 By default, the autosuggest form element expects an `id` and a `value` property on the fetched results.
 The `id` is the reference to the domain object, and the `value` is the value that is displayed by default.
@@ -37,7 +37,9 @@ The autosuggest control takes in an `AutoSuggestFormElementConfiguration` to con
 .Example of a simple autosuggest configuration
 [source,java,indent=0]
 ----
-BootstrapUiBuilders
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders
     .autosuggest()
     .configuration(
             AutoSuggestFormElementConfiguration.withDataSet( # <1>
@@ -47,17 +49,6 @@ BootstrapUiBuilders
     .build()
 ----
 <1> configure a dataset which fetches data from an url, once at least 2 characters are present
-
-Given the above configuration, the following markup would be rendered:
-
-[source,html,indent=0]
-----
-<div data-bootstrapui-adapter-type="autosuggest" class="axbum-typeahead"
-    data-bootstrapui-autosuggest="{&quot;highlight&quot;:true,&quot;hint&quot;:true,&quot;minLength&quot;:1,&quot;_datasets&quot;:[{&quot;name&quot;:&quot;default&quot;,&quot;bloodhound&quot;:{&quot;remote&quot;:{&quot;url&quot;:&quot;/bootstrapAutosuggest/suggest?query={{query}}&quot;}}}]}">
-    <input autocomplete="off" type="search" class="js-typeahead form-control"></input>
-    <input type="hidden" class="js-typeahead-value"></input>
-</div>
-----
 
 == Configuring templates
 
@@ -101,10 +92,12 @@ When configuring a template, optionally a dataset id can be specified for which 
 .Configuring a template
 [source,java,indent=0]
 ----
-BootstrapUiBuilders
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders
     .autosuggest()
-    .notFoundTemplate( BootstrapUiBuilders.div().css( "autosuggest-not-found" )
-                                          .add( BootstrapUiBuilders.text( "There are no results available for '{{query}}'" ) ) )
+    .notFoundTemplate( bootstrap.builders.div().css( "autosuggest-not-found" )
+                                          .add( bootstrap.builders.text( "There are no results available for '{{query}}'" ) ) )
     .build();
 ----
 
@@ -118,9 +111,11 @@ Given the query 'John', the following markup would be rendered in the suggestion
 .Configuring a template for a dataset
 [source,java,indent=0]
 ----
-BootstrapUiBuilders
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders
     .autosuggest()
-    .notFoundTemplate( "people", BootstrapUiBuilders.text("No results found") )
+    .notFoundTemplate( "people", bootstrap.builders.text("No results found") )
     .build();
 ----
 

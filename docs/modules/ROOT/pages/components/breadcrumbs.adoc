@@ -4,7 +4,7 @@ When generating a breadcrumb an `<ol>` element containing all necessary menu ite
 
 == Element and builder
 The `BreadcrumbNavComponentBuilder` is provided to easily build breadcrumbs.
-A builder can be created using `BootstrapUiBuilders.breadcrumb()` factory methods which takes in a `Menu` as parameter.
+A builder can be created using `BootstrapViewElements.bootstrap.builders.breadcrumb()`.
 
 == BreadcrumbNavComponentBuilder attributes
 [cols="1,2,4",options=header]
@@ -52,7 +52,6 @@ For all the attributes consult the javadoc of `NavComponentBuilder`.
 
 == Examples
 === Creating a simple breadcrumb navigation
-Given the following builder configuration
 
 [source,java,indent=0]
 ----
@@ -63,23 +62,10 @@ Menu menu = new PathBasedMenuBuilder()
 menu.select( MenuSelector.byTitle( "Breadcrumb example" ) );
 menu.setTitle( "Bootstrap UI Module" );
 
-NodeViewElement breadcrumbNav = BootstrapUiBuilders.breadcrumb( menu ).build();
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<ol class="breadcrumb">
-   <li><a href="/" title="Bootstrap UI Module">Bootstrap UI Module</a></li>
-   <li><a href="/components" title="Components">Components</a></li>
-   <li class="active">Breadcrumb example</li>
-</ol>
+NodeViewElement breadcrumbNav = BootstrapViewElements.bootstrap.builders.breadcrumb().menu( menu ).build();
 ----
 
 === Creating a breadcrumb navigation with icons
-Given the following builder configuration
-
 [source,java,indent=0]
 ----
 Menu menu = new PathBasedMenuBuilder()
@@ -93,16 +79,6 @@ Menu menu = new PathBasedMenuBuilder()
 menu.select( MenuSelector.byTitle( "Breadcrumb example" ) );
 menu.setTitle( "Bootstrap Ui Module" );
 
-NodeViewElement breadcrumbNav = BootstrapUiBuilders.breadcrumb( menu ).build();
+NodeViewElement breadcrumbNav = BootstrapViewElements.bootstrap.builders.breadcrumb().menu( menu ).build();
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<ol class="breadcrumb">
-   <li><a href="/" title="Bootstrap Ui Module">Bootstrap Ui Module</a></li>
-   <li><a href="/components" title="Components"><span aria-hidden="true" class="glyphicon glyphicon-home"></span> <span class="nav-item-title">Components</span></a></li>
-   <li class="active"><span aria-hidden="true" class="glyphicon glyphicon-hourglass"></span> Breadcrumb example</li>
-</ol>
-----

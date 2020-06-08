@@ -7,7 +7,7 @@ An `InputGroupFormElement` wraps a `<div>` tag with the class `input-group` arou
 == Element and builder
 
 The `InputGroupFormElement` implementation has a corresponding `InputGroupElementBuilder`.
-An `InputGroupFormElement` can also be created via the `BootstrapUiBuilders.inputGroup()` factory method.
+An `InputGroupFormElement` can also be created via the `BootstrapViewElements.bootstrap.builders.inputGroup()` factory method.
 
 == InputGroupFormElement attributes
 
@@ -38,29 +38,21 @@ A layout can specify a xref::components/grid-system.adoc[grid], a type and wheth
 
 image::inputGroup.png[FormGroup]
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.inputGroup()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.inputGroup()
       .control(
-          BootstrapUiBuilders
+          bootstrap.builders
             .textbox()
             .placeholder( "Username" )
             .type( TextboxFormElement.Type.EMAIL )
       )
       .addonBefore(
-          BootstrapUiBuilders
+          bootstrap.builders
             .label( "@" )
       ).build();
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<div class="input-group"><span class="input-group-addon"><label class="control-label">@</label></span>
-    <input placeholder="Username" type="email" class="form-control">
-</div>
-----
 

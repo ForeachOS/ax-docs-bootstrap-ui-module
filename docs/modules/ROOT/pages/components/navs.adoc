@@ -1,6 +1,6 @@
 [[NavComponentBuilder]]
 = Rendering menus
-The `BootstrapUiComponentFactory` provides several builders for generating markup based on an Across `Menu`.
+The `BootstrapViewElements.bootstrap.builders` facade provides several builders for generating markup based on an Across `Menu`.
 All builders extend `NavComponentBuilder` and support some of the same options.
 
 [cols="1,1,4", options=header]
@@ -11,16 +11,16 @@ All builders extend `NavComponentBuilder` and support some of the same options.
 |Description
 
 |`DefaultNavComponentBuilder`
-|`bootstrapUiComponentFactory.nav()`
-|Converts a `Menu` component to a http://getbootstrap.com/components/#nav[Bootstrap nav].
+|`BootstrapViewElements.bootstrap.builders.nav()`
+|Converts a `Menu` component to a https://getbootstrap.com/docs/4.3/components/navs[Bootstrap nav].
 
 |`PanelsNavComponentBuilder`
-|`bootstrapUiComponentFactory.panels()`
+|`BootstrapViewElements.bootstrap.builders.panels()`
 |Converts a `Menu` component to a HTML5 `nav` where every group of `Menu` items is rendered as a panel with a heading.
 
 |`BreadcrumbNavComponentBuilder`
-|`bootstrapUiComponentFactory.breadcrumb()`
-|Generates a http://getbootstrap.com/components/#breadcrumbs[breadcrumb] for the selected items of a `Menu`.
+|`BootstrapViewElements.bootstrap.builders.breadcrumb()`
+|Generates a https://getbootstrap.com/docs/4.3/components/breadcrumb[breadcrumb] for the selected items of a `Menu`.
 
 |===
 
@@ -31,6 +31,8 @@ All builders extend `NavComponentBuilder` and support some of the same options.
 [source,java,indent=0]
 [subs="verbatim,attributes"]
 ----
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
 PathBasedMenuBuilder menu = new PathBasedMenuBuilder();
 menu.item( "/one", "One", "#" ).order( 1 ).and()
     .group( "/two", "Two" ).order( 2 ).and()
@@ -39,7 +41,7 @@ menu.item( "/one", "One", "#" ).order( 1 ).and()
 
 model.addAttribute(
     "customNav",
-    bootstrapUiComponentFactory.nav( menu ).tabs().build( builderContext )
+    bootstrap.builders.nav().menu( menu ).tabs().build( builderContext )
 );
 ----
 
@@ -48,25 +50,6 @@ model.addAttribute(
 ----
 <nav>
     <across:view element="${customNav}" />
-</nav>
-----
-
-.HTML output generated
-[source,html,indent=0]
-----
-<nav>
-    <ul class="nav nav-tabs">
-        <li><a href="#" title="One">One</a></li>
-        <li class="dropdown">
-            <a data-toggle="dropdown" href="#" title="Two" class="dropdown-toggle">
-                Two <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="#" title="Sub item 1">Sub item 1</a></li>
-                <li><a href="#" title="Sub item 2">Sub item 2</a></li>
-            </ul>
-        </li>
-    </ul>
 </nav>
 ----
 
@@ -167,19 +150,6 @@ If so and _nav:keepGroupItem_ is set to true, the replace action will be suppres
 
 *NOTE*: Attribute is only relevant for a `DefaultNavComponentBuilder`.
 
-|_nav:panelStyle_
-|Holds the CSS class that determines the panel styling.
-If set, the default _panel-default_ class will be omitted.
-Only applicable on group menu items that would result in a panel being rendered.
-
-*NOTE*: Attribute is only relevant for a `PanelsNavComponentBuilder`.
-
-|_nav:renderAsPanel_
-|If set to _false_ on an group menu item that would be rendered as a panel (a group on the top level), no panel will be rendered but a sidebar nav list will directly be rendered.
-Optionally a title will still be included if the group has one.  Non-panel lists do not support groups as items, these will be ignored.
-
-*NOTE*: Attribute is only relevant for a `PanelsNavComponentBuilder`.
-
 |_html:*_
 |Any attribute with a name starting with _html:_ will be added as html attribute to the list item.
 Name of the html attribute will be the menu attribute name without the _html:_ prefix.
@@ -199,8 +169,10 @@ Adding an icon to an item or group is easily done by setting the _nav:icon_ attr
 [source,java,indent=0]
 [subs="verbatim,attributes"]
 ----
+import static com.foreach.across.modules.web.ui.elements.HtmlViewElements.html;
+
 menu.item( "/dl", "Download", "#" )
-    .attribute( NavComponentBuilder.ATTR_ICON, new GlyphIcon( GlyphIcon.DOWNLOAD ) )
+    .attribute( NavComponentBuilder.ATTR_ICON, IconSet.iconSet( FONT_AWESOME_SOLID_ICON_SET ).icon( "download" ) )
     .order( 1 );
 ----
 
@@ -217,9 +189,9 @@ If however the dropdown label is replaced by an item or the group only contains 
 [subs="verbatim,attributes"]
 ----
 menu.group( "/options", "Options", "#" )
-    .attribute( NavComponentBuilder.ATTR_ICON, new GlyphIcon( GlyphIcon.COG ) )
+    .attribute( NavComponentBuilder.ATTR_ICON, IconSet.iconSet( FONT_AWESOME_SOLID_ICON_SET ).icon( "cog" ) )
     .attribute( NavComponentBuilder.ATTR_ICON_ONLY, true )
     .and()
     .item( "/options/dl", "Download", "#" )
-    .attribute( NavComponentBuilder.ATTR_ICON, new GlyphIcon( GlyphIcon.DOWNLOAD ) );
+    .attribute( NavComponentBuilder.ATTR_ICON, IconSet.iconSet( FONT_AWESOME_SOLID_ICON_SET ).icon( "download" ) );
 ----

@@ -4,64 +4,43 @@ A `LinkViewElement` writes an `<a>` tag to the output.
 
 == Element and builder
 
-The `ViewElement` implementation for a checkbox element is a `LinkViewElement` and has a corresponding `LinkViewElementBuilder`.
-A `LinkViewElement` can also be created via the `BootstrapUiBuilders#link` factory method.
+The `ViewElement` implementation for a `a` element is a `LinkViewElement` and has a corresponding `LinkViewElementBuilder`.
+A `LinkViewElement` can also be created via the `BootstrapUiBuilders.bootstrap.builders.link` factory method.
 
 == Examples
 
 === Creating a link
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.link()
-                   .build();
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.link().build();
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<a href="#"></a>
-----
 
 === Providing text
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.link()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.link()
                    .url( "https://google.com" )
                    .text( "Google" )
                    .build()
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<a href="https://google.com">Google</a>
-----
 
 === Child elements
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.link()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.link()
                    .url( "https://google.com" )
-                   .add( BootstrapUiBuilders.glyphIcon( GlyphIcon.SEARCH ) )
+                   .add( IconSet.iconSet( FONT_AWESOME_SOLID_ICON_SET ).icon( "download" ) )
                    .build()
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<a href="https://google.com">
-    <span aria-hidden="true" class="glyphicon glyphicon-search"></span>
-</a>
-----

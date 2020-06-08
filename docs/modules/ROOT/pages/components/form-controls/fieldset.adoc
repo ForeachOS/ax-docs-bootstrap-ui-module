@@ -5,76 +5,46 @@ A `FieldsetFormElement` writes a `<fieldset>` tag to the output.
 == Element and builder
 
 The `ViewElement` implementation for a fieldset element is a `FieldsetFormElement` and has a corresponding `FieldsetFormElementBuilder`.
-A `FieldsetFormElement` can also be created via the `BootstrapUiBuilders#fieldset` factory methods.
+A `FieldsetFormElement` can also be created via the `BootstrapViewElements.bootstrap.builders#fieldset` factory methods.
 
 == Examples
 
 === Creating a fieldset
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.fieldset("Author")
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.fieldset().legend("Author")
                    .build();
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<fieldset>
-    <legend>Author</legend>
-</fieldset>
 ----
 
 === Child elements
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.fieldset( "Author" )
-                   .add( BootstrapUiBuilders.textbox() )
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.fieldset().legend( "Author" )
+                   .add( bootstrap.builders.textbox() )
                    .build()
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<fieldset>
-    <legend>Author</legend>
-    <input type="text" class="form-control">
-</fieldset>
 ----
 
 === Customizing the legend
 
 The legend can also have additional child view elements, which can be added through the `Legend` builder of the fieldset.
 
-Given the following builder configuration:
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.fieldset()
-                   .legend() # <1>
-                   .text( "Author" )
-                   .add( BootstrapUiBuilders.glyphIcon( GlyphIcon.USER ) )
-                   .and()
-                   .build()
-----
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
 
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<fieldset>
-    <legend>Author
-        <span aria-hidden="true" class="glyphicon glyphicon-user"></span>
-    </legend>
-</fieldset>
+bootstrap.builders.fieldset()
+       .legend() # <1>
+       .text( "Author" )
+       .add( IconSet.iconSet( FONT_AWESOME_SOLID_ICON_SET ).icon( "user" ) )
+       .and()
+       .build()
 ----
 
 [WARNING]
@@ -84,10 +54,12 @@ As such, the following configuration will add the provided view elements to the 
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.fieldset()
-                   .legend( "Author" )
-                   .add( BootstrapUiBuilders.glyphIcon( GlyphIcon.USER ) )
-                   .build()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.fieldset()
+   .legend( "Author" )
+   .add( IconSet.iconSet( FONT_AWESOME_SOLID_ICON_SET ).icon( "user" )  )
+   .build()
 ----
 ====
 

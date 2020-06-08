@@ -4,7 +4,7 @@ An `AlertViewElement` writes a `<div>` element with the role "alert" to the outp
 
 == Element and builder
 The `AlertViewElement` has an equivalent `AlertViewElementBuilder`.
-A builder can be created using `BootstrapUiBuilders.alert()` factory methods.
+A builder can be created using `BootstrapViewElements.bootstrap.builders.alert()` factory methods.
 
 == AlertViewElement attributes
 [cols="1,2,4",options=header]
@@ -31,46 +31,29 @@ A builder can be created using `BootstrapUiBuilders.alert()` factory methods.
 
 == Examples
 === Creating a simple alert
-Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders
     .alert()
     .danger()
     .text( "This is a danger alert—check it out!\n" )
     .build();
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<div role="alert" class="alert alert-danger">This is a danger alert—check it out!</div>
-----
-
 === Creating an alert with several options
-Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders
     .alert()
     .closeLabel( "Close alert" )
     .dismissible( false )
     .success()
     .text( "This is a success alert—check it out!\n" )
     .build();
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<div role="alert" class="alert alert-dismissible alert-success">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close alert">
-        <span aria-hidden="true">×</span>
-    </button>
-    This is a success alert—check it out!
-</div>
 ----

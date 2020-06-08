@@ -1,16 +1,19 @@
 = OptionsFormElementBuilder
+
 include::{partialsdir}/_attributes.adoc[]
 
 To quickly create a list of options, either as a select, list of checkboxes or list or radio buttons.
 
 == Element and builder
+
 The `OptionsFormElementBuilder` builds an `AbstractNodeViewElement`.
-A builder can be created using `BootstrapUiBuilders.options()` factory methods.
+A builder can be created using `BootstrapViewElements.bootstrap.builders.option.options()` factory methods.
 
 This builder can be used to create a list of options.
 The default implementation is a `select` element which can be extended with a `bootstrap-select` implementation.
 
 == OptionsFormElementBuilder attributes
+
 [cols="1,2,4",options=header]
 |===
 
@@ -45,25 +48,18 @@ The default implementation is a `select` element which can be extended with a `b
 |===
 
 == Examples
+
 === Creating an option list for a select field
-Given the following builder configuration
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.option
     .options()
     .controlName( "demo" )
-    .add( BootstrapUiBuilders.option().label( "Orange" ).value( "orange" ) )
-    .add( BootstrapUiBuilders.option().label( "Apple" ).value( "apple" ) )
+    .add( bootstrap.builders.option.option().label( "Orange" ).value( "orange" ) )
+    .add( bootstrap.builders.option.option().label( "Apple" ).value( "apple" ) )
     .build();
 ----
 
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<select name="demo" id="demo" class="form-control">
-    <option id="demo1" value="orange">Orange</option>
-    <option id="demo2" value="apple">Apple</option>
-</select>
-----

@@ -5,25 +5,18 @@ A `LabelFormElement` writes a `<label>` tag to the output.
 == Element and builder
 
 The `ViewElement` implementation for a label element is a `LabelFormElement` and has a corresponding `LabelFormElementBuilder`.
-A `LabelFormElement` can also be created via the `BootstrapUiBuilders#label` factory methods.
+A `LabelFormElement` can also be created via the `BootstrapViewElements.bootstrap.builders#label` factory methods.
 
 == Examples
 
 === Creating a LabelFormElement
 
-Given the following builder configuration:
-
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.label("Author")
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.label("Author")
                    .build();
-----
-
-The following markup would be rendered:
-
-[source,html,indent=0]
-----
-<label class="control-label">Author</label>
 ----
 
 === Target element
@@ -34,19 +27,13 @@ In the following example, we'll also create a xref::components/form-controls/tex
 
 [source,java,indent=0]
 ----
-ViewElement author = BootstrapUiBuilders.textbox()
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+ViewElement author = bootstrap.builders.textbox()
                                         .htmlId( "author" )
                                         .build();
-BootstrapUiBuilders.label("Author")
+bootstrap.builders.label("Author")
                    .target(authorControl);
-----
-
-The aforementioned builder configurations would result in the following markup:
-
-[source,html,indent=0]
-----
-<label for="author" class="control-label">Author</label>
-<input id="author" type="text" class="form-control">
 ----
 
 === Child elements
@@ -57,16 +44,9 @@ Let's for example add an xref::components/icons.adoc[icon element] to the label.
 
 [source,java,indent=0]
 ----
-BootstrapUiBuilders.label( "Author" )
-		           .add( BootstrapUiBuilders.glyphIcon( GlyphIcon.BOOK ) )
+import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
+
+bootstrap.builders.label( "Author" )
+		           .add( IconSet.iconSet( FONT_AWESOME_BRANDS_ICON_SET ).icon( "apple" ) )
 		           .build();
-----
-
-This will result in the following markup
-
-[source,html,indent=0]
-----
-<label class="control-label">Author
-    <span aria-hidden="true" class="glyphicon glyphicon-book"></span>
-</label>
 ----
