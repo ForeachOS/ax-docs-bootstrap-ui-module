@@ -3,7 +3,7 @@
 [#3-0-0]
 == 3.0.0.RELEASE
 
-This version requires Across 5.0.0.
+This version requires Across 5.0.1.
 
 === Extension module
 BootstrapUiModule configuration has been modified to extend the AcrossWebModule configuration.
