@@ -1,11 +1,18 @@
 = 3.x.x release notes
 
+[#3-1-0]
+== 3.1.0.RELEASE
+
+* Pinned version of cypress because of incompatibility between `cypress/browsers:chrome65-ff57` and `node8`
+* Switched to JUnit5
+
 [#3-0-0]
-== 3.0.0-SNAPSHOT
+== 3.0.0.RELEASE
 
 This version requires Across 5.0.0.
 
 === Extension module
+
 BootstrapUiModule configuration has been modified to extend the AcrossWebModule configuration.
 It no longer starts its own `ApplicationContext`.
 
