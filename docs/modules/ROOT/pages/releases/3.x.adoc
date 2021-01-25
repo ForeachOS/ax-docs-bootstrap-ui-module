@@ -1,5 +1,12 @@
 = 3.x.x release notes
 
+[#3-1-1]
+== 3.1.1.RELEASE
+
+* Added a `maximumResults()` shorthand to set the maximum number of results on `AutoSuggest` dataset.
+* Switched from `node-sass` to `sass` dependency
+* Allow `AutoSuggestFormElement` to be customized with `customizeBuilder()`
+
 [#3-1-0]
 == 3.1.0.RELEASE
 
