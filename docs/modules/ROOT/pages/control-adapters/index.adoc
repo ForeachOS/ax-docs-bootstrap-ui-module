@@ -102,7 +102,7 @@ The ControlAdapterFactory allows you to register custom control adapter initiali
 *initializer*: a function that takes a node and returns the `BootstrapUiControlAdapter` to register on the node
 | Registers a control adapter initializer under a specific type.
 
-| initializeNode(node)
+| initializeControlAdapters(node)
 | *node*: a dom element / jquery node
 | Registers control adapters on elements in the node which have the `[data-bootstrapui-adapter-type]` attribute if none has been registered yet.
 
