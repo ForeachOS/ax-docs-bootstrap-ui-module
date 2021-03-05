@@ -93,6 +93,7 @@ This is done automatically when using an `OptionsFormElementBuilder`.
 import static com.foreach.across.modules.bootstrapui.ui.factories.BootstrapViewElements.bootstrap;
 
 bootstrap.builders
+    .select()
     .select( SelectFormElementConfiguration.simple())
     .multiple()
     .controlName( "boxName" )
